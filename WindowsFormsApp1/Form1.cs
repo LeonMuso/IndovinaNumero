@@ -8,10 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
+using System.IO;
+using System.Globalization;
+using Microsoft.VisualBasic;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class IndovinaNumero : Form
     {
         Random r = new Random();
         const int min = 1;
@@ -19,19 +22,22 @@ namespace WindowsFormsApp1
         const int maxM = 100;
         const int maxD = 500;
         int secondiPassati = 0;
+        const int Victory = 100;
+        int punteggio;
+        string nomeGiocatore;
+        string percorsoFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "punteggio.txt");
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-        public Form1()
+        public IndovinaNumero()
         {
             InitializeComponent();
         }
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
+            BtnNome.Visible = true;
+            LblNome.Visible = true;
             BtnPlay.Visible = false;
-            BtnEasy.Visible = true;
-            BtnMedium.Visible = true;
-            BtnHard.Visible = true;
         }
 
         private void BtnEasy_Click(object sender, EventArgs e)
@@ -46,12 +52,14 @@ namespace WindowsFormsApp1
             LblTimer.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
+            global.Diff = 30;
             global.Tentativi = 10;
             global.TentativiMassimi = global.Tentativi;
             global.TempoMassimo = 120;
             global.Numero = r.Next(min, maxE + 1);
-            global.max = maxE;
+            global.Max = maxE;
             TxBNumero.Focus();
+            //MessageBox.Show($"{global.Numero}");
         }
 
         private void BtnMedium_Click(object sender, EventArgs e)
@@ -66,12 +74,14 @@ namespace WindowsFormsApp1
             LblTimer.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
+            global.Diff = 75;
             global.Tentativi = 7;
             global.TentativiMassimi = global.Tentativi;
             global.TempoMassimo = 90;
             global.Numero = r.Next(min, maxM + 1);
-            global.max = maxM;
+            global.Max = maxM;
             TxBNumero.Focus();
+            //MessageBox.Show($"{global.Numero}");
         }
 
         private void BtnHard_Click(object sender, EventArgs e)
@@ -86,21 +96,42 @@ namespace WindowsFormsApp1
             LblTimer.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
+            global.Diff = 150;
             global.Tentativi = 5;
             global.TentativiMassimi = global.Tentativi;
             global.TempoMassimo = 60;
             global.Numero = r.Next(min, maxD + 1);
-            global.max = maxD;
+            global.Max = maxD;
             TxBNumero.Focus();
+            //MessageBox.Show($"{global.Numero}");
         }
 
         private void BtnVerificaNumero_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(TxBNumero.Text, out int o) && o > 0 && o < global.max)
+            if (int.TryParse(TxBNumero.Text, out int o) && o > 0 && o <= global.Max)
             {
+
                 if (o == global.Numero)
                 {
-                    DialogResult risultato = MessageBox.Show("Hai vinto!!!" + "\n" + "Vuoi rigiocare?", "Vittoria", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    Timer.Stop();
+                    punteggio = Victory + (global.TempoMassimo - secondiPassati) + global.Diff + (global.Tentativi * 2);
+                    string riga = $"{DateTime.Now:yyyy-MM-dd} - {nomeGiocatore} - Punteggio: {punteggio}" + Environment.NewLine;
+                    try
+                    {
+                        File.AppendAllText(percorsoFile, riga);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Salvataggio su file non possibile");
+                    }
+
+                    DialogResult risultato = MessageBox.Show("          --Punteggio--" +
+                                                                "\n" + $"Vittoria +{Victory}" +
+                                                                "\n" + $"Tempo rimanente +{global.TempoMassimo - secondiPassati}" +
+                                                                "\n" + $"Difficoltà scelta +{global.Diff}" +
+                                                                "\n" + $"Tentativi +{global.Tentativi * 2}" +
+                                                                "\n" + $"Punteggio finale: {punteggio}" +
+                                                                "\n" + "Vuoi rigiocare?", "Vittoria", MessageBoxButtons.YesNo);
                     if (risultato == DialogResult.Yes)
                     {
                         BtnEasy.Visible = true;
@@ -110,16 +141,18 @@ namespace WindowsFormsApp1
                         BtnVerificaNumero.Visible = false;
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
+                        LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
-                        Timer.Stop();
                         secondiPassati = 0;
+                        TxBNumero.Clear();
                     }
                     else
                     {
                         Close();
                     }
                 }
+
                 else if (o > global.Numero)
                 {
                     LblMaxMin.Text = "Il numero è minore rispetto al tuo";
@@ -136,7 +169,10 @@ namespace WindowsFormsApp1
                 }
                 if (global.Tentativi == 0)
                 {
-                    DialogResult risultato = MessageBox.Show($"Hai perso per aver terminato i {global.TentativiMassimi} tentativi" + "\n" + "Vuoi rigiocare?", "Sconfitta", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                    DialogResult risultato = MessageBox.Show($"Hai perso per aver terminato i {global.TentativiMassimi} tentativi" +
+                                                              "\n" + $"Il numero era {global.Numero}" +
+                                                              "\n" + "Vuoi rigiocare?",
+                                                              "Sconfitta", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                     if (risultato == DialogResult.Yes)
                     {
                         BtnEasy.Visible = true;
@@ -146,10 +182,12 @@ namespace WindowsFormsApp1
                         BtnVerificaNumero.Visible = false;
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
+                        LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
+                        TxBNumero.Clear();
                     }
                     else
                     {
@@ -160,6 +198,7 @@ namespace WindowsFormsApp1
             else
             {
                 MessageBox.Show("Riprova mettendo un numero valido");
+                TxBNumero.Clear();
             }
         }
 
@@ -195,10 +234,12 @@ namespace WindowsFormsApp1
                         BtnVerificaNumero.Visible = false;
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
+                        LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
+                        TxBNumero.Clear();
                     }
                     else
                     {
@@ -228,10 +269,12 @@ namespace WindowsFormsApp1
                         BtnVerificaNumero.Visible = false;
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
+                        LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
+                        TxBNumero.Clear();
                     }
                     else
                     {
@@ -261,10 +304,12 @@ namespace WindowsFormsApp1
                         BtnVerificaNumero.Visible = false;
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
+                        LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
+                        TxBNumero.Clear();
                     }
                     else
                     {
@@ -275,6 +320,23 @@ namespace WindowsFormsApp1
 
 
         }
+
+        private void BtnNome_Click(object sender, EventArgs e)
+        {
+            do
+            {
+                nomeGiocatore = Interaction.InputBox("inserisci il tuo nome", "nome giocatore").Trim();
+                if(string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Nome non valido");
+                }
+            } while (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit));
+            BtnEasy.Visible = true;
+            BtnMedium.Visible = true;
+            BtnHard.Visible = true;
+            BtnNome.Visible = false;
+            LblNome.Visible = false;
+        }
     }
     public static class global
     {
@@ -282,6 +344,7 @@ namespace WindowsFormsApp1
         public static int TentativiMassimi;
         public static int TempoMassimo;
         public static int Numero;
-        public static int max;
+        public static int Max;
+        public static int Diff;
     }
 }

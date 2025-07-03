@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class IndovinaNumero
     {
         /// <summary>
         /// Variabile di progettazione necessaria.
@@ -40,12 +40,14 @@
             this.LblTentativi = new System.Windows.Forms.Label();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.LblTimer = new System.Windows.Forms.Label();
+            this.LblNome = new System.Windows.Forms.Label();
+            this.BtnNome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnPlay
             // 
             this.BtnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPlay.Location = new System.Drawing.Point(35, 122);
+            this.BtnPlay.Location = new System.Drawing.Point(304, 107);
             this.BtnPlay.Name = "BtnPlay";
             this.BtnPlay.Size = new System.Drawing.Size(134, 48);
             this.BtnPlay.TabIndex = 0;
@@ -55,7 +57,7 @@
             // 
             // BtnEasy
             // 
-            this.BtnEasy.Location = new System.Drawing.Point(35, 179);
+            this.BtnEasy.Location = new System.Drawing.Point(134, 169);
             this.BtnEasy.Name = "BtnEasy";
             this.BtnEasy.Size = new System.Drawing.Size(85, 41);
             this.BtnEasy.TabIndex = 1;
@@ -66,7 +68,7 @@
             // 
             // BtnMedium
             // 
-            this.BtnMedium.Location = new System.Drawing.Point(35, 226);
+            this.BtnMedium.Location = new System.Drawing.Point(134, 216);
             this.BtnMedium.Name = "BtnMedium";
             this.BtnMedium.Size = new System.Drawing.Size(85, 41);
             this.BtnMedium.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // BtnHard
             // 
-            this.BtnHard.Location = new System.Drawing.Point(35, 273);
+            this.BtnHard.Location = new System.Drawing.Point(134, 263);
             this.BtnHard.Name = "BtnHard";
             this.BtnHard.Size = new System.Drawing.Size(85, 41);
             this.BtnHard.TabIndex = 3;
@@ -146,11 +148,34 @@
             this.LblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblTimer.Visible = false;
             // 
-            // Form1
+            // LblNome
+            // 
+            this.LblNome.AutoSize = true;
+            this.LblNome.Location = new System.Drawing.Point(320, 107);
+            this.LblNome.Name = "LblNome";
+            this.LblNome.Size = new System.Drawing.Size(99, 13);
+            this.LblNome.TabIndex = 11;
+            this.LblNome.Text = "Inserisci il tuo nome";
+            this.LblNome.Visible = false;
+            // 
+            // BtnNome
+            // 
+            this.BtnNome.Location = new System.Drawing.Point(334, 132);
+            this.BtnNome.Name = "BtnNome";
+            this.BtnNome.Size = new System.Drawing.Size(75, 23);
+            this.BtnNome.TabIndex = 12;
+            this.BtnNome.Text = "Inserisci";
+            this.BtnNome.UseVisualStyleBackColor = true;
+            this.BtnNome.Visible = false;
+            this.BtnNome.Click += new System.EventHandler(this.BtnNome_Click);
+            // 
+            // IndovinaNumero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnNome);
+            this.Controls.Add(this.LblNome);
             this.Controls.Add(this.LblTimer);
             this.Controls.Add(this.LblTentativi);
             this.Controls.Add(this.LblMaxMin);
@@ -161,8 +186,8 @@
             this.Controls.Add(this.BtnMedium);
             this.Controls.Add(this.BtnEasy);
             this.Controls.Add(this.BtnPlay);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "IndovinaNumero";
+            this.Text = "Indovina il Numero";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -182,6 +207,8 @@
         private System.Windows.Forms.Label LblTentativi;
         private System.Windows.Forms.Timer Timer;
         private System.Windows.Forms.Label LblTimer;
+        private System.Windows.Forms.Label LblNome;
+        private System.Windows.Forms.Button BtnNome;
     }
 }
 
