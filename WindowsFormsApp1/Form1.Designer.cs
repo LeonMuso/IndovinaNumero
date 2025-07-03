@@ -39,6 +39,7 @@
             this.LblMaxMin = new System.Windows.Forms.Label();
             this.LblTentativi = new System.Windows.Forms.Label();
             this.Timer = new System.Windows.Forms.Timer(this.components);
+            this.LblTimer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnPlay
@@ -135,11 +136,22 @@
             this.Timer.Interval = 1000;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
+            // LblTimer
+            // 
+            this.LblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTimer.Location = new System.Drawing.Point(506, 137);
+            this.LblTimer.Name = "LblTimer";
+            this.LblTimer.Size = new System.Drawing.Size(221, 117);
+            this.LblTimer.TabIndex = 9;
+            this.LblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblTimer.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblTimer);
             this.Controls.Add(this.LblTentativi);
             this.Controls.Add(this.LblMaxMin);
             this.Controls.Add(this.BtnVerificaNumero);
@@ -169,6 +181,7 @@
         private System.Windows.Forms.Label LblMaxMin;
         private System.Windows.Forms.Label LblTentativi;
         private System.Windows.Forms.Timer Timer;
+        private System.Windows.Forms.Label LblTimer;
     }
 }
 

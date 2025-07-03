@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech.Synthesis;
 
 namespace WindowsFormsApp1
 {
@@ -18,6 +19,8 @@ namespace WindowsFormsApp1
         const int maxM = 100;
         const int maxD = 500;
         int secondiPassati = 0;
+
+        SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         public Form1()
         {
             InitializeComponent();
@@ -40,6 +43,8 @@ namespace WindowsFormsApp1
             BtnVerificaNumero.Visible = true;
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
+            LblTimer.Visible = true;
+            LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
             global.Tentativi = 10;
             global.TentativiMassimi = global.Tentativi;
@@ -58,6 +63,8 @@ namespace WindowsFormsApp1
             BtnVerificaNumero.Visible = true;
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
+            LblTimer.Visible = true;
+            LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
             global.Tentativi = 7;
             global.TentativiMassimi = global.Tentativi;
@@ -76,6 +83,8 @@ namespace WindowsFormsApp1
             BtnVerificaNumero.Visible = true;
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
+            LblTimer.Visible = true;
+            LblTimer.Text = "Tempo trascorso: 00:00";
             Timer.Start();
             global.Tentativi = 5;
             global.TentativiMassimi = global.Tentativi;
@@ -102,7 +111,9 @@ namespace WindowsFormsApp1
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
                         LblTentativi.Visible = false;
+                        LblTimer.Visible = false;
                         Timer.Stop();
+                        secondiPassati = 0;
                     }
                     else
                     {
@@ -136,7 +147,9 @@ namespace WindowsFormsApp1
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
                         LblTentativi.Visible = false;
+                        LblTimer.Visible = false;
                         Timer.Stop();
+                        secondiPassati = 0;
                     }
                     else
                     {
@@ -158,15 +171,17 @@ namespace WindowsFormsApp1
         private void Timer_Tick(object sender, EventArgs e)
         {
             secondiPassati++;
+            TimeSpan tempo = TimeSpan.FromSeconds(secondiPassati);
+            LblTimer.Text = $"Tempo trascorso: {tempo.Minutes:D2}:{tempo.Seconds:D2}";
             if (global.TempoMassimo == 120)
             {
                 if (secondiPassati == 60)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == 90)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == global.TempoMassimo)
                 {
@@ -181,6 +196,7 @@ namespace WindowsFormsApp1
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
                         LblTentativi.Visible = false;
+                        LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                     }
@@ -194,11 +210,11 @@ namespace WindowsFormsApp1
             {
                 if (secondiPassati == 30)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == 60)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == global.TempoMassimo)
                 {
@@ -213,6 +229,7 @@ namespace WindowsFormsApp1
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
                         LblTentativi.Visible = false;
+                        LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                     }
@@ -226,11 +243,11 @@ namespace WindowsFormsApp1
             {
                 if (secondiPassati == 15)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == 30)
                 {
-                    MessageBox.Show($"passati {secondiPassati} secondi");
+                    synthesizer.SpeakAsync($"passati {secondiPassati} secondi");
                 }
                 else if (secondiPassati == global.TempoMassimo)
                 {
@@ -245,6 +262,7 @@ namespace WindowsFormsApp1
                         LblMaxMin.Text = "";
                         LblMaxMin.Visible = false;
                         LblTentativi.Visible = false;
+                        LblTimer.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                     }
