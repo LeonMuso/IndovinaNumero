@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form2
+    partial class SbloccaLucchetto
     {
         /// <summary>
         /// Required designer variable.
@@ -706,7 +706,7 @@
             this.Num90.Size = new System.Drawing.Size(38, 20);
             this.Num90.TabIndex = 41;
             // 
-            // Form2
+            // SbloccaLucchetto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -755,8 +755,8 @@
             this.Controls.Add(this.LblCorrette);
             this.Controls.Add(this.LblTitolo);
             this.Controls.Add(this.Num00);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "SbloccaLucchetto";
+            this.Text = "Sblocca il lucchetto";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Num00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num01)).EndInit();
