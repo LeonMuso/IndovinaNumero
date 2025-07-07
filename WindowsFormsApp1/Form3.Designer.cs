@@ -34,6 +34,11 @@
             this.LblBandierine = new System.Windows.Forms.Label();
             this.tempoT = new System.Windows.Forms.Timer(this.components);
             this.LblTitolo = new System.Windows.Forms.Label();
+            this.BtnPlay = new System.Windows.Forms.Button();
+            this.BtnEasy = new System.Windows.Forms.Button();
+            this.BtnMedium = new System.Windows.Forms.Button();
+            this.BtnHard = new System.Windows.Forms.Button();
+            this.BtnImp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tabellaCampo
@@ -44,7 +49,7 @@
             this.tabellaCampo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tabellaCampo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tabellaCampo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.tabellaCampo.Location = new System.Drawing.Point(214, 58);
+            this.tabellaCampo.Location = new System.Drawing.Point(281, 67);
             this.tabellaCampo.Name = "tabellaCampo";
             this.tabellaCampo.RowCount = 5;
             this.tabellaCampo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -58,14 +63,14 @@
             // LblTempoT
             // 
             this.LblTempoT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTempoT.Location = new System.Drawing.Point(645, 135);
+            this.LblTempoT.Location = new System.Drawing.Point(652, 149);
             this.LblTempoT.Name = "LblTempoT";
             this.LblTempoT.Size = new System.Drawing.Size(100, 49);
             this.LblTempoT.TabIndex = 1;
             // 
             // LblBandierine
             // 
-            this.LblBandierine.Location = new System.Drawing.Point(648, 202);
+            this.LblBandierine.Location = new System.Drawing.Point(655, 216);
             this.LblBandierine.Name = "LblBandierine";
             this.LblBandierine.Size = new System.Drawing.Size(97, 45);
             this.LblBandierine.TabIndex = 2;
@@ -85,11 +90,66 @@
             this.LblTitolo.TabIndex = 5;
             this.LblTitolo.Text = "Campo minato";
             // 
+            // BtnPlay
+            // 
+            this.BtnPlay.Location = new System.Drawing.Point(39, 102);
+            this.BtnPlay.Name = "BtnPlay";
+            this.BtnPlay.Size = new System.Drawing.Size(98, 40);
+            this.BtnPlay.TabIndex = 6;
+            this.BtnPlay.Text = "Play";
+            this.BtnPlay.UseVisualStyleBackColor = true;
+            this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
+            // 
+            // BtnEasy
+            // 
+            this.BtnEasy.Location = new System.Drawing.Point(39, 175);
+            this.BtnEasy.Name = "BtnEasy";
+            this.BtnEasy.Size = new System.Drawing.Size(75, 23);
+            this.BtnEasy.TabIndex = 7;
+            this.BtnEasy.Text = "Facile";
+            this.BtnEasy.UseVisualStyleBackColor = true;
+            this.BtnEasy.Click += new System.EventHandler(this.BtnEasy_Click);
+            // 
+            // BtnMedium
+            // 
+            this.BtnMedium.Location = new System.Drawing.Point(39, 204);
+            this.BtnMedium.Name = "BtnMedium";
+            this.BtnMedium.Size = new System.Drawing.Size(75, 23);
+            this.BtnMedium.TabIndex = 8;
+            this.BtnMedium.Text = "Medio";
+            this.BtnMedium.UseVisualStyleBackColor = true;
+            this.BtnMedium.Click += new System.EventHandler(this.BtnMedium_Click);
+            // 
+            // BtnHard
+            // 
+            this.BtnHard.Location = new System.Drawing.Point(39, 233);
+            this.BtnHard.Name = "BtnHard";
+            this.BtnHard.Size = new System.Drawing.Size(75, 23);
+            this.BtnHard.TabIndex = 9;
+            this.BtnHard.Text = "Difficile";
+            this.BtnHard.UseVisualStyleBackColor = true;
+            this.BtnHard.Click += new System.EventHandler(this.BtnHard_Click);
+            // 
+            // BtnImp
+            // 
+            this.BtnImp.Location = new System.Drawing.Point(39, 262);
+            this.BtnImp.Name = "BtnImp";
+            this.BtnImp.Size = new System.Drawing.Size(75, 23);
+            this.BtnImp.TabIndex = 10;
+            this.BtnImp.Text = "Impossibile";
+            this.BtnImp.UseVisualStyleBackColor = true;
+            this.BtnImp.Click += new System.EventHandler(this.BtnImp_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnImp);
+            this.Controls.Add(this.BtnHard);
+            this.Controls.Add(this.BtnMedium);
+            this.Controls.Add(this.BtnEasy);
+            this.Controls.Add(this.BtnPlay);
             this.Controls.Add(this.LblTitolo);
             this.Controls.Add(this.LblBandierine);
             this.Controls.Add(this.LblTempoT);
@@ -107,5 +167,10 @@
         private System.Windows.Forms.Label LblBandierine;
         private System.Windows.Forms.Timer tempoT;
         private System.Windows.Forms.Label LblTitolo;
+        private System.Windows.Forms.Button BtnPlay;
+        private System.Windows.Forms.Button BtnEasy;
+        private System.Windows.Forms.Button BtnMedium;
+        private System.Windows.Forms.Button BtnHard;
+        private System.Windows.Forms.Button BtnImp;
     }
 }

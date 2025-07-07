@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,46 +13,46 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
-
-        // Modificabili 
-        // Righe/Colonne per il campo (massimo 15*15)
-        // nMine per il numero di mine (aggiungerne quando aumenti il campo)
-        // nBandierine per il numero di bandiere (aggiungerne se si aumentano le mine)
-        const int righe = 15;
-        const int colonne = 15;
-        const int numeroMine = 20;
-        int nBandierine = 7;
-
-
-
+        string percorsoFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "punteggio2.txt");
         int secondiPassati = 0;
 
-        private Button[,] griglia = new Button[righe, colonne];
-        private Cella[,] celle = new Cella[righe, colonne];
+
 
         public Form3()
         {
             InitializeComponent();
-            InizializzaCampo();
-            tempoT.Start();
+
         }
+
+        //punteggio = Victory + (global.TempoMassimo - secondiPassati) + global.Diff + (global.Tentativi* 2);
+        //            string riga = $"{DateTime.Now:yyyy-MM-dd} - {nomeGiocatore} - Punteggio: {punteggio}" + Environment.NewLine;
+        //            try
+        //            {
+        //                File.AppendAllText(percorsoFile, riga);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show("Salvataggio su file non possibile");
+        //            }
 
         private void InizializzaCampo()
         {
-            tabellaCampo.RowCount = righe;
-            tabellaCampo.ColumnCount = colonne;
+            global2.griglia = new Button[global2.righe, global2.colonne];
+            global2.celle = new Cella[global2.righe, global2.colonne];
+            tabellaCampo.RowCount = global2.righe;
+            tabellaCampo.ColumnCount = global2.colonne;
             tabellaCampo.Controls.Clear();
             tabellaCampo.RowStyles.Clear();
             tabellaCampo.ColumnStyles.Clear();
 
-            for (int i = 0; i < righe; i++)
-                tabellaCampo.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / righe));
-            for (int j = 0; j < colonne; j++)
-                tabellaCampo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / colonne));
+            for (int i = 0; i < global2.righe; i++)
+                tabellaCampo.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / global2.righe));
+            for (int j = 0; j < global2.colonne; j++)
+                tabellaCampo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / global2.colonne));
 
-            for (int r = 0; r < righe; r++)
+            for (int r = 0; r < global2.righe; r++)
             {
-                for (int c = 0; c < colonne; c++)
+                for (int c = 0; c < global2.colonne; c++)
                 {
                     var btn = new Button
                     {
@@ -61,8 +62,12 @@ namespace WindowsFormsApp1
                     };
                     btn.MouseUp += CellaCliccata;
 
-                    griglia[r, c] = btn;
-                    celle[r, c] = new Cella { Riga = r, Colonna = c };
+                    global2.griglia[r, c] = btn;
+                    global2.celle[r, c] = new Cella
+                    {
+                        Riga = r,
+                        Colonna = c
+                    };
 
                     tabellaCampo.Controls.Add(btn, c, r);
                 }
@@ -76,13 +81,13 @@ namespace WindowsFormsApp1
         {
             var rand = new Random();
             int piazzate = 0;
-            while (piazzate < numeroMine)
+            while (piazzate < global2.numeroMine)
             {
-                int r = rand.Next(righe);
-                int c = rand.Next(colonne);
-                if (!celle[r, c].IsMina)
+                int r = rand.Next(global2.righe);
+                int c = rand.Next(global2.colonne);
+                if (!global2.celle[r, c].IsMina)
                 {
-                    celle[r, c].IsMina = true;
+                    global2.celle[r, c].IsMina = true;
                     piazzate++;
                 }
             }
@@ -96,11 +101,11 @@ namespace WindowsFormsApp1
 
         private void CalcolaVicini()
         {
-            for (int r = 0; r < righe; r++)
+            for (int r = 0; r < global2.righe; r++)
             {
-                for (int c = 0; c < colonne; c++)
+                for (int c = 0; c < global2.colonne; c++)
                 {
-                    if (celle[r, c].IsMina) continue;
+                    if (global2.celle[r, c].IsMina) continue;
 
                     int count = 0;
                     for (int i = -1; i <= 1; i++)
@@ -108,11 +113,11 @@ namespace WindowsFormsApp1
                         {
                             int nr = r + i;
                             int nc = c + j;
-                            if (nr >= 0 && nr < righe && nc >= 0 && nc < colonne)
-                                if (celle[nr, nc].IsMina)
+                            if (nr >= 0 && nr < global2.righe && nc >= 0 && nc < global2.colonne)
+                                if (global2.celle[nr, nc].IsMina)
                                     count++;
                         }
-                    celle[r, c].MineVicino = count;
+                    global2.celle[r, c].MineVicino = count;
                 }
             }
         }
@@ -129,23 +134,23 @@ namespace WindowsFormsApp1
                 if (btn.Text == "🚩")
                 {
                     btn.Text = "";
-                    nBandierine++;
-                    LblBandierine.Text = $"Bandierine rimanenti:{nBandierine}";
+                    global2.nBandierine++;
+                    LblBandierine.Text = $"Bandierine rimanenti:{global2.nBandierine}";
                 }
 
                 else
                 {
                     btn.Text = "🚩";
-                    nBandierine--;
-                    LblBandierine.Text = $"Bandierine rimanenti:{nBandierine}";
+                    global2.nBandierine--;
+                    LblBandierine.Text = $"Bandierine rimanenti:{global2.nBandierine}";
                 }
 
                 return;
             }
             else if (e.Button == MouseButtons.Left)
             {
-                var cella = celle[r, c];
-                var bottone = griglia[r, c];
+                var cella = global2.celle[r, c];
+                var bottone = global2.griglia[r, c];
 
                 // Se la cella è già rivelata e ha numero > 0 → prova apertura celle vicine
                 if (cella.Rivelata && cella.MineVicino > 0)
@@ -160,8 +165,8 @@ namespace WindowsFormsApp1
 
         private void Rivelare(int r, int c)
         {
-            var cella = celle[r, c];
-            var bottone = griglia[r, c];
+            var cella = global2.celle[r, c];
+            var bottone = global2.griglia[r, c];
 
             if (cella.Rivelata || bottone.Text == "🚩") return;
 
@@ -188,7 +193,7 @@ namespace WindowsFormsApp1
                     {
                         int nr = r + i;
                         int nc = c + j;
-                        if (nr >= 0 && nr < righe && nc >= 0 && nc < colonne)
+                        if (nr >= 0 && nr < global2.righe && nc >= 0 && nc < global2.colonne)
                             Rivelare(nr, nc);
                     }
             }
@@ -199,9 +204,9 @@ namespace WindowsFormsApp1
 
         private void FineGioco(bool vittoria)
         {
-            for (int r = 0; r < righe; r++)
-                for (int c = 0; c < colonne; c++)
-                    griglia[r, c].Enabled = false;
+            for (int r = 0; r < global2.righe; r++)
+                for (int c = 0; c < global2.colonne; c++)
+                    global2.griglia[r, c].Enabled = false;
 
             MessageBox.Show(vittoria ? "🎉 Hai vinto!" : "💥 Hai perso!");
             Close();
@@ -209,9 +214,9 @@ namespace WindowsFormsApp1
 
         private bool ControllaVittoria()
         {
-            for (int r = 0; r < righe; r++)
-                for (int c = 0; c < colonne; c++)
-                    if (!celle[r, c].IsMina && !celle[r, c].Rivelata)
+            for (int r = 0; r < global2.righe; r++)
+                for (int c = 0; c < global2.colonne; c++)
+                    if (!global2.celle[r, c].IsMina && !global2.celle[r, c].Rivelata)
                         return false;
             return true;
         }
@@ -226,16 +231,16 @@ namespace WindowsFormsApp1
                     int nr = r + i;
                     int nc = c + j;
 
-                    if (nr >= 0 && nr < righe && nc >= 0 && nc < colonne)
+                    if (nr >= 0 && nr < global2.righe && nc >= 0 && nc < global2.colonne)
                     {
-                        if (griglia[nr, nc].Text == "🚩")
+                        if (global2.griglia[nr, nc].Text == "🚩")
                         {
                             bandiereAttorno++;
                         }
                     }
                 }
 
-            if (bandiereAttorno == celle[r, c].MineVicino)
+            if (bandiereAttorno == global2.celle[r, c].MineVicino)
             {
                 // Se il numero di bandiere coincide con il numero nella cella
                 for (int i = -1; i <= 1; i++)
@@ -245,10 +250,10 @@ namespace WindowsFormsApp1
                         int nr = r + i;
                         int nc = c + j;
 
-                        if (nr >= 0 && nr < righe && nc >= 0 && nc < colonne)
+                        if (nr >= 0 && nr < global2.righe && nc >= 0 && nc < global2.colonne)
                         {
-                            var cella = celle[nr, nc];
-                            var bottone = griglia[nr, nc];
+                            var cella = global2.celle[nr, nc];
+                            var bottone = global2.griglia[nr, nc];
                             if (bottone.Text != "🚩" && !cella.Rivelata)
                             {
                                 Rivelare(nr, nc);
@@ -259,8 +264,61 @@ namespace WindowsFormsApp1
 
             }
         }
-    }
 
+        private void BtnEasy_Click(object sender, EventArgs e)
+        {
+            global2.righe = 5;
+            global2.colonne = 5;
+            global2.numeroMine = 3;
+            global2.nBandierine = 5;
+            InizializzaCampo();
+            tempoT.Start();
+        }
+
+        private void BtnMedium_Click(object sender, EventArgs e)
+        {
+            global2.righe = 9;
+            global2.colonne = 9;
+            global2.numeroMine = 10;
+            global2.nBandierine = 15;
+            InizializzaCampo();
+            tempoT.Start();
+        }
+
+        private void BtnHard_Click(object sender, EventArgs e)
+        {
+            global2.righe = 15;
+            global2.colonne = 15;
+            global2.numeroMine = 20;
+            global2.nBandierine = 30;
+            InizializzaCampo();
+            tempoT.Start();
+        }
+
+        private void BtnImp_Click(object sender, EventArgs e)
+        {
+            global2.righe = 5;
+            global2.colonne = 5;
+            global2.numeroMine = 24;
+            global2.nBandierine = 0;
+            InizializzaCampo();
+            tempoT.Start();
+        }
+
+        private void BtnPlay_Click(object sender, EventArgs e)
+        {
+            
+        }
+    }
+    public static class global2
+    {
+        public static Button[,] griglia;
+        public static Cella[,] celle;
+        public static int righe;
+        public static int colonne;
+        public static int numeroMine;
+        public static int nBandierine;
+    }
     public class Cella
     {
         public int Riga { get; set; }
