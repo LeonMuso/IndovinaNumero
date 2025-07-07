@@ -39,6 +39,11 @@
             this.BtnMedium = new System.Windows.Forms.Button();
             this.BtnHard = new System.Windows.Forms.Button();
             this.BtnImp = new System.Windows.Forms.Button();
+            this.BtnHowToPlay = new System.Windows.Forms.Button();
+            this.BtnScrivi = new System.Windows.Forms.Button();
+            this.TxBScrittura = new System.Windows.Forms.TextBox();
+            this.BtnAggiungi = new System.Windows.Forms.Button();
+            this.BtnVisualizza = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tabellaCampo
@@ -108,6 +113,7 @@
             this.BtnEasy.TabIndex = 7;
             this.BtnEasy.Text = "Facile";
             this.BtnEasy.UseVisualStyleBackColor = true;
+            this.BtnEasy.Visible = false;
             this.BtnEasy.Click += new System.EventHandler(this.BtnEasy_Click);
             // 
             // BtnMedium
@@ -118,6 +124,7 @@
             this.BtnMedium.TabIndex = 8;
             this.BtnMedium.Text = "Medio";
             this.BtnMedium.UseVisualStyleBackColor = true;
+            this.BtnMedium.Visible = false;
             this.BtnMedium.Click += new System.EventHandler(this.BtnMedium_Click);
             // 
             // BtnHard
@@ -128,6 +135,7 @@
             this.BtnHard.TabIndex = 9;
             this.BtnHard.Text = "Difficile";
             this.BtnHard.UseVisualStyleBackColor = true;
+            this.BtnHard.Visible = false;
             this.BtnHard.Click += new System.EventHandler(this.BtnHard_Click);
             // 
             // BtnImp
@@ -138,13 +146,69 @@
             this.BtnImp.TabIndex = 10;
             this.BtnImp.Text = "Impossibile";
             this.BtnImp.UseVisualStyleBackColor = true;
+            this.BtnImp.Visible = false;
             this.BtnImp.Click += new System.EventHandler(this.BtnImp_Click);
+            // 
+            // BtnHowToPlay
+            // 
+            this.BtnHowToPlay.Location = new System.Drawing.Point(686, 398);
+            this.BtnHowToPlay.Name = "BtnHowToPlay";
+            this.BtnHowToPlay.Size = new System.Drawing.Size(102, 40);
+            this.BtnHowToPlay.TabIndex = 11;
+            this.BtnHowToPlay.Text = "How to play";
+            this.BtnHowToPlay.UseVisualStyleBackColor = true;
+            this.BtnHowToPlay.Click += new System.EventHandler(this.BtnHowToPlay_Click);
+            // 
+            // BtnScrivi
+            // 
+            this.BtnScrivi.Location = new System.Drawing.Point(12, 415);
+            this.BtnScrivi.Name = "BtnScrivi";
+            this.BtnScrivi.Size = new System.Drawing.Size(75, 23);
+            this.BtnScrivi.TabIndex = 12;
+            this.BtnScrivi.Text = "Scrivi";
+            this.BtnScrivi.UseVisualStyleBackColor = true;
+            this.BtnScrivi.Click += new System.EventHandler(this.BtnScrivi_Click);
+            // 
+            // TxBScrittura
+            // 
+            this.TxBScrittura.Location = new System.Drawing.Point(105, 417);
+            this.TxBScrittura.Name = "TxBScrittura";
+            this.TxBScrittura.Size = new System.Drawing.Size(100, 20);
+            this.TxBScrittura.TabIndex = 13;
+            this.TxBScrittura.Visible = false;
+            // 
+            // BtnAggiungi
+            // 
+            this.BtnAggiungi.Location = new System.Drawing.Point(221, 417);
+            this.BtnAggiungi.Name = "BtnAggiungi";
+            this.BtnAggiungi.Size = new System.Drawing.Size(75, 23);
+            this.BtnAggiungi.TabIndex = 14;
+            this.BtnAggiungi.Text = "Aggiungi";
+            this.BtnAggiungi.UseVisualStyleBackColor = true;
+            this.BtnAggiungi.Visible = false;
+            this.BtnAggiungi.Click += new System.EventHandler(this.BtnAggiungi_Click);
+            // 
+            // BtnVisualizza
+            // 
+            this.BtnVisualizza.Location = new System.Drawing.Point(302, 417);
+            this.BtnVisualizza.Name = "BtnVisualizza";
+            this.BtnVisualizza.Size = new System.Drawing.Size(75, 23);
+            this.BtnVisualizza.TabIndex = 15;
+            this.BtnVisualizza.Text = "Visualizza";
+            this.BtnVisualizza.UseVisualStyleBackColor = true;
+            this.BtnVisualizza.Visible = false;
+            this.BtnVisualizza.Click += new System.EventHandler(this.BtnVisualizza_Click);
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnVisualizza);
+            this.Controls.Add(this.BtnAggiungi);
+            this.Controls.Add(this.TxBScrittura);
+            this.Controls.Add(this.BtnScrivi);
+            this.Controls.Add(this.BtnHowToPlay);
             this.Controls.Add(this.BtnImp);
             this.Controls.Add(this.BtnHard);
             this.Controls.Add(this.BtnMedium);
@@ -155,8 +219,10 @@
             this.Controls.Add(this.LblTempoT);
             this.Controls.Add(this.tabellaCampo);
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Aggiungi";
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -172,5 +238,10 @@
         private System.Windows.Forms.Button BtnMedium;
         private System.Windows.Forms.Button BtnHard;
         private System.Windows.Forms.Button BtnImp;
+        private System.Windows.Forms.Button BtnHowToPlay;
+        private System.Windows.Forms.Button BtnScrivi;
+        private System.Windows.Forms.TextBox TxBScrittura;
+        private System.Windows.Forms.Button BtnAggiungi;
+        private System.Windows.Forms.Button BtnVisualizza;
     }
 }
