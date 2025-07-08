@@ -14,7 +14,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form3 : Form
+    public partial class CampoMinato : Form
     {
         string percorsoFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "punteggio2.txt");
         int secondiPassati = 0;
@@ -22,10 +22,10 @@ namespace WindowsFormsApp1
         const int Sconfitta = -100;
         string nomeGiocatore;
         DialogResult risultato;
-        private List<string> noteSalvate = new List<string> ();
+        private List<string> noteSalvate = new List<string>();
         private string percorsoFile2 = "note.json";
 
-        public Form3()
+        public CampoMinato()
         {
             InitializeComponent();
 
@@ -126,9 +126,15 @@ namespace WindowsFormsApp1
             TableLayoutPanelCellPosition pos = tabellaCampo.GetPositionFromControl(btn);
             int r = pos.Row;
             int c = pos.Column;
+            var cella = global2.celle[r, c];
+
 
             if (e.Button == MouseButtons.Right)
             {
+                if (global2.celle[r, c].Rivelata == true)
+                {
+                    return;
+                }
                 if (btn.Text == "🚩")
                 {
                     btn.Text = "";
@@ -147,7 +153,7 @@ namespace WindowsFormsApp1
             }
             else if (e.Button == MouseButtons.Left)
             {
-                var cella = global2.celle[r, c];
+                //var cella = global2.celle[r, c];
                 var bottone = global2.griglia[r, c];
 
                 // Se la cella è già rivelata e ha numero > 0 → prova apertura celle vicine
@@ -169,7 +175,7 @@ namespace WindowsFormsApp1
             if (cella.Rivelata || bottone.Text == "🚩") return;
 
             cella.Rivelata = true;
-            bottone.Enabled = false;
+            //bottone.Enabled = false;
 
             if (cella.IsMina)
             {
@@ -223,7 +229,7 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Salvataggio su file non possibile");
+                    MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
                 }
             }
             else
@@ -242,7 +248,7 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Salvataggio su file non possibile");
+                    MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
                 }
             }
 
@@ -269,6 +275,8 @@ namespace WindowsFormsApp1
         }
         private void ApriCelleViciniSeBandiereCorrette(int r, int c)
         {
+
+
             int bandiereAttorno = 0;
 
             // Conta bandiere intorno
@@ -289,6 +297,7 @@ namespace WindowsFormsApp1
 
             if (bandiereAttorno == global2.celle[r, c].MineVicino)
             {
+
                 // Se il numero di bandiere coincide con il numero nella cella
                 for (int i = -1; i <= 1; i++)
                 {
@@ -296,11 +305,11 @@ namespace WindowsFormsApp1
                     {
                         int nr = r + i;
                         int nc = c + j;
-
                         if (nr >= 0 && nr < global2.righe && nc >= 0 && nc < global2.colonne)
                         {
                             var cella = global2.celle[nr, nc];
                             var bottone = global2.griglia[nr, nc];
+                            //bottone.Enabled = false;
                             if (bottone.Text != "🚩" && !cella.Rivelata)
                             {
                                 Rivelare(nr, nc);
@@ -470,7 +479,7 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            File.WriteAllText("note.json","[]");
+            File.WriteAllText("note.json", "[]");
         }
     }
     public static class global2

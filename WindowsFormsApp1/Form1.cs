@@ -122,7 +122,7 @@ namespace WindowsFormsApp1
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Salvataggio su file non possibile");
+                        MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
                     }
 
                     DialogResult risultato = MessageBox.Show("          --Punteggio--" +
