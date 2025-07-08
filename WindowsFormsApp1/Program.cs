@@ -16,7 +16,11 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Poker5());
+            Application.Run(new LogIn());
         }
+    }
+    public static class UtenteC
+    {
+        public static string NomeU { get; set; }
     }
 }

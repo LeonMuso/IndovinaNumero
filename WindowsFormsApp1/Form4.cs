@@ -20,9 +20,14 @@ namespace WindowsFormsApp1
         private FlowLayoutPanel flpMano2;
         private List<int> selezione1 = new List<int>();
         private List<int> selezione2 = new List<int>();
+        int vP1 = 0;
+        int vP2 = 0;
+
         public Poker5()
         {
             InitializeComponent();
+            LblPP1.Text = $"{vP1}";
+            LblPP2.Text = $"{vP2}";
             flpMano1 = new FlowLayoutPanel
             {
                 Name = "flpMano1",
@@ -55,7 +60,7 @@ namespace WindowsFormsApp1
             MostraManoGrafica(manoGiocatore1, flpMano1, selezione1);
             MostraManoGrafica(manoGiocatore2, flpMano2, selezione2);
 
-            
+
         }
 
         private void MostraManoGrafica(List<Carta> mano, FlowLayoutPanel panel, List<int> indiciSelezionati)
@@ -123,16 +128,41 @@ namespace WindowsFormsApp1
 
             string tipo1 = ValutatorePoker.NomePunteggio(p1);
             string tipo2 = ValutatorePoker.NomePunteggio(p2);
-
+            
             string risultato;
             if (p1 > p2)
+            {
                 risultato = $"Giocatore 1 vince con {tipo1}";
+                vP1++;
+                LblPP1.Text = $"{vP1}";
+            }
             else if (p2 > p1)
+            {
                 risultato = $"Giocatore 2 vince con {tipo2}";
+                vP2++;
+                LblPP2.Text = $"{vP2}";
+            }
             else
+            {
                 risultato = $"Pareggio con {tipo1}";
-
+            }
             MessageBox.Show(risultato, "Risultato finale");
+            if(vP1 >= 3 && vP1 > vP2)
+            {
+                MessageBox.Show("Il giocatore 1 ha vinto");
+                vP1 = 0;
+                LblPP1.Text = $"{vP1}";
+                vP2 = 0;
+                LblPP2.Text = $"{vP2}";
+            }
+            else if (vP2 >= 3 && vP2 > vP1)
+            {
+                MessageBox.Show("Il giocatore 2 ha vinto");
+                vP1 = 0;
+                LblPP1.Text = $"{vP1}";
+                vP2 = 0;
+                LblPP2.Text = $"{vP2}";
+            }
         }
 
         private void BtnCambioP1_Click(object sender, EventArgs e)
@@ -144,6 +174,7 @@ namespace WindowsFormsApp1
             }
             selezione1.Clear();
             MostraManoGrafica(manoGiocatore1, flpMano1, selezione1);
+            BtnCambioP1.Enabled = false;
         }
 
         private void BtnCambioP2_Click(object sender, EventArgs e)
@@ -155,11 +186,18 @@ namespace WindowsFormsApp1
             }
             selezione2.Clear();
             MostraManoGrafica(manoGiocatore2, flpMano2, selezione2);
+            BtnCambioP2.Enabled = false;
         }
 
         private void BtnVincitore_Click(object sender, EventArgs e)
         {
             ValutaVincitore();
+            mazzo = new Mazzo();
+            mazzo.Mescola();
+            manoGiocatore1 = mazzo.Pesca(5);
+            manoGiocatore2 = mazzo.Pesca(5);
+            MostraManoGrafica(manoGiocatore1, flpMano1, selezione1);
+            MostraManoGrafica(manoGiocatore2, flpMano2, selezione2);
         }
     }
 
