@@ -39,9 +39,9 @@ namespace WindowsFormsApp1
             string input = txtUsername.Text.Trim();
             if (Regex.IsMatch(input,@"^[A-Za-z_]+$"))
             {
+                this.DialogResult = DialogResult.OK;
                 UtenteC.NomeU = txtUsername.Text;
-                this.Hide();
-                new Form5().Show();
+                this.Close();
             }
             else
             {
@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
                 txtUsername.Clear();
                 txtUsername.Focus();
             }
+            
         }
     }
 }

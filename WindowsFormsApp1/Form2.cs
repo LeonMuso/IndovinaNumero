@@ -96,5 +96,26 @@ namespace WindowsFormsApp1
                 BtnVerifica.Enabled = false;
             }
         }
+
+        private void SbloccaLucchetto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da sblocca il lucchetto?",
+                                                      "Torna al menu",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                new MenuLog().Show();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new SbloccaLucchetto();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
+        }
     }
 }

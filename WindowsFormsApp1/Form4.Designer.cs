@@ -162,6 +162,7 @@
             this.Controls.Add(this.LblTitolo);
             this.Name = "Poker5";
             this.Text = "Poker a 5";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Poker5_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

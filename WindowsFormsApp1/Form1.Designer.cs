@@ -188,6 +188,7 @@
             this.Controls.Add(this.BtnPlay);
             this.Name = "IndovinaNumero";
             this.Text = "Indovina il Numero";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndovinaNumero_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -326,7 +326,7 @@ namespace WindowsFormsApp1
             do
             {
                 nomeGiocatore = Interaction.InputBox("inserisci il tuo nome", "nome giocatore").Trim();
-                if(string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit))
+                if (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit))
                 {
                     MessageBox.Show("Nome non valido");
                 }
@@ -336,6 +336,27 @@ namespace WindowsFormsApp1
             BtnHard.Visible = true;
             BtnNome.Visible = false;
             LblNome.Visible = false;
+        }
+
+        private void IndovinaNumero_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da indovina il numero?",
+                                                      "Torna al menu",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                new MenuLog().Show();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new IndovinaNumero();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
         }
     }
     public static class global

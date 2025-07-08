@@ -220,6 +220,7 @@
             this.Controls.Add(this.tabellaCampo);
             this.Name = "CampoMinato";
             this.Text = "Campo minato";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CampoMinato_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

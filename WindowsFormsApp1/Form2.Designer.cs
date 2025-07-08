@@ -757,6 +757,7 @@
             this.Controls.Add(this.Num00);
             this.Name = "SbloccaLucchetto";
             this.Text = "Sblocca il lucchetto";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SbloccaLucchetto_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Num00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num01)).EndInit();

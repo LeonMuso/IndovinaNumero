@@ -16,7 +16,12 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogIn());
+            LogIn logIn = new LogIn();
+            if (logIn.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MenuLog());
+            }
+
         }
     }
     public static class UtenteC

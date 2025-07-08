@@ -199,6 +199,27 @@ namespace WindowsFormsApp1
             MostraManoGrafica(manoGiocatore1, flpMano1, selezione1);
             MostraManoGrafica(manoGiocatore2, flpMano2, selezione2);
         }
+
+        private void Poker5_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da poker?",
+                                                      "Torna al menu",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                new MenuLog().Show();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new Poker5();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
+        }
     }
 
     public class Carta

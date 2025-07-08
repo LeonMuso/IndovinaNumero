@@ -481,6 +481,27 @@ namespace WindowsFormsApp1
         {
             File.WriteAllText("note.json", "[]");
         }
+
+        private void CampoMinato_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da campo minato?",
+                                                      "Torna al menu",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                new MenuLog().Show();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new CampoMinato();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
+        }
     }
     public static class global2
     {
