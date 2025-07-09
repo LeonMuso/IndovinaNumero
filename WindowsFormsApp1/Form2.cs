@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             for (int i = 0; i < 4; i++)
                 codiceSegreto[i] = rnd.Next(0, 10);
 
-            MessageBox.Show($"{codiceSegreto[0]}{codiceSegreto[1]}{codiceSegreto[2]}{codiceSegreto[3]}");
+            //MessageBox.Show($"{codiceSegreto[0]}{codiceSegreto[1]}{codiceSegreto[2]}{codiceSegreto[3]}");
             for (int i = 0; i < maxTentativi; i++)
             {
                 NumericUpDown[] riga = new NumericUpDown[4];

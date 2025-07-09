@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     public static class GestionePunteggi
     {
-        private static readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "punteggi.json"); 
+        private static readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "punteggi.json");
 
         private static Dictionary<string, Dictionary<string, int>> dati = new Dictionary<string, Dictionary<string, int>>();
 
@@ -35,14 +35,11 @@ namespace WindowsFormsApp1
             else
             {
                 dati = new Dictionary<string, Dictionary<string, int>>();
-
                 dati["IndovinaNumero"] = new Dictionary<string, int>();
                 dati["Lucchetto"] = new Dictionary<string, int>();
                 dati["CampoMinato"] = new Dictionary<string, int>();
                 dati["Poker"] = new Dictionary<string, int>();
                 dati["BOMB"] = new Dictionary<string, int>();
-
-
                 Salva();
             }
         }
@@ -60,7 +57,7 @@ namespace WindowsFormsApp1
         {
             if (dati.ContainsKey(gioco) && dati[gioco].ContainsKey(utente))
             {
-                    return dati[gioco][utente];
+                return dati[gioco][utente];
             }
             return 0;
         }
@@ -69,7 +66,7 @@ namespace WindowsFormsApp1
         {
             string json = JsonConvert.SerializeObject(dati, Formatting.Indented);
             File.WriteAllText(filePath, json);
-            MessageBox.Show($"punteggio salvato su : \n{filePath}");
+            //MessageBox.Show($"punteggio salvato su : \n{filePath}");
         }
     }
 }

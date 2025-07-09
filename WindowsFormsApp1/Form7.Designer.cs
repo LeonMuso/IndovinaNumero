@@ -28,19 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.lstNomiRecenti = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(30, 30);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(150, 20);
+            this.txtUsername.TabIndex = 0;
+            // 
+            // lstNomiRecenti
+            // 
+            this.lstNomiRecenti.FormattingEnabled = true;
+            this.lstNomiRecenti.Location = new System.Drawing.Point(210, 30);
+            this.lstNomiRecenti.Name = "lstNomiRecenti";
+            this.lstNomiRecenti.Size = new System.Drawing.Size(142, 147);
+            this.lstNomiRecenti.TabIndex = 1;
+            this.lstNomiRecenti.Click += new System.EventHandler(this.lstNomiRecenti_Click);
             // 
             // LogIn2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(202, 157);
+            this.ClientSize = new System.Drawing.Size(364, 199);
+            this.Controls.Add(this.lstNomiRecenti);
+            this.Controls.Add(this.txtUsername);
             this.Name = "LogIn2";
             this.Text = "Log in 2";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.ListBox lstNomiRecenti;
     }
 }
