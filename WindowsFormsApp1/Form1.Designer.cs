@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IndovinaNumero));
             this.BtnPlay = new System.Windows.Forms.Button();
             this.BtnEasy = new System.Windows.Forms.Button();
             this.BtnMedium = new System.Windows.Forms.Button();
@@ -42,6 +43,9 @@
             this.LblTimer = new System.Windows.Forms.Label();
             this.LblNome = new System.Windows.Forms.Label();
             this.BtnNome = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblUtente = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnPlay
@@ -169,11 +173,32 @@
             this.BtnNome.Visible = false;
             this.BtnNome.Click += new System.EventHandler(this.BtnNome_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(755, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LblUtente
+            // 
+            this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUtente.Location = new System.Drawing.Point(571, 9);
+            this.LblUtente.Name = "LblUtente";
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
+            this.LblUtente.TabIndex = 18;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // IndovinaNumero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.BtnNome);
             this.Controls.Add(this.LblNome);
             this.Controls.Add(this.LblTimer);
@@ -190,6 +215,7 @@
             this.Text = "Indovina il Numero";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndovinaNumero_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +236,8 @@
         private System.Windows.Forms.Label LblTimer;
         private System.Windows.Forms.Label LblNome;
         private System.Windows.Forms.Button BtnNome;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblUtente;
     }
 }
 

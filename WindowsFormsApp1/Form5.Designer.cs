@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuLog));
             this.LblSbloccaLucchetto = new System.Windows.Forms.Label();
             this.LblCampoMinato = new System.Windows.Forms.Label();
             this.LblIndovinaIlNumero = new System.Windows.Forms.Label();
@@ -42,11 +43,13 @@
             this.LblSingle = new System.Windows.Forms.Label();
             this.LblMultiPlayer = new System.Windows.Forms.Label();
             this.LblUtente = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LblSbloccaLucchetto
@@ -105,6 +108,8 @@
             // 
             // PcBPoker
             // 
+            this.PcBPoker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBPoker.BackgroundImage")));
+            this.PcBPoker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PcBPoker.Location = new System.Drawing.Point(5, 225);
             this.PcBPoker.Name = "PcBPoker";
             this.PcBPoker.Size = new System.Drawing.Size(100, 97);
@@ -114,6 +119,8 @@
             // 
             // PcBNumero
             // 
+            this.PcBNumero.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBNumero.BackgroundImage")));
+            this.PcBNumero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PcBNumero.Location = new System.Drawing.Point(5, 59);
             this.PcBNumero.Name = "PcBNumero";
             this.PcBNumero.Size = new System.Drawing.Size(100, 97);
@@ -123,6 +130,8 @@
             // 
             // PcBLucchetto
             // 
+            this.PcBLucchetto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBLucchetto.BackgroundImage")));
+            this.PcBLucchetto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PcBLucchetto.Location = new System.Drawing.Point(132, 59);
             this.PcBLucchetto.Name = "PcBLucchetto";
             this.PcBLucchetto.Size = new System.Drawing.Size(100, 97);
@@ -132,6 +141,8 @@
             // 
             // PcBCampoMinato
             // 
+            this.PcBCampoMinato.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBCampoMinato.BackgroundImage")));
+            this.PcBCampoMinato.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PcBCampoMinato.Location = new System.Drawing.Point(258, 59);
             this.PcBCampoMinato.Name = "PcBCampoMinato";
             this.PcBCampoMinato.Size = new System.Drawing.Size(100, 97);
@@ -171,16 +182,28 @@
             // LblUtente
             // 
             this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUtente.Location = new System.Drawing.Point(602, 9);
+            this.LblUtente.Location = new System.Drawing.Point(570, 12);
             this.LblUtente.Name = "LblUtente";
-            this.LblUtente.Size = new System.Drawing.Size(186, 41);
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
             this.LblUtente.TabIndex = 13;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(757, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
             // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.LblMultiPlayer);
             this.Controls.Add(this.LblSingle);
@@ -203,6 +226,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,5 +248,6 @@
         private System.Windows.Forms.Label LblSingle;
         private System.Windows.Forms.Label LblMultiPlayer;
         private System.Windows.Forms.Label LblUtente;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

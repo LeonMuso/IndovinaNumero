@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CampoMinato));
             this.tabellaCampo = new System.Windows.Forms.TableLayoutPanel();
             this.LblTempoT = new System.Windows.Forms.Label();
             this.LblBandierine = new System.Windows.Forms.Label();
@@ -44,6 +45,9 @@
             this.TxBScrittura = new System.Windows.Forms.TextBox();
             this.BtnAggiungi = new System.Windows.Forms.Button();
             this.BtnVisualizza = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblUtente = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabellaCampo
@@ -199,11 +203,32 @@
             this.BtnVisualizza.Visible = false;
             this.BtnVisualizza.Click += new System.EventHandler(this.BtnVisualizza_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(756, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LblUtente
+            // 
+            this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUtente.Location = new System.Drawing.Point(572, 9);
+            this.LblUtente.Name = "LblUtente";
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
+            this.LblUtente.TabIndex = 18;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CampoMinato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.BtnVisualizza);
             this.Controls.Add(this.BtnAggiungi);
             this.Controls.Add(this.TxBScrittura);
@@ -222,6 +247,7 @@
             this.Text = "Campo minato";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CampoMinato_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +270,7 @@
         private System.Windows.Forms.TextBox TxBScrittura;
         private System.Windows.Forms.Button BtnAggiungi;
         private System.Windows.Forms.Button BtnVisualizza;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblUtente;
     }
 }

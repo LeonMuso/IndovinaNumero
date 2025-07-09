@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
         public CampoMinato()
         {
             InitializeComponent();
+            LblUtente.Text = UtenteC.NomeU;
 
         }
 

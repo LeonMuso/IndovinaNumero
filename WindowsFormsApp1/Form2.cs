@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public SbloccaLucchetto()
         {
             InitializeComponent();
+            LblUtente.Text = UtenteC.NomeU;
         }
 
         int[] codiceSegreto;

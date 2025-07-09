@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public MenuLog()
         {
             InitializeComponent();
+            LblUtente.Text = "Benvenuto " + UtenteC.NomeU;
         }
 
         private void PcBNumero_Click(object sender, EventArgs e)

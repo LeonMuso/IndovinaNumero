@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
         public IndovinaNumero()
         {
             InitializeComponent();
+            LblUtente.Text = UtenteC.NomeU;
         }
 
         private void BtnPlay_Click(object sender, EventArgs e)
@@ -115,15 +116,11 @@ namespace WindowsFormsApp1
                 {
                     Timer.Stop();
                     punteggio = Victory + (global.TempoMassimo - secondiPassati) + global.Diff + (global.Tentativi * 2);
-                    string riga = $"{DateTime.Now:yyyy-MM-dd} - {nomeGiocatore} - Punteggio: {punteggio}" + Environment.NewLine;
-                    try
-                    {
-                        File.AppendAllText(percorsoFile, riga);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
-                    }
+                    string gioco = "IndovinaNumero";
+                    string utente = UtenteC.NomeU;
+                    int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
+                    int nuovoPunteggio = punteggioAttuale + punteggio;
+                    GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
 
                     DialogResult risultato = MessageBox.Show("          --Punteggio--" +
                                                                 "\n" + $"Vittoria +{Victory}" +

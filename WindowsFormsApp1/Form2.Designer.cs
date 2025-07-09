@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SbloccaLucchetto));
             this.Num00 = new System.Windows.Forms.NumericUpDown();
             this.LblTitolo = new System.Windows.Forms.Label();
             this.LblCorrette = new System.Windows.Forms.Label();
@@ -72,6 +73,8 @@
             this.Num92 = new System.Windows.Forms.NumericUpDown();
             this.Num91 = new System.Windows.Forms.NumericUpDown();
             this.Num90 = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblUtente = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Num00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num02)).BeginInit();
@@ -112,6 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num92)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num91)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num90)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Num00
@@ -706,11 +710,32 @@
             this.Num90.Size = new System.Drawing.Size(38, 20);
             this.Num90.TabIndex = 41;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(752, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 46;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LblUtente
+            // 
+            this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUtente.Location = new System.Drawing.Point(568, 9);
+            this.LblUtente.Name = "LblUtente";
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
+            this.LblUtente.TabIndex = 45;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // SbloccaLucchetto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.Num93);
             this.Controls.Add(this.Num92);
             this.Controls.Add(this.Num91);
@@ -799,6 +824,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Num92)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num91)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num90)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -850,5 +876,7 @@
         private System.Windows.Forms.NumericUpDown Num92;
         private System.Windows.Forms.NumericUpDown Num91;
         private System.Windows.Forms.NumericUpDown Num90;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblUtente;
     }
 }

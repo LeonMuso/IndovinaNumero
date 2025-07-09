@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         public Poker5()
         {
             InitializeComponent();
+            LblUtente.Text = UtenteC.NomeU;
             LblPP1.Text = $"{vP1}";
             LblPP2.Text = $"{vP2}";
             flpMano1 = new FlowLayoutPanel

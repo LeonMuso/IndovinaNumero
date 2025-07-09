@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Poker5));
             this.LblTitolo = new System.Windows.Forms.Label();
             this.BtnDistribuisci = new System.Windows.Forms.Button();
             this.LblP1 = new System.Windows.Forms.Label();
@@ -39,6 +40,9 @@
             this.LblPP2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.LblUtente = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LblTitolo
@@ -144,11 +148,32 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "P1";
             // 
+            // LblUtente
+            // 
+            this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUtente.Location = new System.Drawing.Point(572, 6);
+            this.LblUtente.Name = "LblUtente";
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
+            this.LblUtente.TabIndex = 16;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(756, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
             // Poker5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.LblPP2);
@@ -163,6 +188,7 @@
             this.Name = "Poker5";
             this.Text = "Poker a 5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Poker5_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +207,7 @@
         private System.Windows.Forms.Label LblPP2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LblUtente;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
