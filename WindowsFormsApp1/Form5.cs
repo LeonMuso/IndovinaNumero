@@ -69,5 +69,26 @@ namespace WindowsFormsApp1
                 this.Dispose();
             }
         }
+
+        private void BtnEsci_Click(object sender, EventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire dal menu?",
+                                                      "Uscita",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new MenuLog();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
+        }
     }
 }

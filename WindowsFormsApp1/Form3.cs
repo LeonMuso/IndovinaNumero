@@ -16,10 +16,8 @@ namespace WindowsFormsApp1
 {
     public partial class CampoMinato : Form
     {
-        string percorsoFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "punteggio2.txt");
         int secondiPassati = 0;
         const int Victory = 100;
-        const int Sconfitta = -100;
         string nomeGiocatore;
         DialogResult risultato;
         private List<string> noteSalvate = new List<string>();
@@ -217,40 +215,25 @@ namespace WindowsFormsApp1
             if (vittoria == true)
             {
                 punteggio = Victory + (200 - secondiPassati) + global2.Diff;
+                string gioco = "CampoMinato";
+                string utente = UtenteC.NomeU;
+                int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
+                if (!(punteggioAttuale > punteggio))
+                {
+                    int nuovoPunteggio = punteggio;
+                    GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+                }
                 risultato = MessageBox.Show("          --Punteggio--" +
                                             "\n" + $"Vittoria +{Victory}" +
                                             "\n" + $"Tempo rimanente +{200 - secondiPassati}" +
                                             "\n" + $"Difficoltà scelta +{global2.Diff}" +
                                             "\n" + $"Punteggio finale: {punteggio}" +
                                             "\n" + "Vuoi rigiocare?", "Vittoria", MessageBoxButtons.YesNo);
-                string riga = $"{DateTime.Now:yyyy-MM-dd} - {nomeGiocatore} - Punteggio: {punteggio} - Vittoria" + Environment.NewLine;
-                try
-                {
-                    File.AppendAllText(percorsoFile, riga);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
-                }
             }
             else
             {
-                punteggio = (200 - secondiPassati) + Sconfitta + global2.Diff;
-                risultato = MessageBox.Show("          --Punteggio--" +
-                                            "\n" + $"Sconfitta {Sconfitta}" +
-                                            "\n" + $"Tempo rimanente +{200 - secondiPassati}" +
-                                            "\n" + $"Difficoltà scelta +{global2.Diff}" +
-                                            "\n" + $"Punteggio finale: {punteggio}" +
+                risultato = MessageBox.Show("\n" + $"Sconfitta" +
                                             "\n" + "Vuoi rigiocare?", "Sconfitta", MessageBoxButtons.YesNo);
-                string riga = $"{DateTime.Now:yyyy-MM-dd} - {nomeGiocatore} - Punteggio: {punteggio} - Sconfitta" + Environment.NewLine;
-                try
-                {
-                    File.AppendAllText(percorsoFile, riga);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Salvataggio su file non possibile" + ex.Message);
-                }
             }
 
             if (risultato == DialogResult.Yes)
@@ -380,14 +363,6 @@ namespace WindowsFormsApp1
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            do
-            {
-                nomeGiocatore = Interaction.InputBox("inserisci il tuo nome", "nome giocatore").Trim();
-                if (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit))
-                {
-                    MessageBox.Show("Nome non valido");
-                }
-            } while (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit));
             BtnEasy.Visible = true;
             BtnMedium.Visible = true;
             BtnHard.Visible = true;

@@ -105,6 +105,7 @@
             this.BtnEsci.TabIndex = 5;
             this.BtnEsci.Text = "Esci";
             this.BtnEsci.UseVisualStyleBackColor = true;
+            this.BtnEsci.Click += new System.EventHandler(this.BtnEsci_Click);
             // 
             // PcBPoker
             // 

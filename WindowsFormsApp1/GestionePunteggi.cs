@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
         {
             string json = JsonConvert.SerializeObject(dati, Formatting.Indented);
             File.WriteAllText(filePath, json);
-            MessageBox.Show("punteggio salvato");
+            MessageBox.Show($"punteggio salvato su : \n{filePath}");
         }
     }
 }

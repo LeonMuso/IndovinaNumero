@@ -41,8 +41,6 @@
             this.LblTentativi = new System.Windows.Forms.Label();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.LblTimer = new System.Windows.Forms.Label();
-            this.LblNome = new System.Windows.Forms.Label();
-            this.BtnNome = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblUtente = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -152,27 +150,6 @@
             this.LblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblTimer.Visible = false;
             // 
-            // LblNome
-            // 
-            this.LblNome.AutoSize = true;
-            this.LblNome.Location = new System.Drawing.Point(320, 107);
-            this.LblNome.Name = "LblNome";
-            this.LblNome.Size = new System.Drawing.Size(99, 13);
-            this.LblNome.TabIndex = 11;
-            this.LblNome.Text = "Inserisci il tuo nome";
-            this.LblNome.Visible = false;
-            // 
-            // BtnNome
-            // 
-            this.BtnNome.Location = new System.Drawing.Point(334, 132);
-            this.BtnNome.Name = "BtnNome";
-            this.BtnNome.Size = new System.Drawing.Size(75, 23);
-            this.BtnNome.TabIndex = 12;
-            this.BtnNome.Text = "Inserisci";
-            this.BtnNome.UseVisualStyleBackColor = true;
-            this.BtnNome.Visible = false;
-            this.BtnNome.Click += new System.EventHandler(this.BtnNome_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
@@ -199,8 +176,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
-            this.Controls.Add(this.BtnNome);
-            this.Controls.Add(this.LblNome);
             this.Controls.Add(this.LblTimer);
             this.Controls.Add(this.LblTentativi);
             this.Controls.Add(this.LblMaxMin);
@@ -234,8 +209,6 @@
         private System.Windows.Forms.Label LblTentativi;
         private System.Windows.Forms.Timer Timer;
         private System.Windows.Forms.Label LblTimer;
-        private System.Windows.Forms.Label LblNome;
-        private System.Windows.Forms.Button BtnNome;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblUtente;
     }

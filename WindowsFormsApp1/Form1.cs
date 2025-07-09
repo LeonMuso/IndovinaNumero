@@ -24,8 +24,6 @@ namespace WindowsFormsApp1
         int secondiPassati = 0;
         const int Victory = 100;
         int punteggio;
-        string nomeGiocatore;
-        string percorsoFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "punteggio.txt");
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         public IndovinaNumero()
@@ -36,9 +34,10 @@ namespace WindowsFormsApp1
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            BtnNome.Visible = true;
-            LblNome.Visible = true;
             BtnPlay.Visible = false;
+            BtnEasy.Visible = true;
+            BtnMedium.Visible = true;
+            BtnHard.Visible = true;
         }
 
         private void BtnEasy_Click(object sender, EventArgs e)
@@ -119,8 +118,11 @@ namespace WindowsFormsApp1
                     string gioco = "IndovinaNumero";
                     string utente = UtenteC.NomeU;
                     int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
-                    int nuovoPunteggio = punteggioAttuale + punteggio;
-                    GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+                    if (!(punteggioAttuale > punteggio))
+                    {
+                        int nuovoPunteggio = punteggio;
+                        GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+                    }
 
                     DialogResult risultato = MessageBox.Show("          --Punteggio--" +
                                                                 "\n" + $"Vittoria +{Victory}" +
@@ -316,23 +318,6 @@ namespace WindowsFormsApp1
             }
 
 
-        }
-
-        private void BtnNome_Click(object sender, EventArgs e)
-        {
-            do
-            {
-                nomeGiocatore = Interaction.InputBox("inserisci il tuo nome", "nome giocatore").Trim();
-                if (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit))
-                {
-                    MessageBox.Show("Nome non valido");
-                }
-            } while (string.IsNullOrEmpty(nomeGiocatore) || nomeGiocatore.Any(char.IsDigit));
-            BtnEasy.Visible = true;
-            BtnMedium.Visible = true;
-            BtnHard.Visible = true;
-            BtnNome.Visible = false;
-            LblNome.Visible = false;
         }
 
         private void IndovinaNumero_FormClosing(object sender, FormClosingEventArgs e)
