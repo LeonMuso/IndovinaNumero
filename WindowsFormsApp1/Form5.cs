@@ -45,8 +45,15 @@ namespace WindowsFormsApp1
 
         private void PcBPoker_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new Poker5().Show();
+            var login2 = new LogIn2();
+            if (login2.ShowDialog() == DialogResult.OK)
+            {
+                string nome1 = UtenteC.NomeU;
+                string nome2 = UtenteC.NomeU2;
+                var poker = new Poker5(nome1,nome2);
+                poker.Show();
+                this.Hide();
+            }
         }
 
         private void MenuLog_FormClosing(object sender, FormClosingEventArgs e)

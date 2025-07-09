@@ -12,26 +12,28 @@ namespace WindowsFormsApp1
 {
     public partial class SbloccaLucchetto : Form
     {
+        int[] codiceSegreto;
+        int rigaCorrente = 0;
+        List<NumericUpDown[]> righeNumeri = new List<NumericUpDown[]>();
+        const int maxTentativi = 10;
+        int punteggio = 0;
+        const int Victory = 100;
+        DialogResult risultato;
         public SbloccaLucchetto()
         {
             InitializeComponent();
             LblUtente.Text = UtenteC.NomeU;
         }
 
-        int[] codiceSegreto;
-        int rigaCorrente = 0;
-        List<NumericUpDown[]> righeNumeri = new List<NumericUpDown[]>();
-        const int maxTentativi = 10;
-
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+
             Random rnd = new Random();
             codiceSegreto = new int[4];
             for (int i = 0; i < 4; i++)
                 codiceSegreto[i] = rnd.Next(0, 10);
 
-            
+            MessageBox.Show($"{codiceSegreto[0]}{codiceSegreto[1]}{codiceSegreto[2]}{codiceSegreto[3]}");
             for (int i = 0; i < maxTentativi; i++)
             {
                 NumericUpDown[] riga = new NumericUpDown[4];
@@ -79,9 +81,33 @@ namespace WindowsFormsApp1
 
             if (corrette == 4)
             {
-                MessageBox.Show("✅ Complimenti! Hai indovinato il codice!");
-                BtnVerifica.Enabled = false;
-                return;
+                punteggio = Victory + (tentativiRimasti * 10);
+                risultato = MessageBox.Show("          --Punteggio--" +
+                                            "\n" + $"Vittoria +{Victory}" +
+                                            "\n" + $"Tentativi +{tentativiRimasti * 10}" +
+                                            "\n" + $"Punteggio finale: {punteggio}" +
+                                            "\n" + "Vuoi rigiocare?", "Vittoria", MessageBoxButtons.YesNo);
+                string gioco = "Lucchetto";
+                string utente = UtenteC.NomeU;
+                int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
+                if (!(punteggioAttuale > punteggio))
+                {
+                    int nuovoPunteggio = punteggio;
+                    GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+                }
+                if (risultato == DialogResult.Yes)
+                {
+                    var posizione = this.Location;
+                    var nuovoForm = new SbloccaLucchetto();
+                    nuovoForm.StartPosition = FormStartPosition.Manual;
+                    nuovoForm.Location = posizione;
+                    nuovoForm.Show();
+                    this.Dispose();
+                }
+                else
+                {
+                    Close();
+                }
             }
 
             rigaCorrente++;
@@ -93,8 +119,21 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show($"❌ Hai esaurito i tentativi. Il codice era: {string.Join("", codiceSegreto)}");
-                BtnVerifica.Enabled = false;
+                risultato = MessageBox.Show($"❌ Hai esaurito i tentativi. Il codice era: {string.Join("", codiceSegreto)}"+
+                                             "\n"+"Vuoi rigiocare?","Sconfitta",MessageBoxButtons.YesNo);
+                if (risultato == DialogResult.Yes)
+                {
+                    var posizione = this.Location;
+                    var nuovoForm = new SbloccaLucchetto();
+                    nuovoForm.StartPosition = FormStartPosition.Manual;
+                    nuovoForm.Location = posizione;
+                    nuovoForm.Show();
+                    this.Dispose();
+                }
+                else
+                {
+                    Close();
+                }
             }
         }
 

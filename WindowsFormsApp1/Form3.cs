@@ -18,7 +18,6 @@ namespace WindowsFormsApp1
     {
         int secondiPassati = 0;
         const int Victory = 100;
-        string nomeGiocatore;
         DialogResult risultato;
         private List<string> noteSalvate = new List<string>();
         private string percorsoFile2 = "note.json";

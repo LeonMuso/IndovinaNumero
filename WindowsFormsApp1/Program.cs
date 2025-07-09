@@ -27,5 +27,6 @@ namespace WindowsFormsApp1
     public static class UtenteC
     {
         public static string NomeU { get; set; }
+        public static string NomeU2 { get; set; }
     }
 }

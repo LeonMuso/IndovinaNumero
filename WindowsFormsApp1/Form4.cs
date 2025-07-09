@@ -23,10 +23,14 @@ namespace WindowsFormsApp1
         int vP1 = 0;
         int vP2 = 0;
 
-        public Poker5()
+        public Poker5(string p1, string p2)
         {
             InitializeComponent();
             LblUtente.Text = UtenteC.NomeU;
+            LblP1.Text = p1;
+            LblP12.Text = p1;
+            LblP2.Text = p2;
+            LblP22.Text = p2;
             LblPP1.Text = $"{vP1}";
             LblPP2.Text = $"{vP2}";
             flpMano1 = new FlowLayoutPanel
@@ -214,7 +218,7 @@ namespace WindowsFormsApp1
             else
             {
                 var posizione = this.Location;
-                var nuovoForm = new Poker5();
+                var nuovoForm = new Poker5(UtenteC.NomeU,UtenteC.NomeU2);
                 nuovoForm.StartPosition = FormStartPosition.Manual;
                 nuovoForm.Location = posizione;
                 nuovoForm.Show();
