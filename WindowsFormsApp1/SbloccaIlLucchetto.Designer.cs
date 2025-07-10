@@ -75,6 +75,7 @@
             this.Num90 = new System.Windows.Forms.NumericUpDown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblUtente = new System.Windows.Forms.Label();
+            this.BtnClassifica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Num00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Num02)).BeginInit();
@@ -729,11 +730,23 @@
             this.LblUtente.TabIndex = 45;
             this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // BtnClassifica
+            // 
+            this.BtnClassifica.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnClassifica.BackgroundImage")));
+            this.BtnClassifica.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnClassifica.Location = new System.Drawing.Point(707, 373);
+            this.BtnClassifica.Name = "BtnClassifica";
+            this.BtnClassifica.Size = new System.Drawing.Size(81, 65);
+            this.BtnClassifica.TabIndex = 47;
+            this.BtnClassifica.UseVisualStyleBackColor = true;
+            this.BtnClassifica.Click += new System.EventHandler(this.BtnClassifica_Click);
+            // 
             // SbloccaLucchetto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.Num93);
@@ -878,5 +891,6 @@
         private System.Windows.Forms.NumericUpDown Num90;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblUtente;
+        private System.Windows.Forms.Button BtnClassifica;
     }
 }

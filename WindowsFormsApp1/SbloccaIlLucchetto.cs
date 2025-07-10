@@ -157,5 +157,10 @@ namespace WindowsFormsApp1
                 this.Dispose();
             }
         }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("Lucchetto").Show();
+        }
     }
 }

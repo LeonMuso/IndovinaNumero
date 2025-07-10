@@ -477,6 +477,11 @@ namespace WindowsFormsApp1
                 this.Dispose();
             }
         }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("CampoMinato").Show();
+        }
     }
     public static class global2
     {

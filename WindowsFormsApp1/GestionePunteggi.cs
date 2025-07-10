@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     public static class GestionePunteggi
     {
-        private static readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "punteggi.json");
+        private static readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Punteggi.json");
 
         private static Dictionary<string, Dictionary<string, int>> dati = new Dictionary<string, Dictionary<string, int>>();
 

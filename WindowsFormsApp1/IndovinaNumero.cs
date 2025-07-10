@@ -50,7 +50,9 @@ namespace WindowsFormsApp1
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
             LblTimer.Visible = true;
+            LblNumeri.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
+            LblNumeri.Text = "Numeri da 1 a 50";
             Timer.Start();
             global.Diff = 30;
             global.Tentativi = 10;
@@ -72,7 +74,9 @@ namespace WindowsFormsApp1
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
             LblTimer.Visible = true;
+            LblNumeri.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
+            LblNumeri.Text = "Numeri da 1 a 100";
             Timer.Start();
             global.Diff = 75;
             global.Tentativi = 7;
@@ -94,7 +98,9 @@ namespace WindowsFormsApp1
             LblMaxMin.Visible = true;
             LblTentativi.Visible = true;
             LblTimer.Visible = true;
+            LblNumeri.Visible = true;
             LblTimer.Text = "Tempo trascorso: 00:00";
+            LblNumeri.Text = "Numeri da 1 a 500";
             Timer.Start();
             global.Diff = 150;
             global.Tentativi = 5;
@@ -143,6 +149,7 @@ namespace WindowsFormsApp1
                         LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
+                        LblNumeri.Visible = false;
                         secondiPassati = 0;
                         TxBNumero.Clear();
                     }
@@ -184,6 +191,7 @@ namespace WindowsFormsApp1
                         LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
+                        LblNumeri.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                         TxBNumero.Clear();
@@ -236,6 +244,7 @@ namespace WindowsFormsApp1
                         LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
+                        LblNumeri.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                         TxBNumero.Clear();
@@ -271,6 +280,7 @@ namespace WindowsFormsApp1
                         LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
+                        LblNumeri.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                         TxBNumero.Clear();
@@ -306,6 +316,7 @@ namespace WindowsFormsApp1
                         LblTentativi.Text = "";
                         LblTentativi.Visible = false;
                         LblTimer.Visible = false;
+                        LblNumeri.Visible = false;
                         Timer.Stop();
                         secondiPassati = 0;
                         TxBNumero.Clear();
@@ -339,6 +350,11 @@ namespace WindowsFormsApp1
                 nuovoForm.Show();
                 this.Dispose();
             }
+        }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("IndovinaNumero").Show();
         }
     }
     public static class global

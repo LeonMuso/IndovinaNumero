@@ -43,6 +43,8 @@
             this.LblTimer = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblUtente = new System.Windows.Forms.Label();
+            this.BtnClassifica = new System.Windows.Forms.Button();
+            this.LblNumeri = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,11 +171,33 @@
             this.LblUtente.TabIndex = 18;
             this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // BtnClassifica
+            // 
+            this.BtnClassifica.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnClassifica.BackgroundImage")));
+            this.BtnClassifica.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnClassifica.Location = new System.Drawing.Point(707, 373);
+            this.BtnClassifica.Name = "BtnClassifica";
+            this.BtnClassifica.Size = new System.Drawing.Size(81, 65);
+            this.BtnClassifica.TabIndex = 20;
+            this.BtnClassifica.UseVisualStyleBackColor = true;
+            this.BtnClassifica.Click += new System.EventHandler(this.BtnClassifica_Click);
+            // 
+            // LblNumeri
+            // 
+            this.LblNumeri.AutoSize = true;
+            this.LblNumeri.Location = new System.Drawing.Point(225, 164);
+            this.LblNumeri.Name = "LblNumeri";
+            this.LblNumeri.Size = new System.Drawing.Size(0, 13);
+            this.LblNumeri.TabIndex = 21;
+            this.LblNumeri.Visible = false;
+            // 
             // IndovinaNumero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblNumeri);
+            this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.LblTimer);
@@ -211,6 +235,8 @@
         private System.Windows.Forms.Label LblTimer;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblUtente;
+        private System.Windows.Forms.Button BtnClassifica;
+        private System.Windows.Forms.Label LblNumeri;
     }
 }
 

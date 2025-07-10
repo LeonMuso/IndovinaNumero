@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,8 @@ namespace WindowsFormsApp1
 {
     public partial class Poker5 : Form
     {
-
+        int cambiP1 = 0;
+        int cambiP2 = 0;
         private Mazzo mazzo;
         private List<Carta> manoGiocatore1;
         private List<Carta> manoGiocatore2;
@@ -133,28 +136,44 @@ namespace WindowsFormsApp1
 
             string tipo1 = ValutatorePoker.NomePunteggio(p1);
             string tipo2 = ValutatorePoker.NomePunteggio(p2);
-            
+
+            string vincitore = "";
+            int puntiVittoria = 150;
+
             string risultato;
             if (p1 > p2)
             {
                 risultato = $"Giocatore 1 vince con {tipo1}";
                 vP1++;
                 LblPP1.Text = $"{vP1}";
+                BtnCambioP1.Enabled = true;
+                BtnCambioP2.Enabled = true;
             }
             else if (p2 > p1)
             {
                 risultato = $"Giocatore 2 vince con {tipo2}";
                 vP2++;
                 LblPP2.Text = $"{vP2}";
+                BtnCambioP1.Enabled = true;
+                BtnCambioP2.Enabled = true;
             }
             else
             {
                 risultato = $"Pareggio con {tipo1}";
+                BtnCambioP1.Enabled = true;
+                BtnCambioP2.Enabled = true;
             }
             MessageBox.Show(risultato, "Risultato finale");
-            if(vP1 >= 3 && vP1 > vP2)
+            if (vP1 >= 3 && vP1 > vP2)
             {
                 MessageBox.Show("Il giocatore 1 ha vinto");
+                vincitore = UtenteC.NomeU;
+                int punteggio = puntiVittoria - (10 * cambiP1);
+                MessageBox.Show("         --Punteggio--" +
+                                "\n" + $"Vittoria +{puntiVittoria}" +
+                                "\n" + $"Cambi -{cambiP1 * 10}" +
+                                "\n" + $"Punteggio finale: {punteggio}", $"Vittoria {UtenteC.NomeU}");
+                SalvaPunteggio("Poker", vincitore, punteggio);
                 vP1 = 0;
                 LblPP1.Text = $"{vP1}";
                 vP2 = 0;
@@ -163,12 +182,42 @@ namespace WindowsFormsApp1
             else if (vP2 >= 3 && vP2 > vP1)
             {
                 MessageBox.Show("Il giocatore 2 ha vinto");
+                vincitore = UtenteC.NomeU2;
+                int punteggio = puntiVittoria - (10 * cambiP2);
+                MessageBox.Show("         --Punteggio--" +
+                                "\n" + $"Vittoria +{puntiVittoria}" +
+                                "\n" + $"Cambi -{cambiP2 * 10}" +
+                                "\n" + $"Punteggio finale: {punteggio}", $"Vittoria {UtenteC.NomeU2}");
+                SalvaPunteggio("Poker", vincitore, punteggio);
                 vP1 = 0;
                 LblPP1.Text = $"{vP1}";
                 vP2 = 0;
                 LblPP2.Text = $"{vP2}";
             }
         }
+        void SalvaPunteggio(string gioco, string utente, int punti)
+        {
+            string path = "Punteggi.json";
+            var dict = new Dictionary<string, Dictionary<string, int>>();
+
+            if (File.Exists(path))
+            {
+                var json = File.ReadAllText(path);
+                dict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, int>>>(json)
+                       ?? new Dictionary<string, Dictionary<string, int>>();
+            }
+
+            if (!dict.ContainsKey(gioco))
+                dict[gioco] = new Dictionary<string, int>();
+
+            if (dict[gioco].ContainsKey(utente))
+                dict[gioco][utente] += punti;
+            else
+                dict[gioco][utente] = punti;
+
+            File.WriteAllText(path, JsonConvert.SerializeObject(dict, Formatting.Indented));
+        }
+
 
         private void BtnCambioP1_Click(object sender, EventArgs e)
         {
@@ -180,6 +229,7 @@ namespace WindowsFormsApp1
             selezione1.Clear();
             MostraManoGrafica(manoGiocatore1, flpMano1, selezione1);
             BtnCambioP1.Enabled = false;
+            cambiP1++;
         }
 
         private void BtnCambioP2_Click(object sender, EventArgs e)
@@ -192,6 +242,7 @@ namespace WindowsFormsApp1
             selezione2.Clear();
             MostraManoGrafica(manoGiocatore2, flpMano2, selezione2);
             BtnCambioP2.Enabled = false;
+            cambiP2++;
         }
 
         private void BtnVincitore_Click(object sender, EventArgs e)
@@ -218,12 +269,17 @@ namespace WindowsFormsApp1
             else
             {
                 var posizione = this.Location;
-                var nuovoForm = new Poker5(UtenteC.NomeU,UtenteC.NomeU2);
+                var nuovoForm = new Poker5(UtenteC.NomeU, UtenteC.NomeU2);
                 nuovoForm.StartPosition = FormStartPosition.Manual;
                 nuovoForm.Location = posizione;
                 nuovoForm.Show();
                 this.Dispose();
             }
+        }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("Poker").Show();
         }
     }
 

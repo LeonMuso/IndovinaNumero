@@ -42,6 +42,7 @@
             this.LblP12 = new System.Windows.Forms.Label();
             this.LblUtente = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BtnClassifica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,11 +164,23 @@
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
+            // BtnClassifica
+            // 
+            this.BtnClassifica.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnClassifica.BackgroundImage")));
+            this.BtnClassifica.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnClassifica.Location = new System.Drawing.Point(707, 373);
+            this.BtnClassifica.Name = "BtnClassifica";
+            this.BtnClassifica.Size = new System.Drawing.Size(81, 65);
+            this.BtnClassifica.TabIndex = 18;
+            this.BtnClassifica.UseVisualStyleBackColor = true;
+            this.BtnClassifica.Click += new System.EventHandler(this.BtnClassifica_Click);
+            // 
             // Poker5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.LblP12);
@@ -205,5 +218,6 @@
         private System.Windows.Forms.Label LblP12;
         private System.Windows.Forms.Label LblUtente;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button BtnClassifica;
     }
 }

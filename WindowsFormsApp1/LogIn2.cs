@@ -35,6 +35,11 @@ namespace WindowsFormsApp1
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             string input = txtUsername.Text.Trim();
+            if (input == UtenteC.NomeU)
+            {
+                MessageBox.Show("Inserisci un nome valido");
+                return;
+            }
             if (Regex.IsMatch(input, @"^[A-Za-z_]+$"))
             {
                 this.DialogResult = DialogResult.OK;
@@ -44,6 +49,7 @@ namespace WindowsFormsApp1
             }
             else
             {
+
                 MessageBox.Show("Inserisci un nome valido");
                 txtUsername.Clear();
                 txtUsername.Focus();
