@@ -45,6 +45,7 @@
             this.LblUtente = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BtnClassifica = new System.Windows.Forms.Button();
+            this.LblCaso = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
@@ -154,6 +155,8 @@
             // 
             // PcBBOMB
             // 
+            this.PcBBOMB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBBOMB.BackgroundImage")));
+            this.PcBBOMB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PcBBOMB.Location = new System.Drawing.Point(501, 111);
             this.PcBBOMB.Name = "PcBBOMB";
             this.PcBBOMB.Size = new System.Drawing.Size(182, 170);
@@ -211,11 +214,21 @@
             this.BtnClassifica.UseVisualStyleBackColor = true;
             this.BtnClassifica.Click += new System.EventHandler(this.BtnClassifica_Click);
             // 
+            // LblCaso
+            // 
+            this.LblCaso.Location = new System.Drawing.Point(553, 186);
+            this.LblCaso.Name = "LblCaso";
+            this.LblCaso.Size = new System.Drawing.Size(73, 35);
+            this.LblCaso.TabIndex = 16;
+            this.LblCaso.Text = "Non funzionante";
+            this.LblCaso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblCaso);
             this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
@@ -264,5 +277,6 @@
         private System.Windows.Forms.Label LblUtente;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BtnClassifica;
+        private System.Windows.Forms.Label LblCaso;
     }
 }

@@ -41,10 +41,6 @@
             this.BtnHard = new System.Windows.Forms.Button();
             this.BtnImp = new System.Windows.Forms.Button();
             this.BtnHowToPlay = new System.Windows.Forms.Button();
-            this.BtnScrivi = new System.Windows.Forms.Button();
-            this.TxBScrittura = new System.Windows.Forms.TextBox();
-            this.BtnAggiungi = new System.Windows.Forms.Button();
-            this.BtnVisualizza = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblUtente = new System.Windows.Forms.Label();
             this.BtnClassifica = new System.Windows.Forms.Button();
@@ -164,46 +160,6 @@
             this.BtnHowToPlay.UseVisualStyleBackColor = true;
             this.BtnHowToPlay.Click += new System.EventHandler(this.BtnHowToPlay_Click);
             // 
-            // BtnScrivi
-            // 
-            this.BtnScrivi.Location = new System.Drawing.Point(12, 415);
-            this.BtnScrivi.Name = "BtnScrivi";
-            this.BtnScrivi.Size = new System.Drawing.Size(75, 23);
-            this.BtnScrivi.TabIndex = 12;
-            this.BtnScrivi.Text = "Scrivi";
-            this.BtnScrivi.UseVisualStyleBackColor = true;
-            this.BtnScrivi.Click += new System.EventHandler(this.BtnScrivi_Click);
-            // 
-            // TxBScrittura
-            // 
-            this.TxBScrittura.Location = new System.Drawing.Point(105, 417);
-            this.TxBScrittura.Name = "TxBScrittura";
-            this.TxBScrittura.Size = new System.Drawing.Size(100, 20);
-            this.TxBScrittura.TabIndex = 13;
-            this.TxBScrittura.Visible = false;
-            // 
-            // BtnAggiungi
-            // 
-            this.BtnAggiungi.Location = new System.Drawing.Point(221, 417);
-            this.BtnAggiungi.Name = "BtnAggiungi";
-            this.BtnAggiungi.Size = new System.Drawing.Size(75, 23);
-            this.BtnAggiungi.TabIndex = 14;
-            this.BtnAggiungi.Text = "Aggiungi";
-            this.BtnAggiungi.UseVisualStyleBackColor = true;
-            this.BtnAggiungi.Visible = false;
-            this.BtnAggiungi.Click += new System.EventHandler(this.BtnAggiungi_Click);
-            // 
-            // BtnVisualizza
-            // 
-            this.BtnVisualizza.Location = new System.Drawing.Point(302, 417);
-            this.BtnVisualizza.Name = "BtnVisualizza";
-            this.BtnVisualizza.Size = new System.Drawing.Size(75, 23);
-            this.BtnVisualizza.TabIndex = 15;
-            this.BtnVisualizza.Text = "Visualizza";
-            this.BtnVisualizza.UseVisualStyleBackColor = true;
-            this.BtnVisualizza.Visible = false;
-            this.BtnVisualizza.Click += new System.EventHandler(this.BtnVisualizza_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
@@ -242,10 +198,6 @@
             this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblUtente);
-            this.Controls.Add(this.BtnVisualizza);
-            this.Controls.Add(this.BtnAggiungi);
-            this.Controls.Add(this.TxBScrittura);
-            this.Controls.Add(this.BtnScrivi);
             this.Controls.Add(this.BtnHowToPlay);
             this.Controls.Add(this.BtnImp);
             this.Controls.Add(this.BtnHard);
@@ -262,7 +214,6 @@
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -279,10 +230,6 @@
         private System.Windows.Forms.Button BtnHard;
         private System.Windows.Forms.Button BtnImp;
         private System.Windows.Forms.Button BtnHowToPlay;
-        private System.Windows.Forms.Button BtnScrivi;
-        private System.Windows.Forms.TextBox TxBScrittura;
-        private System.Windows.Forms.Button BtnAggiungi;
-        private System.Windows.Forms.Button BtnVisualizza;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblUtente;
         private System.Windows.Forms.Button BtnClassifica;

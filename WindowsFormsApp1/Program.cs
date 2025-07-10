@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
             LogIn logIn = new LogIn();
             if (logIn.ShowDialog() == DialogResult.OK)
             {
+                
                 Application.Run(new MenuLog());
             }
 

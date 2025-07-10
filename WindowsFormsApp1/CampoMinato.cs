@@ -403,55 +403,6 @@ namespace WindowsFormsApp1
 
         }
 
-        private void BtnScrivi_Click(object sender, EventArgs e)
-        {
-            TxBScrittura.Visible = true;
-            BtnAggiungi.Visible = true;
-            BtnVisualizza.Visible = true;
-        }
-
-        private void BtnAggiungi_Click(object sender, EventArgs e)
-        {
-            string testo = TxBScrittura.Text.Trim();
-            if (string.IsNullOrWhiteSpace(testo))
-            {
-                MessageBox.Show("inserisci testo prima");
-                return;
-            }
-            noteSalvate.Add(testo);
-            TxBScrittura.Clear();
-            string json = JsonConvert.SerializeObject(noteSalvate, Formatting.Indented);
-            File.WriteAllText(percorsoFile2, json);
-            MessageBox.Show("andata");
-        }
-        private void BtnVisualizza_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists("note.json"))
-            {
-                MessageBox.Show("Il file non esiste ancora.");
-                return;
-            }
-
-            try
-            {
-                string json = File.ReadAllText("note.json");
-                var note = JsonConvert.DeserializeObject<List<string>>(json);
-
-                if (note == null || note.Count == 0)
-                {
-                    MessageBox.Show("Nessuna nota trovata.");
-                    return;
-                }
-
-                string messaggio = "📝 NOTE SALVATE:\n\n" + string.Join("\n• ", note);
-                MessageBox.Show(messaggio, "Visualizza Note");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Errore nella lettura del file:\n" + ex.Message);
-            }
-        }
-
         private void Form3_Load(object sender, EventArgs e)
         {
             File.WriteAllText("note.json", "[]");

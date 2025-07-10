@@ -39,8 +39,7 @@ namespace WindowsFormsApp1
         private void PcBBOMB_Click(object sender, EventArgs e)
         {
             //this.Hide();
-            //new IndovinaNumero().Show();
-            //in produzione
+            //new Form1().Show();
         }
 
         private void PcBPoker_Click(object sender, EventArgs e)
@@ -68,12 +67,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                var posizione = this.Location;
-                var nuovoForm = new MenuLog();
-                nuovoForm.StartPosition = FormStartPosition.Manual;
-                nuovoForm.Location = posizione;
-                nuovoForm.Show();
-                this.Dispose();
+                e.Cancel = true;
             }
         }
 
@@ -86,15 +80,6 @@ namespace WindowsFormsApp1
             if (risultato == DialogResult.Yes)
             {
                 Application.Exit();
-            }
-            else
-            {
-                var posizione = this.Location;
-                var nuovoForm = new MenuLog();
-                nuovoForm.StartPosition = FormStartPosition.Manual;
-                nuovoForm.Location = posizione;
-                nuovoForm.Show();
-                this.Dispose();
             }
         }
 
