@@ -16,15 +16,15 @@ namespace WindowsFormsApp1
     public partial class LogIn : Form
     {
         private Button btnLogin;
-        private string utentiPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UtentiRecenti.json");
+        private readonly string utentiPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UtentiRecenti.json");
         public LogIn()
         {
             InitializeComponent();
-            CaricaUtentiRecenti();
+            CaricaUtenti();
             btnLogin = new Button
             {
                 Text = "Login",
-                Location = new System.Drawing.Point(30, 70)
+                Location = new System.Drawing.Point(30, 100)
             };
             btnLogin.Click += BtnLogin_Click;
             Controls.Add(btnLogin);
@@ -32,57 +32,82 @@ namespace WindowsFormsApp1
         }
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string input = txtUsername.Text.Trim();
-            if (Regex.IsMatch(input, @"^[A-Za-z_]+$"))
+            string nome = txtUsername.Text.Trim();
+            string password = txtPassword.Text;
+
+            if (!Regex.IsMatch(nome, @"^[a-zA-Z_]+$"))
             {
-                this.DialogResult = DialogResult.OK;
-                SalvaNomeUtente(input);
-                UtenteC.NomeU = txtUsername.Text;
-                this.Close();
+                MessageBox.Show("Il nome utente può contenere solo lettere e underscore (_)");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Inserisci una password.");
+                return;
+            }
+
+            var utenti = CaricaUtenti();
+            var utenteEsistente = utenti.FirstOrDefault(u => u.Nome == nome);
+
+            if (utenteEsistente != null)
+            {
+                if (utenteEsistente.Password != password)
+                {
+                    MessageBox.Show("Password errata.");
+                    return;
+                }
             }
             else
             {
-                MessageBox.Show("Inserisci un nome valido");
-                txtUsername.Clear();
-                txtUsername.Focus();
+                AggiungiNuovoUtente(nome, password);
             }
-
-        }
-        private void lstNomiRecenti_Click(object sender, EventArgs e)
-        {
-            if (lstNomiRecenti.SelectedItem != null)
-                txtUsername.Text = lstNomiRecenti.SelectedItem.ToString();
+            UtenteC.NomeU = nome;
+            this.DialogResult = DialogResult.OK;
+            this.Hide();
         }
 
-        private void CaricaUtentiRecenti()
+        private void lstNomiRecenti_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lstNomiRecenti.Items.Clear();
+            string selezionato = lstNomiRecenti.SelectedItem.ToString();
+            var utenti = CaricaUtenti();
+            var trovato = utenti.FirstOrDefault(u => u.Nome == selezionato);
+            if (trovato != null)
+            {
+                txtUsername.Text = trovato.Nome;
+                //txtPassword.Text = trovato.Password;
+            }
+        }
+
+        private List<Utente> CaricaUtenti()
+        {
             if (!File.Exists(utentiPath))
-                return;
+                return new List<Utente>();
 
-            var json = File.ReadAllText(utentiPath);
-            var nomi = JsonConvert.DeserializeObject<List<string>>(json) ?? new List<string>();
-
-            foreach (var nome in nomi)
-                lstNomiRecenti.Items.Add(nome);
+            string json = File.ReadAllText(utentiPath);
+            return JsonConvert.DeserializeObject<List<Utente>>(json) ?? new List<Utente>();
         }
 
 
-        private void SalvaNomeUtente(string nome)
+        private void AggiungiNuovoUtente(string nome, string password)
         {
-            var nomi = new List<string>();
-
-            if (File.Exists(utentiPath))
-            {
-                nomi = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(utentiPath)) ?? new List<string>();
-            }
-
-            if (!nomi.Contains(nome))
-            {
-                nomi.Add(nome);
-                File.WriteAllText(utentiPath, JsonConvert.SerializeObject(nomi, Formatting.Indented));
-            }
+            var utenti = CaricaUtenti();
+            utenti.Add(new Utente { Nome = nome, Password = password });
+            string json = JsonConvert.SerializeObject(utenti, Formatting.Indented);
+            File.WriteAllText(utentiPath, json);
         }
+
+        private void LogIn_Load(object sender, EventArgs e)
+        {
+            var utenti = CaricaUtenti();
+            lstNomiRecenti.Items.Clear();
+            lstNomiRecenti.Items.AddRange(utenti.Select(u => u.Nome).ToArray());
+        }
+    }
+    public class Utente
+    {
+        public string Nome { get; set; }
+        public string Password { get; set; }
 
     }
 }

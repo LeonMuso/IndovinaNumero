@@ -30,6 +30,7 @@
         {
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lstNomiRecenti = new System.Windows.Forms.ListBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -46,17 +47,26 @@
             this.lstNomiRecenti.Name = "lstNomiRecenti";
             this.lstNomiRecenti.Size = new System.Drawing.Size(142, 147);
             this.lstNomiRecenti.TabIndex = 1;
-            this.lstNomiRecenti.Click += new System.EventHandler(this.lstNomiRecenti_Click);
+            this.lstNomiRecenti.SelectedIndexChanged += new System.EventHandler(this.lstNomiRecenti_SelectedIndexChanged);
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(30, 66);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(150, 20);
+            this.txtPassword.TabIndex = 3;
             // 
             // LogIn2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 199);
+            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lstNomiRecenti);
             this.Controls.Add(this.txtUsername);
             this.Name = "LogIn2";
             this.Text = "Log in 2";
+            this.Load += new System.EventHandler(this.LogIn2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -66,5 +76,6 @@
 
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.ListBox lstNomiRecenti;
+        private System.Windows.Forms.TextBox txtPassword;
     }
 }

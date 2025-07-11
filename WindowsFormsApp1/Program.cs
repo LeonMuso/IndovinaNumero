@@ -29,5 +29,6 @@ namespace WindowsFormsApp1
     {
         public static string NomeU { get; set; }
         public static string NomeU2 { get; set; }
+        public static string Password {  get; set; }
     }
 }
