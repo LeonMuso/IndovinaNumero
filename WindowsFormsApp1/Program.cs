@@ -16,12 +16,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LogIn logIn = new LogIn();
-            if (logIn.ShowDialog() == DialogResult.OK)
-            {
-                
-                Application.Run(new MenuLog());
-            }
+            Application.Run(new Sudoku());
 
         }
     }
@@ -29,6 +24,6 @@ namespace WindowsFormsApp1
     {
         public static string NomeU { get; set; }
         public static string NomeU2 { get; set; }
-        public static string Password {  get; set; }
+        public static string Password { get; set; }
     }
 }

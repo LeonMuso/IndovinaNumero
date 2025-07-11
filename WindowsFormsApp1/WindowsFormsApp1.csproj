@@ -101,6 +101,12 @@
     </Compile>
     <Compile Include="GestionePunteggi.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Sudoku.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sudoku.Designer.cs">
+      <DependentUpon>Sudoku.cs</DependentUpon>
+    </Compile>
     <Content Include="Properties\Resources\prima bomba.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -194,10 +200,11 @@
     <EmbeddedResource Include="LogIn2.resx">
       <DependentUpon>LogIn2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sudoku.resx">
+      <DependentUpon>Sudoku.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
-    <Content Include="Regole.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Regole.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -371,7 +371,7 @@ namespace WindowsFormsApp1
 
         private void BtnHowToPlay_Click(object sender, EventArgs e)
         {
-            string percorso = "Regole.json";
+            string percorso = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Regole.json");
             if (!File.Exists(percorso))
             {
                 MessageBox.Show("non trovato");

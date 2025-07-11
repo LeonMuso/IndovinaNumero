@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
             Random rnd = new Random();
             codiceSegreto = new int[4];
             for (int i = 0; i < 4; i++)
-                codiceSegreto[i] = rnd.Next(0, 10);
+                codiceSegreto[i] = rnd.Next(1, 6);
 
             //MessageBox.Show($"{codiceSegreto[0]}{codiceSegreto[1]}{codiceSegreto[2]}{codiceSegreto[3]}");
             for (int i = 0; i < maxTentativi; i++)
@@ -43,8 +43,8 @@ namespace WindowsFormsApp1
                     var controllo = Controls.Find(nome, true).FirstOrDefault() as NumericUpDown;
                     if (controllo != null)
                     {
-                        controllo.Minimum = 0;
-                        controllo.Maximum = 9;
+                        controllo.Minimum = 1;
+                        controllo.Maximum = 5;
                         controllo.Enabled = (i == 0);
                         riga[j] = controllo;
                     }

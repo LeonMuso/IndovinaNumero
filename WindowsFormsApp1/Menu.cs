@@ -15,25 +15,51 @@ namespace WindowsFormsApp1
         public MenuLog()
         {
             InitializeComponent();
-            LblUtente.Text = "Benvenuto " + UtenteC.NomeU;
+            PcBBOMB.Enabled = true;
+            PcBCampoMinato.Enabled = true;
+            PcBLucchetto.Enabled = true;
+            PcBNumero.Enabled = true;
+            PcBPoker.Enabled = true;
         }
 
         private void PcBNumero_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new IndovinaNumero().Show();
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new IndovinaNumero().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void PcBLucchetto_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new SbloccaLucchetto().Show();
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new SbloccaLucchetto().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PcBCampoMinato_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new CampoMinato().Show();
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new CampoMinato().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PcBBOMB_Click(object sender, EventArgs e)
@@ -44,15 +70,23 @@ namespace WindowsFormsApp1
 
         private void PcBPoker_Click(object sender, EventArgs e)
         {
-            var login2 = new LogIn2();
-            if (login2.ShowDialog() == DialogResult.OK)
+            if (UtenteC.NomeU != null)
             {
-                string nome1 = UtenteC.NomeU;
-                string nome2 = UtenteC.NomeU2;
-                var poker = new Poker5(nome1,nome2);
-                poker.Show();
-                this.Hide();
+                var login2 = new LogIn2();
+                if (login2.ShowDialog() == DialogResult.OK)
+                {
+                    string nome1 = UtenteC.NomeU;
+                    string nome2 = UtenteC.NomeU2;
+                    var poker = new Poker5(nome1, nome2);
+                    poker.Show();
+                    this.Hide();
+                }
             }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void MenuLog_FormClosing(object sender, FormClosingEventArgs e)
@@ -86,6 +120,17 @@ namespace WindowsFormsApp1
         private void BtnClassifica_Click(object sender, EventArgs e)
         {
             new Classifica().Show();
+        }
+
+        private void BtnLogIn_Click(object sender, EventArgs e)
+        {
+            LogIn logIn = new LogIn();
+            if (logIn.ShowDialog() == DialogResult.OK)
+            {
+                BtnLogIn.Visible = false;
+                LblUtente.Visible = true;
+                LblUtente.Text = "Benvenuto " + UtenteC.NomeU;
+            }
         }
     }
 }

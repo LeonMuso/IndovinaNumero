@@ -46,6 +46,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BtnClassifica = new System.Windows.Forms.Button();
             this.LblCaso = new System.Windows.Forms.Label();
+            this.BtnLogIn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
@@ -84,7 +85,7 @@
             // LblBOMB
             // 
             this.LblBOMB.AutoSize = true;
-            this.LblBOMB.Location = new System.Drawing.Point(567, 284);
+            this.LblBOMB.Location = new System.Drawing.Point(576, 423);
             this.LblBOMB.Name = "LblBOMB";
             this.LblBOMB.Size = new System.Drawing.Size(50, 13);
             this.LblBOMB.TabIndex = 3;
@@ -113,6 +114,7 @@
             // 
             this.PcBPoker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBPoker.BackgroundImage")));
             this.PcBPoker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBPoker.Enabled = false;
             this.PcBPoker.Location = new System.Drawing.Point(5, 225);
             this.PcBPoker.Name = "PcBPoker";
             this.PcBPoker.Size = new System.Drawing.Size(100, 97);
@@ -124,6 +126,7 @@
             // 
             this.PcBNumero.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBNumero.BackgroundImage")));
             this.PcBNumero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBNumero.Enabled = false;
             this.PcBNumero.Location = new System.Drawing.Point(5, 59);
             this.PcBNumero.Name = "PcBNumero";
             this.PcBNumero.Size = new System.Drawing.Size(100, 97);
@@ -135,6 +138,7 @@
             // 
             this.PcBLucchetto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBLucchetto.BackgroundImage")));
             this.PcBLucchetto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBLucchetto.Enabled = false;
             this.PcBLucchetto.Location = new System.Drawing.Point(132, 59);
             this.PcBLucchetto.Name = "PcBLucchetto";
             this.PcBLucchetto.Size = new System.Drawing.Size(100, 97);
@@ -146,6 +150,7 @@
             // 
             this.PcBCampoMinato.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBCampoMinato.BackgroundImage")));
             this.PcBCampoMinato.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBCampoMinato.Enabled = false;
             this.PcBCampoMinato.Location = new System.Drawing.Point(258, 59);
             this.PcBCampoMinato.Name = "PcBCampoMinato";
             this.PcBCampoMinato.Size = new System.Drawing.Size(100, 97);
@@ -157,7 +162,8 @@
             // 
             this.PcBBOMB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBBOMB.BackgroundImage")));
             this.PcBBOMB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBBOMB.Location = new System.Drawing.Point(501, 111);
+            this.PcBBOMB.Enabled = false;
+            this.PcBBOMB.Location = new System.Drawing.Point(510, 250);
             this.PcBBOMB.Name = "PcBBOMB";
             this.PcBBOMB.Size = new System.Drawing.Size(182, 170);
             this.PcBBOMB.TabIndex = 10;
@@ -187,11 +193,12 @@
             // LblUtente
             // 
             this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUtente.Location = new System.Drawing.Point(570, 12);
+            this.LblUtente.Location = new System.Drawing.Point(561, 12);
             this.LblUtente.Name = "LblUtente";
             this.LblUtente.Size = new System.Drawing.Size(190, 44);
             this.LblUtente.TabIndex = 13;
             this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LblUtente.Visible = false;
             // 
             // pictureBox1
             // 
@@ -216,18 +223,29 @@
             // 
             // LblCaso
             // 
-            this.LblCaso.Location = new System.Drawing.Point(553, 186);
+            this.LblCaso.Location = new System.Drawing.Point(562, 325);
             this.LblCaso.Name = "LblCaso";
             this.LblCaso.Size = new System.Drawing.Size(73, 35);
             this.LblCaso.TabIndex = 16;
             this.LblCaso.Text = "Non funzionante";
             this.LblCaso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // BtnLogIn
+            // 
+            this.BtnLogIn.Location = new System.Drawing.Point(676, 24);
+            this.BtnLogIn.Name = "BtnLogIn";
+            this.BtnLogIn.Size = new System.Drawing.Size(75, 23);
+            this.BtnLogIn.TabIndex = 17;
+            this.BtnLogIn.Text = "Login";
+            this.BtnLogIn.UseVisualStyleBackColor = true;
+            this.BtnLogIn.Click += new System.EventHandler(this.BtnLogIn_Click);
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnLogIn);
             this.Controls.Add(this.LblCaso);
             this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.pictureBox1);
@@ -278,5 +296,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BtnClassifica;
         private System.Windows.Forms.Label LblCaso;
+        private System.Windows.Forms.Button BtnLogIn;
     }
 }
