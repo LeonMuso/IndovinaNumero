@@ -1,98 +1,55 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
-
-namespace WindowsFormsApp1
+namespace SudokuWinForms
 {
     public partial class Sudoku : Form
     {
-        private TableLayoutPanel griglia;
         private TextBox[,] celle = new TextBox[9, 9];
         private int[,] schemaCompleto;
-        private Random rand = new Random();
-
+        private TableLayoutPanel griglia;
+        private Label lblErrori;
+        private int errori = 0;
+        private const int MaxErrori = 7;
         private Timer timerGioco;
         private int secondiTrascorsi = 0;
-        private Button btnSalvaPunteggio;
-        private readonly string pathPunteggi = "Punteggi.json";
         private Label lblTimer;
+        private string Utente = UtenteC.NomeU;
+        private bool[,] erroriContati = new bool[9, 9];
 
         public Sudoku()
         {
             InitializeComponent();
+            LblUtente.Text = UtenteC.NomeU;
             InizializzaInterfaccia();
-            GeneraNuovaPartita("facile");
+            NuovaPartita(Difficolta.Facile);
         }
 
         private void InizializzaInterfaccia()
         {
-            this.Text = "Sudoku";
-            this.Size = new Size(520, 600);
-
-
-            ComboBox cmbDifficolta = new ComboBox
-            {
-                Location = new Point(20, 10),
-                Width = 100,
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Name = "cmbDifficolta"
-            };
-            cmbDifficolta.Items.AddRange(new[] { "facile", "medio", "difficile" });
-            cmbDifficolta.SelectedIndex = 0;
-            this.Controls.Add(cmbDifficolta);
-
-
-            Button btnNuova = new Button
-            {
-                Text = "Nuova Partita",
-                Location = new Point(140, 10),
-                Width = 120
-            };
-            this.Controls.Add(btnNuova);
-
-
-            btnSalvaPunteggio = new Button
-            {
-                Text = "Salva Punteggio",
-                Location = new Point(280, 10),
-                Width = 120
-            };
-            this.Controls.Add(btnSalvaPunteggio);
-
-
-            lblTimer = new Label
-            {
-                Text = "Tempo: 0s",
-                Location = new Point(410, 15),
-                Width = 100
-            };
-            this.Controls.Add(lblTimer);
-
 
             griglia = new TableLayoutPanel
             {
                 RowCount = 9,
                 ColumnCount = 9,
-                Location = new Point(20, 50),
+                Dock = DockStyle.Top,
                 Size = new Size(450, 450),
-                CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+                Location = new Point(20, 20)
             };
+
             for (int i = 0; i < 9; i++)
             {
-                griglia.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.11f));
-                griglia.RowStyles.Add(new RowStyle(SizeType.Percent, 11.11f));
+                griglia.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1f));
+                griglia.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1f));
             }
-            this.Controls.Add(griglia);
 
+            this.Controls.Add(griglia);
 
             for (int r = 0; r < 9; r++)
             {
@@ -109,12 +66,10 @@ namespace WindowsFormsApp1
                     };
                     celle[r, c] = txt;
 
-
                     int top = (r % 3 == 0) ? 3 : 1;
                     int left = (c % 3 == 0) ? 3 : 1;
                     int bottom = (r == 8) ? 3 : 1;
                     int right = (c == 8) ? 3 : 1;
-
 
                     Panel borderPanel = new Panel
                     {
@@ -122,7 +77,6 @@ namespace WindowsFormsApp1
                         BackColor = Color.Black,
                         Padding = new Padding(left, top, right, bottom)
                     };
-
 
                     Panel innerPanel = new Panel
                     {
@@ -136,6 +90,23 @@ namespace WindowsFormsApp1
                 }
             }
 
+            lblErrori = new Label
+            {
+                Text = "Errori: 0",
+                Location = new Point(20, 480),
+                Width = 150,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold)
+            };
+            this.Controls.Add(lblErrori);
+
+            lblTimer = new Label
+            {
+                Text = "Tempo: 0s",
+                Location = new Point(200, 480),
+                Width = 150,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold)
+            };
+            this.Controls.Add(lblTimer);
 
             timerGioco = new Timer();
             timerGioco.Interval = 1000;
@@ -144,164 +115,252 @@ namespace WindowsFormsApp1
                 secondiTrascorsi++;
                 lblTimer.Text = $"Tempo: {secondiTrascorsi}s";
             };
-            timerGioco.Start();
-
-
-            btnNuova.Click += (s, e) =>
-            {
-                string difficolta = cmbDifficolta.SelectedItem.ToString();
-                GeneraNuovaPartita(difficolta);
-            };
-
-            btnSalvaPunteggio.Click += (s, e) =>
-            {
-                int punteggio = CalcolaPunteggioConErrori();
-                SalvaPunteggioSudoku("Sudoku", punteggio);
-                MessageBox.Show($"Punteggio finale: {punteggio} punti\nTempo: {secondiTrascorsi} secondi", "Punteggio Salvato");
-            };
+            CbDiff.Items.AddRange(new[] { "Facile", "Medio", "Difficile" });
+            CbDiff.SelectedIndex = 0;
         }
 
-        private void GeneraNuovaPartita(string difficolta)
+        private void NuovaPartita(Difficolta diff)
         {
-            schemaCompleto = GeneraSudokuCompletato();
-            int celleVuote = difficolta == "facile" ? 30 : difficolta == "medio" ? 45 : 55;
-
-            int[,] schemaParziale = (int[,])schemaCompleto.Clone();
-            int rimanenti = celleVuote;
-            while (rimanenti > 0)
-            {
-                int r = rand.Next(9);
-                int c = rand.Next(9);
-                if (schemaParziale[r, c] != 0)
-                {
-                    schemaParziale[r, c] = 0;
-                    rimanenti--;
-                }
-            }
-
-            for (int r = 0; r < 9; r++)
-            {
-                for (int c = 0; c < 9; c++)
-                {
-                    if (schemaParziale[r, c] != 0)
-                    {
-                        celle[r, c].Text = schemaParziale[r, c].ToString();
-                        celle[r, c].ReadOnly = true;
-                        celle[r, c].BackColor = Color.LightGray;
-                    }
-                    else
-                    {
-                        celle[r, c].Text = "";
-                        celle[r, c].ReadOnly = false;
-                        celle[r, c].BackColor = Color.White;
-                    }
-                }
-            }
-
+            schemaCompleto = GeneraSchemaCompleto();
+            int[,] schemaParziale = RimuoviCelle(schemaCompleto, diff);
+            errori = 0;
+            lblErrori.Text = "Errori: 0";
             secondiTrascorsi = 0;
+            lblTimer.Text = "Tempo: 0s";
             timerGioco.Start();
-        }
-
-        private int[,] GeneraSudokuCompletato()
-        {
-            int[,] board = new int[9, 9];
-            RisolviSudoku(board);
-            return board;
-        }
-
-        private bool RisolviSudoku(int[,] board)
-        {
-            for (int r = 0; r < 9; r++)
-            {
-                for (int c = 0; c < 9; c++)
-                {
-                    if (board[r, c] == 0)
-                    {
-                        var numeri = Enumerable.Range(1, 9).OrderBy(x => rand.Next()).ToList();
-                        foreach (int n in numeri)
-                        {
-                            if (Valido(board, r, c, n))
-                            {
-                                board[r, c] = n;
-                                if (RisolviSudoku(board))
-                                    return true;
-                                board[r, c] = 0;
-                            }
-                        }
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        private bool Valido(int[,] board, int r, int c, int val)
-        {
-            for (int i = 0; i < 9; i++)
-                if (board[r, i] == val || board[i, c] == val)
-                    return false;
-
-            int inizioRiga = (r / 3) * 3;
-            int inizioColonna = (c / 3) * 3;
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    if (board[inizioRiga + i, inizioColonna + j] == val)
-                        return false;
-
-            return true;
-        }
-
-        private int CalcolaPunteggioConErrori()
-        {
-            int punti = 0;
+            erroriContati = new bool[9, 9];
 
             for (int r = 0; r < 9; r++)
             {
                 for (int c = 0; c < 9; c++)
                 {
                     var txt = celle[r, c];
-                    string contenuto = txt.Text.Trim();
+                    txt.TextChanged -= null;
+                    txt.ForeColor = Color.Black;
 
-                    if (string.IsNullOrEmpty(contenuto)) continue;
-
-                    if (int.TryParse(contenuto, out int valore))
+                    if (schemaParziale[r, c] != 0)
                     {
-                        if (valore == schemaCompleto[r, c])
-                            punti += 1;
-                        else
-                            punti -= 2;
+                        txt.Text = schemaParziale[r, c].ToString();
+                        txt.ReadOnly = true;
+                        txt.ForeColor = Color.Black;
+                    }
+                    else
+                    {
+                        txt.Text = "";
+                        txt.ReadOnly = false;
+                        int rr = r, cc = c;
+                        txt.TextChanged += (s, e) =>
+                        {
+                            if (txt.ReadOnly) return;
+
+                            string valore = txt.Text.Trim();
+                            if (valore.Length != 1 || !char.IsDigit(valore[0]) || valore == "0") return;
+
+                            int inserito = int.Parse(valore);
+                            if (inserito != schemaCompleto[rr, cc])
+                            {
+                                if (!erroriContati[rr, cc])
+                                {
+                                    errori++;
+                                    erroriContati[rr, cc] = true;
+                                    lblErrori.Text = $"Errori: {errori}";
+
+                                }
+                                txt.ForeColor = Color.Red;
+
+                                if (errori >= MaxErrori)
+                                {
+                                    timerGioco.Stop();
+                                    MessageBox.Show("Hai commesso 7 errori!\nHai perso la partita.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    DisabilitaGriglia();
+                                }
+                            }
+                            else
+                            {
+                                txt.ForeColor = Color.Green;
+                                if (CelleComplete())
+                                {
+                                    timerGioco.Stop();
+                                    int punteggio = CalcolaPunteggio();
+                                    MessageBox.Show($"Hai vinto!\nPunteggio: {punteggio}", "Vittoria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    SalvaPunteggioNelJson(Utente, punteggio);
+                                    DisabilitaGriglia();
+                                }
+                            }
+                        };
                     }
                 }
             }
-
-            int bonusTempo = 100 - (secondiTrascorsi / 30);
-            if (bonusTempo < 0) bonusTempo = 0;
-
-            punti += bonusTempo;
-            return punti < 0 ? 0 : punti;
         }
 
-        private void SalvaPunteggioSudoku(string gioco, int punti)
+        private void DisabilitaGriglia()
         {
-            Dictionary<string, Dictionary<string, int>> dati = new Dictionary<string, Dictionary<string, int>>();
+            for (int r = 0; r < 9; r++)
+                for (int c = 0; c < 9; c++)
+                    celle[r, c].ReadOnly = true;
+        }
 
-            if (File.Exists(pathPunteggi))
+        private int[,] GeneraSchemaCompleto()
+        {
+            int[,] griglia = new int[9, 9];
+            RiempieSchema(griglia, 0, 0);
+            return griglia;
+        }
+
+        private bool RiempieSchema(int[,] griglia, int riga, int colonna)
+        {
+            if (riga == 9)
+                return true;
+
+            int nextRiga = (colonna == 8) ? riga + 1 : riga;
+            int nextColonna = (colonna + 1) % 9;
+
+            var numeri = Enumerable.Range(1, 9).OrderBy(n => Guid.NewGuid()).ToList();
+
+            foreach (int numero in numeri)
             {
-                string jsonEsistente = File.ReadAllText(pathPunteggi);
-                dati = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, int>>>(jsonEsistente)
-                       ?? new Dictionary<string, Dictionary<string, int>>();
+                if (PosizioneValida(griglia, riga, colonna, numero))
+                {
+                    griglia[riga, colonna] = numero;
+                    if (RiempieSchema(griglia, nextRiga, nextColonna))
+                        return true;
+                    griglia[riga, colonna] = 0;
+                }
             }
 
-            if (!dati.ContainsKey(gioco))
-                dati[gioco] = new Dictionary<string, int>();
-
-            string utente = Environment.UserName;
-            dati[gioco][utente] = punti;
-
-            string json = JsonConvert.SerializeObject(dati, Formatting.Indented);
-            File.WriteAllText(pathPunteggi, json);
+            return false;
         }
+
+        private bool PosizioneValida(int[,] griglia, int r, int c, int numero)
+        {
+            for (int i = 0; i < 9; i++)
+                if (griglia[r, i] == numero || griglia[i, c] == numero)
+                    return false;
+
+            int startR = (r / 3) * 3;
+            int startC = (c / 3) * 3;
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    if (griglia[startR + i, startC + j] == numero)
+                        return false;
+
+            return true;
+        }
+
+        private int[,] RimuoviCelle(int[,] schema, Difficolta diff)
+        {
+            int[,] copia = (int[,])schema.Clone();
+            Random rnd = new Random();
+            int celleDaRimuovere = 30;
+            if (diff == Difficolta.Facile)
+            {
+                celleDaRimuovere = 30;
+            }
+            else if (diff == Difficolta.Medio)
+            {
+                celleDaRimuovere = 40;
+            }
+            else if (diff == Difficolta.Difficile)
+            {
+                celleDaRimuovere = 50;
+            }
+
+            while (celleDaRimuovere > 0)
+            {
+                int r = rnd.Next(9);
+                int c = rnd.Next(9);
+                if (copia[r, c] != 0)
+                {
+                    copia[r, c] = 0;
+                    celleDaRimuovere--;
+                }
+            }
+
+            return copia;
+        }
+
+        private void Sudoku_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da sudoku?",
+                                                     "Torna al menu",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Stop);
+            if (risultato == DialogResult.Yes)
+            {
+                new MenuLog().Show();
+            }
+            else
+            {
+                var posizione = this.Location;
+                var nuovoForm = new Sudoku();
+                nuovoForm.StartPosition = FormStartPosition.Manual;
+                nuovoForm.Location = posizione;
+                nuovoForm.Show();
+                this.Dispose();
+            }
+        }
+
+        private void BtnNuovaPartita_Click(object sender, EventArgs e)
+        {
+            if (CbDiff.SelectedItem.ToString() == "Facile")
+            {
+                NuovaPartita(Difficolta.Facile);
+            }
+            else if (CbDiff.SelectedItem.ToString() == "Medio")
+            {
+                NuovaPartita(Difficolta.Medio);
+            }
+            else if (CbDiff.SelectedItem.ToString() == "Difficile")
+            {
+                NuovaPartita(Difficolta.Difficile);
+            }
+        }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("Sudoku").Show();
+        }
+
+        private bool CelleComplete()
+        {
+            for (int r = 0; r < 9; r++)
+            {
+                for (int c = 0; c < 9; c++)
+                {
+                    if (celle[r, c].Text == "")
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private int CalcolaPunteggio()
+        {
+            int puntiVittoria = 100;
+            int puntiTempo = Math.Max(0, 250 - secondiTrascorsi);
+            int puntiErrori = Math.Max(0, 70 - (errori * 10));
+            int totale = puntiVittoria + puntiTempo + puntiErrori;
+            return totale;
+        }
+        private void SalvaPunteggioNelJson(string utente, int punteggio)
+        {
+            string gioco = "Sudoku";
+            int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
+            if (!(punteggioAttuale > punteggio))
+            {
+                int nuovoPunteggio = punteggio;
+                GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+            }
+        }
+
+    }
+
+    public enum Difficolta
+    {
+        Facile,
+        Medio,
+        Difficile
     }
 
 }
-

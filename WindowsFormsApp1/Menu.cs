@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SudokuWinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,12 @@ namespace WindowsFormsApp1
         public MenuLog()
         {
             InitializeComponent();
-            PcBBOMB.Enabled = true;
-            PcBCampoMinato.Enabled = true;
-            PcBLucchetto.Enabled = true;
-            PcBNumero.Enabled = true;
-            PcBPoker.Enabled = true;
+            if (UtenteC.NomeU != null)
+            {
+                LblUtente.Visible = true;
+                LblUtente.Text = "Benvenuto " + UtenteC.NomeU;
+                BtnLogIn.Visible = false;
+            }
         }
 
         private void PcBNumero_Click(object sender, EventArgs e)
@@ -130,6 +132,19 @@ namespace WindowsFormsApp1
                 BtnLogIn.Visible = false;
                 LblUtente.Visible = true;
                 LblUtente.Text = "Benvenuto " + UtenteC.NomeU;
+            }
+        }
+
+        private void PcBSudoku_Click(object sender, EventArgs e)
+        {
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new Sudoku().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

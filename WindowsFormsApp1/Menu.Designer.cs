@@ -47,12 +47,15 @@
             this.BtnClassifica = new System.Windows.Forms.Button();
             this.LblCaso = new System.Windows.Forms.Label();
             this.BtnLogIn = new System.Windows.Forms.Button();
+            this.PcBSudoku = new System.Windows.Forms.PictureBox();
+            this.LblSudoku = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).BeginInit();
             this.SuspendLayout();
             // 
             // LblSbloccaLucchetto
@@ -114,7 +117,6 @@
             // 
             this.PcBPoker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBPoker.BackgroundImage")));
             this.PcBPoker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBPoker.Enabled = false;
             this.PcBPoker.Location = new System.Drawing.Point(5, 225);
             this.PcBPoker.Name = "PcBPoker";
             this.PcBPoker.Size = new System.Drawing.Size(100, 97);
@@ -126,7 +128,6 @@
             // 
             this.PcBNumero.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBNumero.BackgroundImage")));
             this.PcBNumero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBNumero.Enabled = false;
             this.PcBNumero.Location = new System.Drawing.Point(5, 59);
             this.PcBNumero.Name = "PcBNumero";
             this.PcBNumero.Size = new System.Drawing.Size(100, 97);
@@ -138,7 +139,6 @@
             // 
             this.PcBLucchetto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBLucchetto.BackgroundImage")));
             this.PcBLucchetto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBLucchetto.Enabled = false;
             this.PcBLucchetto.Location = new System.Drawing.Point(132, 59);
             this.PcBLucchetto.Name = "PcBLucchetto";
             this.PcBLucchetto.Size = new System.Drawing.Size(100, 97);
@@ -150,7 +150,6 @@
             // 
             this.PcBCampoMinato.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBCampoMinato.BackgroundImage")));
             this.PcBCampoMinato.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBCampoMinato.Enabled = false;
             this.PcBCampoMinato.Location = new System.Drawing.Point(258, 59);
             this.PcBCampoMinato.Name = "PcBCampoMinato";
             this.PcBCampoMinato.Size = new System.Drawing.Size(100, 97);
@@ -162,7 +161,6 @@
             // 
             this.PcBBOMB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBBOMB.BackgroundImage")));
             this.PcBBOMB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBBOMB.Enabled = false;
             this.PcBBOMB.Location = new System.Drawing.Point(510, 250);
             this.PcBBOMB.Name = "PcBBOMB";
             this.PcBBOMB.Size = new System.Drawing.Size(182, 170);
@@ -240,11 +238,33 @@
             this.BtnLogIn.UseVisualStyleBackColor = true;
             this.BtnLogIn.Click += new System.EventHandler(this.BtnLogIn_Click);
             // 
+            // PcBSudoku
+            // 
+            this.PcBSudoku.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBSudoku.BackgroundImage")));
+            this.PcBSudoku.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBSudoku.Location = new System.Drawing.Point(386, 59);
+            this.PcBSudoku.Name = "PcBSudoku";
+            this.PcBSudoku.Size = new System.Drawing.Size(100, 97);
+            this.PcBSudoku.TabIndex = 18;
+            this.PcBSudoku.TabStop = false;
+            this.PcBSudoku.Click += new System.EventHandler(this.PcBSudoku_Click);
+            // 
+            // LblSudoku
+            // 
+            this.LblSudoku.AutoSize = true;
+            this.LblSudoku.Location = new System.Drawing.Point(418, 159);
+            this.LblSudoku.Name = "LblSudoku";
+            this.LblSudoku.Size = new System.Drawing.Size(44, 13);
+            this.LblSudoku.TabIndex = 19;
+            this.LblSudoku.Text = "Sudoku";
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblSudoku);
+            this.Controls.Add(this.PcBSudoku);
             this.Controls.Add(this.BtnLogIn);
             this.Controls.Add(this.LblCaso);
             this.Controls.Add(this.BtnClassifica);
@@ -272,6 +292,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,5 +318,7 @@
         private System.Windows.Forms.Button BtnClassifica;
         private System.Windows.Forms.Label LblCaso;
         private System.Windows.Forms.Button BtnLogIn;
+        private System.Windows.Forms.PictureBox PcBSudoku;
+        private System.Windows.Forms.Label LblSudoku;
     }
 }
