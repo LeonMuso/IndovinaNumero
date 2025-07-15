@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class LogIn2 : Form
+    public partial class LogIn3 : Form
     {
         private Button btnLogin;
         private string utentiPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UtentiRecenti.json");
-        public LogIn2()
+        public LogIn3()
         {
             InitializeComponent();
             CaricaUtenti();
@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
 
             string nome = txtUsername.Text.Trim();
             string password = txtPassword.Text;
-            if (txtUsername.Text == UtenteC.NomeU)
+            if (txtUsername.Text == UtenteC.NomeU || txtUsername.Text == UtenteC.NomeU2)
             {
                 MessageBox.Show("Non puoi inserire lo stesso utente");
                 return;
@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
             {
                 AggiungiNuovoUtente(nome, password);
             }
-            UtenteC.NomeU2 = nome;
+            UtenteC.NomeU3 = nome;
             this.DialogResult = DialogResult.OK;
             this.Hide();
         }
@@ -104,7 +104,7 @@ namespace WindowsFormsApp1
             File.WriteAllText(utentiPath, json);
         }
 
-        private void LogIn2_Load(object sender, EventArgs e)
+        private void LogIn3_Load(object sender, EventArgs e)
         {
             var utenti = CaricaUtenti();
             lstNomiRecenti.Items.Clear();

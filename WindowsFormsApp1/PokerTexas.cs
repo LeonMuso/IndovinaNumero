@@ -17,25 +17,28 @@ namespace WindowsFormsApp1
         private List<Giocatore> giocatori = new List<Giocatore>();
         private mazzo mazzo;
         private List<carta> carteComuni = new List<carta>();
-        private int faseCarte = 0;
+        private int fase = 0;
         private int piatto = 0;
-        public PokerTexas()
+        public PokerTexas(string p1, string p2, string p3)
         {
             InitializeComponent();
 
         }
         private void PokerTexas_Load(object sender, EventArgs e)
         {
-            giocatori.Add(new Giocatore { Nome = "Giocatore 1", Soldi = 1000 });
-            giocatori.Add(new Giocatore { Nome = "Giocatore 2", Soldi = 1000 });
-            giocatori.Add(new Giocatore { Nome = "Giocatore 3", Soldi = 1000 });
+            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU, Soldi = 1000 });
+            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU2, Soldi = 1000 });
+            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU3, Soldi = 1000 });
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnFaseSuccessiva.Enabled = true;
+            btnPunta1.Enabled = true; btnPunta2.Enabled = true; btnPunta3.Enabled = true;
+            btnFold1.Enabled = true; btnFold2.Enabled = true; btnFold3.Enabled = true;
             mazzo = new mazzo();
             carteComuni.Clear();
-            faseCarte = 0;
+            fase = 0;
             piatto = 0;
 
             foreach (var g in giocatori)
@@ -47,6 +50,128 @@ namespace WindowsFormsApp1
 
             AggiornaGiocatori();
             pnlCarteComuni.Controls.Clear();
+            MostraCarteComuni();
+            //int daPescare = fase == 0 ? 3 : 1;
+            //carteComuni.AddRange(mazzo.Pesca(daPescare));
+
+        }
+        private void btnPunta1_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            int scommessa = 100;
+
+            if (g.Foldato || g.Soldi <= 0) return;
+
+            // Se non ha abbastanza soldi fa all-in
+            if (g.Soldi <= scommessa)
+            {
+                piatto += g.Soldi;
+                g.Soldi = 0;
+            }
+            else
+            {
+                piatto += scommessa;
+                g.Soldi -= scommessa;
+            }
+
+            g.HaAgitoQuestoTurno = true;
+            VerificaFineTurno();
+            AggiornaGiocatori();
+        }
+        private void btnFold1_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            g.Foldato = true;
+            g.HaAgitoQuestoTurno = true;
+
+            VerificaFineTurno();
+            AggiornaGiocatori();
+        }
+
+        private void btnPunta2_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            int scommessa = 100;
+
+            if (g.Foldato || g.Soldi <= 0) return;
+
+            // Se non ha abbastanza soldi fa all-in
+            if (g.Soldi <= scommessa)
+            {
+                piatto += g.Soldi;
+                g.Soldi = 0;
+            }
+            else
+            {
+                piatto += scommessa;
+                g.Soldi -= scommessa;
+            }
+
+            g.HaAgitoQuestoTurno = true;
+            VerificaFineTurno();
+            AggiornaGiocatori();
+        }
+
+        private void btnFold2_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            g.Foldato = true;
+            g.HaAgitoQuestoTurno = true;
+
+            VerificaFineTurno();
+            AggiornaGiocatori();
+        }
+
+        private void btnPunta3_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            int scommessa = 100;
+
+            if (g.Foldato || g.Soldi <= 0) return;
+
+            // Se non ha abbastanza soldi fa all-in
+            if (g.Soldi <= scommessa)
+            {
+                piatto += g.Soldi;
+                g.Soldi = 0;
+            }
+            else
+            {
+                piatto += scommessa;
+                g.Soldi -= scommessa;
+            }
+
+            g.HaAgitoQuestoTurno = true;
+            VerificaFineTurno();
+            AggiornaGiocatori();
+        }
+
+        private void btnFold3_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Giocatore g = giocatori[index];
+
+            g.Foldato = true;
+            g.HaAgitoQuestoTurno = true;
+
+            VerificaFineTurno();
+            AggiornaGiocatori();
         }
 
         private void btnMostraVincitore_Click(object sender, EventArgs e)
@@ -60,9 +185,9 @@ namespace WindowsFormsApp1
         }
         private void MostraCarteComuni()
         {
-            int daPescare = faseCarte == 0 ? 3 : 1;
+            int daPescare = fase == 0 ? 3 : 1;
             carteComuni.AddRange(mazzo.Pesca(daPescare));
-            faseCarte++;
+            fase++;
 
             pnlCarteComuni.Controls.Clear();
             for (int i = 0; i < carteComuni.Count; i++)
@@ -79,8 +204,12 @@ namespace WindowsFormsApp1
                 };
                 pnlCarteComuni.Controls.Add(lbl);
             }
+            if (fase == 3)
+            {
+                btnMostraVincitore.Visible = true;
+                btnFaseSuccessiva.Enabled = false;
+            }
 
-            btnMostraVincitore.Visible = faseCarte == 3;
         }
 
         private void MostraVincitore()
@@ -112,58 +241,72 @@ namespace WindowsFormsApp1
         }
 
         private void AggiornaGiocatori()
-        { // Giocatore 1
-            lblNomiSoldi1.Text = giocatori[0].Nome + $"Soldi: ${giocatori[0].Soldi}";
-
-            pnlGiocatore1.Controls.Clear();
-            foreach (var carta in giocatori[0].Mano)
+        {
+            for (int i = 0; i < giocatori.Count; i++)
             {
-                Label lbl = new Label { Text = carta.ToString(), Width = 60, Height = 30, BorderStyle = BorderStyle.FixedSingle, TextAlign = ContentAlignment.MiddleCenter, Margin = new Padding(2) };
-                pnlGiocatore1.Controls.Add(lbl);
-            }
+                Giocatore g = giocatori[i];
 
-            // Giocatore 2
-            lblNomiSoldi2.Text = giocatori[1].Nome + $"Soldi: ${giocatori[1].Soldi}";
-            pnlGiocatore2.Controls.Clear();
-            foreach (var carta in giocatori[1].Mano)
-            {
-                Label lbl = new Label
+                Panel pannello = Controls.Find("pnlGiocatore" + (i + 1), true).FirstOrDefault() as Panel;
+                if (pannello == null) continue;
+
+                // Label con nome e soldi
+                Label lblNomiSoldi = pannello.Controls.Find("lblNomiSoldi" + (i + 1), true).FirstOrDefault() as Label;
+                if (lblNomiSoldi != null)
                 {
-                    Text = carta.ToString(),
-                    Width = 60,
-                    Height = 30,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(2)
-                };
-                pnlGiocatore2.Controls.Add(lbl);
-            }
+                    if (g.Foldato)
+                        lblNomiSoldi.Text = $"{g.Nome} - Foldato";
+                    else
+                        lblNomiSoldi.Text = $"{g.Nome} - ${g.Soldi}";
+                }
 
-            // Giocatore 3
-            lblNomiSoldi3.Text = giocatori[2].Nome + $"Soldi: ${giocatori[2].Soldi}";
-            pnlGiocatore3.Controls.Clear();
-            foreach (var carta in giocatori[2].Mano)
-            {
-                Label lbl = new Label
+                // Label con le carte
+                Label lblCarte = pannello.Controls.Find("lblCarte" + (i + 1), true).FirstOrDefault() as Label;
+                if (lblCarte != null)
                 {
-                    Text = carta.ToString(),
-                    Width = 60,
-                    Height = 30,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(2)
-                };
-                pnlGiocatore3.Controls.Add(lbl);
+                    if (g.Foldato)
+                        lblCarte.Text = "Carte: --";
+                    else
+                        lblCarte.Text = "Carte: " + string.Join(" ", g.Mano.Select(c => c.ToString()));
+                }
+
+                // Bottone "Punta"
+                Button btnPunta = pannello.Controls.Find("btnPunta" + (i + 1), true).FirstOrDefault() as Button;
+                if (btnPunta != null)
+                {
+                    btnPunta.Enabled = !g.Foldato && g.Soldi > 0;
+                    btnPunta.Tag = i;
+                }
+
+                // Bottone "Fold"
+                Button btnFold = pannello.Controls.Find("btnFold" + (i + 1), true).FirstOrDefault() as Button;
+                if (btnFold != null)
+                {
+                    btnFold.Enabled = !g.Foldato;
+                    btnFold.Tag = i;
+                }
             }
 
-            // Aggiorna il piatto
-            lblPiatto.Text = $"Piatto: ${piatto}";
-
+            // Label del piatto (fuori dai pannelli)
+            Label lblPiatto = Controls.Find("lblPiatto", true).FirstOrDefault() as Label;
+            if (lblPiatto != null)
+                lblPiatto.Text = $"Piatto: ${piatto}";
         }
 
+        private void VerificaFineTurno()
+        {
+            if (giocatori.All(g => g.HaAgitoQuestoTurno || g.Foldato))
+            {
+                MostraCarteComuni();
+                ResetAzioniTurno();
+                AggiornaGiocatori();
+            }
+        }
 
-
-
+        private void ResetAzioniTurno()
+        {
+            foreach (var g in giocatori)
+                g.HaAgitoQuestoTurno = false;
+        }
 
         private void PokerTexas_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -178,15 +321,13 @@ namespace WindowsFormsApp1
             else
             {
                 var posizione = this.Location;
-                var nuovoForm = new PokerTexas();
+                var nuovoForm = new PokerTexas(UtenteC.NomeU, UtenteC.NomeU2, UtenteC.NomeU3);
                 nuovoForm.StartPosition = FormStartPosition.Manual;
                 nuovoForm.Location = posizione;
                 nuovoForm.Show();
                 this.Dispose();
             }
         }
-
-
     }
 }
 
@@ -218,8 +359,6 @@ public class mazzo
     }
 }
 
-
-
 public class Giocatore
 {
     public string Nome { get; set; }
@@ -227,6 +366,7 @@ public class Giocatore
     public int Soldi { get; set; }
     public bool Foldato { get; set; } = false;
     public int PuntataAttuale { get; set; } = 0;
+    public bool HaAgitoQuestoTurno { get; set; } = false;
     public bool AllIn => Soldi == 0;
 }
 

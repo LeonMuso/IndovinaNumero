@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PokerTexas());
+            Application.Run(new MenuLog());
 
         }
     }
@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
     {
         public static string NomeU { get; set; }
         public static string NomeU2 { get; set; }
+        public static string NomeU3 { get; set; }
         public static string Password { get; set; }
     }
 }
