@@ -147,5 +147,18 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void PcBTexasHoldem_Click(object sender, EventArgs e)
+        {
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new PokerTexas().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

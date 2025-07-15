@@ -49,6 +49,8 @@
             this.BtnLogIn = new System.Windows.Forms.Button();
             this.PcBSudoku = new System.Windows.Forms.PictureBox();
             this.LblSudoku = new System.Windows.Forms.Label();
+            this.PcBTexasHoldem = new System.Windows.Forms.PictureBox();
+            this.LblTexasHoldem = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
@@ -56,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).BeginInit();
             this.SuspendLayout();
             // 
             // LblSbloccaLucchetto
@@ -258,11 +261,33 @@
             this.LblSudoku.TabIndex = 19;
             this.LblSudoku.Text = "Sudoku";
             // 
+            // PcBTexasHoldem
+            // 
+            this.PcBTexasHoldem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBTexasHoldem.BackgroundImage")));
+            this.PcBTexasHoldem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBTexasHoldem.Location = new System.Drawing.Point(132, 225);
+            this.PcBTexasHoldem.Name = "PcBTexasHoldem";
+            this.PcBTexasHoldem.Size = new System.Drawing.Size(100, 97);
+            this.PcBTexasHoldem.TabIndex = 20;
+            this.PcBTexasHoldem.TabStop = false;
+            this.PcBTexasHoldem.Click += new System.EventHandler(this.PcBTexasHoldem_Click);
+            // 
+            // LblTexasHoldem
+            // 
+            this.LblTexasHoldem.AutoSize = true;
+            this.LblTexasHoldem.Location = new System.Drawing.Point(145, 325);
+            this.LblTexasHoldem.Name = "LblTexasHoldem";
+            this.LblTexasHoldem.Size = new System.Drawing.Size(75, 13);
+            this.LblTexasHoldem.TabIndex = 21;
+            this.LblTexasHoldem.Text = "Texas Holdem";
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblTexasHoldem);
+            this.Controls.Add(this.PcBTexasHoldem);
             this.Controls.Add(this.LblSudoku);
             this.Controls.Add(this.PcBSudoku);
             this.Controls.Add(this.BtnLogIn);
@@ -293,6 +318,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,5 +346,7 @@
         private System.Windows.Forms.Button BtnLogIn;
         private System.Windows.Forms.PictureBox PcBSudoku;
         private System.Windows.Forms.Label LblSudoku;
+        private System.Windows.Forms.PictureBox PcBTexasHoldem;
+        private System.Windows.Forms.Label LblTexasHoldem;
     }
 }
