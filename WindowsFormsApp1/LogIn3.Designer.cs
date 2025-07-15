@@ -45,7 +45,7 @@
             this.lstNomiRecenti.FormattingEnabled = true;
             this.lstNomiRecenti.Location = new System.Drawing.Point(210, 30);
             this.lstNomiRecenti.Name = "lstNomiRecenti";
-            this.lstNomiRecenti.Size = new System.Drawing.Size(142, 147);
+            this.lstNomiRecenti.Size = new System.Drawing.Size(142, 43);
             this.lstNomiRecenti.TabIndex = 5;
             this.lstNomiRecenti.SelectedIndexChanged += new System.EventHandler(this.lstNomiRecenti_SelectedIndexChanged);
             // 

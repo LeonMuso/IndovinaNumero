@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             btnLogin = new Button
             {
                 Text = "Login",
-                Location = new System.Drawing.Point(30, 100)
+                Location = new System.Drawing.Point(150, 100)
             };
             btnLogin.Click += BtnLogin_Click;
             Controls.Add(txtUsername);

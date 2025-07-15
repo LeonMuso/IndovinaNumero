@@ -231,7 +231,6 @@
       <DependentUpon>Sudoku.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Regole.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
