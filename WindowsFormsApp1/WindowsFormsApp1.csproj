@@ -80,6 +80,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Puntata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Puntata.Designer.cs">
+      <DependentUpon>Puntata.cs</DependentUpon>
+    </Compile>
     <Compile Include="SbloccaIlLucchetto.cs">
       <SubType>Form</SubType>
     </Compile>

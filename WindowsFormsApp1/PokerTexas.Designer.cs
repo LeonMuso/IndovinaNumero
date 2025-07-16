@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PokerTexas));
             this.lblNomiSoldi2 = new System.Windows.Forms.Label();
             this.btnFold3 = new System.Windows.Forms.Button();
             this.btnFold1 = new System.Windows.Forms.Button();
@@ -48,15 +49,19 @@
             this.btnFaseSuccessiva = new System.Windows.Forms.Button();
             this.btnMostraVincitore = new System.Windows.Forms.Button();
             this.lblPiatto = new System.Windows.Forms.Label();
+            this.BtnClassifica = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblUtente = new System.Windows.Forms.Label();
             this.pnlGiocatore1.SuspendLayout();
             this.pnlGiocatore2.SuspendLayout();
             this.pnlGiocatore3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomiSoldi2
             // 
             this.lblNomiSoldi2.AutoSize = true;
-            this.lblNomiSoldi2.Location = new System.Drawing.Point(12, 62);
+            this.lblNomiSoldi2.Location = new System.Drawing.Point(126, 79);
             this.lblNomiSoldi2.Name = "lblNomiSoldi2";
             this.lblNomiSoldi2.Size = new System.Drawing.Size(0, 13);
             this.lblNomiSoldi2.TabIndex = 0;
@@ -64,7 +69,7 @@
             // btnFold3
             // 
             this.btnFold3.Enabled = false;
-            this.btnFold3.Location = new System.Drawing.Point(96, 86);
+            this.btnFold3.Location = new System.Drawing.Point(210, 103);
             this.btnFold3.Name = "btnFold3";
             this.btnFold3.Size = new System.Drawing.Size(75, 23);
             this.btnFold3.TabIndex = 1;
@@ -76,7 +81,7 @@
             // btnFold1
             // 
             this.btnFold1.Enabled = false;
-            this.btnFold1.Location = new System.Drawing.Point(96, 86);
+            this.btnFold1.Location = new System.Drawing.Point(210, 103);
             this.btnFold1.Name = "btnFold1";
             this.btnFold1.Size = new System.Drawing.Size(75, 23);
             this.btnFold1.TabIndex = 2;
@@ -88,7 +93,7 @@
             // btnFold2
             // 
             this.btnFold2.Enabled = false;
-            this.btnFold2.Location = new System.Drawing.Point(96, 86);
+            this.btnFold2.Location = new System.Drawing.Point(210, 103);
             this.btnFold2.Name = "btnFold2";
             this.btnFold2.Size = new System.Drawing.Size(75, 23);
             this.btnFold2.TabIndex = 3;
@@ -103,7 +108,7 @@
             this.pnlGiocatore1.Controls.Add(this.lblNomiSoldi1);
             this.pnlGiocatore1.Controls.Add(this.btnFold1);
             this.pnlGiocatore1.Controls.Add(this.btnPunta1);
-            this.pnlGiocatore1.Location = new System.Drawing.Point(12, 40);
+            this.pnlGiocatore1.Location = new System.Drawing.Point(27, 206);
             this.pnlGiocatore1.Name = "pnlGiocatore1";
             this.pnlGiocatore1.Size = new System.Drawing.Size(294, 139);
             this.pnlGiocatore1.TabIndex = 4;
@@ -119,7 +124,7 @@
             // lblNomiSoldi1
             // 
             this.lblNomiSoldi1.AutoSize = true;
-            this.lblNomiSoldi1.Location = new System.Drawing.Point(12, 62);
+            this.lblNomiSoldi1.Location = new System.Drawing.Point(127, 79);
             this.lblNomiSoldi1.Name = "lblNomiSoldi1";
             this.lblNomiSoldi1.Size = new System.Drawing.Size(0, 13);
             this.lblNomiSoldi1.TabIndex = 11;
@@ -127,38 +132,38 @@
             // btnPunta1
             // 
             this.btnPunta1.Enabled = false;
-            this.btnPunta1.Location = new System.Drawing.Point(15, 86);
+            this.btnPunta1.Location = new System.Drawing.Point(129, 103);
             this.btnPunta1.Name = "btnPunta1";
             this.btnPunta1.Size = new System.Drawing.Size(75, 23);
             this.btnPunta1.TabIndex = 10;
             this.btnPunta1.Tag = "0";
-            this.btnPunta1.Text = "Punta 100";
+            this.btnPunta1.Text = "Punta";
             this.btnPunta1.UseVisualStyleBackColor = true;
             this.btnPunta1.Click += new System.EventHandler(this.btnPunta1_Click);
             // 
             // btnPunta2
             // 
             this.btnPunta2.Enabled = false;
-            this.btnPunta2.Location = new System.Drawing.Point(15, 86);
+            this.btnPunta2.Location = new System.Drawing.Point(129, 103);
             this.btnPunta2.Name = "btnPunta2";
             this.btnPunta2.Size = new System.Drawing.Size(75, 23);
             this.btnPunta2.TabIndex = 6;
             this.btnPunta2.Tag = "1";
-            this.btnPunta2.Text = "Punta 100";
+            this.btnPunta2.Text = "Punta";
             this.btnPunta2.UseVisualStyleBackColor = true;
             this.btnPunta2.Click += new System.EventHandler(this.btnPunta2_Click);
             // 
             // pnlCarteComuni
             // 
-            this.pnlCarteComuni.Location = new System.Drawing.Point(342, 40);
+            this.pnlCarteComuni.Location = new System.Drawing.Point(270, 84);
             this.pnlCarteComuni.Name = "pnlCarteComuni";
-            this.pnlCarteComuni.Size = new System.Drawing.Size(539, 139);
+            this.pnlCarteComuni.Size = new System.Drawing.Size(400, 100);
             this.pnlCarteComuni.TabIndex = 7;
             // 
             // lblNomiSoldi3
             // 
             this.lblNomiSoldi3.AutoSize = true;
-            this.lblNomiSoldi3.Location = new System.Drawing.Point(12, 62);
+            this.lblNomiSoldi3.Location = new System.Drawing.Point(126, 79);
             this.lblNomiSoldi3.Name = "lblNomiSoldi3";
             this.lblNomiSoldi3.Size = new System.Drawing.Size(0, 13);
             this.lblNomiSoldi3.TabIndex = 8;
@@ -166,12 +171,12 @@
             // btnPunta3
             // 
             this.btnPunta3.Enabled = false;
-            this.btnPunta3.Location = new System.Drawing.Point(15, 86);
+            this.btnPunta3.Location = new System.Drawing.Point(129, 103);
             this.btnPunta3.Name = "btnPunta3";
             this.btnPunta3.Size = new System.Drawing.Size(75, 23);
             this.btnPunta3.TabIndex = 9;
             this.btnPunta3.Tag = "2";
-            this.btnPunta3.Text = "Punta 100";
+            this.btnPunta3.Text = "Punta";
             this.btnPunta3.UseVisualStyleBackColor = true;
             this.btnPunta3.Click += new System.EventHandler(this.btnPunta3_Click);
             // 
@@ -181,7 +186,7 @@
             this.pnlGiocatore2.Controls.Add(this.lblNomiSoldi2);
             this.pnlGiocatore2.Controls.Add(this.btnFold2);
             this.pnlGiocatore2.Controls.Add(this.btnPunta2);
-            this.pnlGiocatore2.Location = new System.Drawing.Point(12, 185);
+            this.pnlGiocatore2.Location = new System.Drawing.Point(299, 351);
             this.pnlGiocatore2.Name = "pnlGiocatore2";
             this.pnlGiocatore2.Size = new System.Drawing.Size(294, 139);
             this.pnlGiocatore2.TabIndex = 5;
@@ -200,7 +205,7 @@
             this.pnlGiocatore3.Controls.Add(this.lblNomiSoldi3);
             this.pnlGiocatore3.Controls.Add(this.btnPunta3);
             this.pnlGiocatore3.Controls.Add(this.btnFold3);
-            this.pnlGiocatore3.Location = new System.Drawing.Point(12, 330);
+            this.pnlGiocatore3.Location = new System.Drawing.Point(558, 206);
             this.pnlGiocatore3.Name = "pnlGiocatore3";
             this.pnlGiocatore3.Size = new System.Drawing.Size(294, 139);
             this.pnlGiocatore3.TabIndex = 5;
@@ -215,7 +220,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(342, 185);
+            this.btnStart.Location = new System.Drawing.Point(12, 50);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(98, 23);
             this.btnStart.TabIndex = 10;
@@ -226,7 +231,7 @@
             // btnFaseSuccessiva
             // 
             this.btnFaseSuccessiva.Enabled = false;
-            this.btnFaseSuccessiva.Location = new System.Drawing.Point(342, 214);
+            this.btnFaseSuccessiva.Location = new System.Drawing.Point(12, 79);
             this.btnFaseSuccessiva.Name = "btnFaseSuccessiva";
             this.btnFaseSuccessiva.Size = new System.Drawing.Size(98, 23);
             this.btnFaseSuccessiva.TabIndex = 11;
@@ -236,7 +241,7 @@
             // 
             // btnMostraVincitore
             // 
-            this.btnMostraVincitore.Location = new System.Drawing.Point(446, 195);
+            this.btnMostraVincitore.Location = new System.Drawing.Point(13, 108);
             this.btnMostraVincitore.Name = "btnMostraVincitore";
             this.btnMostraVincitore.Size = new System.Drawing.Size(97, 31);
             this.btnMostraVincitore.TabIndex = 12;
@@ -248,16 +253,49 @@
             // lblPiatto
             // 
             this.lblPiatto.AutoSize = true;
-            this.lblPiatto.Location = new System.Drawing.Point(440, 270);
+            this.lblPiatto.Location = new System.Drawing.Point(125, 84);
             this.lblPiatto.Name = "lblPiatto";
             this.lblPiatto.Size = new System.Drawing.Size(0, 13);
             this.lblPiatto.TabIndex = 13;
+            // 
+            // BtnClassifica
+            // 
+            this.BtnClassifica.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnClassifica.BackgroundImage")));
+            this.BtnClassifica.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnClassifica.Location = new System.Drawing.Point(809, 451);
+            this.BtnClassifica.Name = "BtnClassifica";
+            this.BtnClassifica.Size = new System.Drawing.Size(81, 65);
+            this.BtnClassifica.TabIndex = 16;
+            this.BtnClassifica.UseVisualStyleBackColor = true;
+            this.BtnClassifica.Click += new System.EventHandler(this.BtnClassifica_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(849, 401);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LblUtente
+            // 
+            this.LblUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUtente.Location = new System.Drawing.Point(653, 401);
+            this.LblUtente.Name = "LblUtente";
+            this.LblUtente.Size = new System.Drawing.Size(190, 44);
+            this.LblUtente.TabIndex = 18;
+            this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PokerTexas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 519);
+            this.Controls.Add(this.LblUtente);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.BtnClassifica);
             this.Controls.Add(this.lblPiatto);
             this.Controls.Add(this.btnMostraVincitore);
             this.Controls.Add(this.btnFaseSuccessiva);
@@ -276,6 +314,7 @@
             this.pnlGiocatore2.PerformLayout();
             this.pnlGiocatore3.ResumeLayout(false);
             this.pnlGiocatore3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,5 +342,8 @@
         private System.Windows.Forms.Label lblCarte1;
         private System.Windows.Forms.Label lblCarte2;
         private System.Windows.Forms.Label lblCarte3;
+        private System.Windows.Forms.Button BtnClassifica;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblUtente;
     }
 }
