@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
     public partial class PokerTexas : Form
     {
         private List<Giocatore> giocatori = new List<Giocatore>();
+        private HashSet<string> giocatoriProntiPerFase = new HashSet<string>();
         private mazzo mazzo;
         private List<carta> carteComuni = new List<carta>();
         private int fase = 0;
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1
         const int puntiVittoria = 150;
         int giocatoreCorrente = 0;
         int puntataMassima = 0;
+        int clickFase = 0;
         public PokerTexas(string p1, string p2, string p3)
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace WindowsFormsApp1
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnFaseSuccessiva.Enabled = true;
-            AggiornaStatoBottoniTurno();
+
             mazzo = new mazzo();
             carteComuni.Clear();
             fase = 0;
@@ -57,13 +59,12 @@ namespace WindowsFormsApp1
             AggiornaGiocatori();
             pnlCarteComuni.Controls.Clear();
             MostraCarteComuni();
-
+            AggiornaStatoBottoniTurno();
         }
+
         private void btnPunta1_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            int index = int.Parse(btn.Tag.ToString());
-            Giocatore g = giocatori[index];
+            Giocatore g = giocatori[giocatoreCorrente];
 
             if (g.Foldato || g.Soldi <= 0) return;
 
@@ -97,10 +98,12 @@ namespace WindowsFormsApp1
                     g.HaAgitoQuestoTurno = true;
                 }
 
-                AvanzaTurno(sender, e);
+                AvanzaTurno();
                 AggiornaGiocatori();
+                AggiornaStatoBottoniTurno();
             }
         }
+
         private void btnFold1_Click(object sender, EventArgs e)
         {
 
@@ -108,15 +111,14 @@ namespace WindowsFormsApp1
             g.Foldato = true;
             g.HaAgitoQuestoTurno = true;
 
-            AvanzaTurno(sender, e);
+            AvanzaTurno();
             AggiornaGiocatori();
+            AggiornaStatoBottoniTurno();
         }
 
         private void btnPunta2_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            int index = int.Parse(btn.Tag.ToString());
-            Giocatore g = giocatori[index];
+            Giocatore g = giocatori[giocatoreCorrente];
 
             if (g.Foldato || g.Soldi <= 0) return;
 
@@ -150,8 +152,9 @@ namespace WindowsFormsApp1
                     g.HaAgitoQuestoTurno = true;
                 }
 
-                AvanzaTurno(sender, e);
+                AvanzaTurno();
                 AggiornaGiocatori();
+                AggiornaStatoBottoniTurno();
             }
         }
 
@@ -161,15 +164,14 @@ namespace WindowsFormsApp1
             g.Foldato = true;
             g.HaAgitoQuestoTurno = true;
 
-            AvanzaTurno(sender, e);
+            AvanzaTurno();
             AggiornaGiocatori();
+            AggiornaStatoBottoniTurno();
         }
 
         private void btnPunta3_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            int index = int.Parse(btn.Tag.ToString());
-            Giocatore g = giocatori[index];
+            Giocatore g = giocatori[giocatoreCorrente];
 
             if (g.Foldato || g.Soldi <= 0) return;
 
@@ -203,8 +205,9 @@ namespace WindowsFormsApp1
                     g.HaAgitoQuestoTurno = true;
                 }
 
-                AvanzaTurno(sender, e);
+                AvanzaTurno();
                 AggiornaGiocatori();
+                AggiornaStatoBottoniTurno();
             }
         }
 
@@ -214,8 +217,9 @@ namespace WindowsFormsApp1
             g.Foldato = true;
             g.HaAgitoQuestoTurno = true;
 
-            AvanzaTurno(sender, e);
+            AvanzaTurno();
             AggiornaGiocatori();
+            AggiornaStatoBottoniTurno();
         }
 
         private void btnMostraVincitore_Click(object sender, EventArgs e)
@@ -225,10 +229,66 @@ namespace WindowsFormsApp1
             btnMostraVincitore.Visible = false;
         }
 
-        private void btnFaseSuccessiva_Click(object sender, EventArgs e)
+        private void PassaFaseSuccessiva()
         {
             MostraCarteComuni();
         }
+
+        private void btnFaseSuccessiva_Click(object sender, EventArgs e)
+        {
+            Giocatore g = giocatori[giocatoreCorrente];
+
+            // Se ha già cliccato, lo blocco
+            if (giocatoriProntiPerFase.Contains(g.Nome))
+            {
+                MessageBox.Show("Hai già confermato per la fase successiva oppure devi puntare uguale agli altri");
+                giocatoriProntiPerFase.Clear();
+                return;
+            }
+
+            // Controllo se le puntate sono tutte uguali tra i giocatori ancora in gioco
+            var puntateAttive = giocatori
+                .Where(x => !x.Foldato && x.Soldi > 0)
+                .Select(x => x.PuntataAttuale)
+                .Distinct()
+                .ToList();
+
+            if (puntateAttive.Count > 1)
+            {
+                MessageBox.Show("Le puntate non sono ancora uguali. Non puoi proseguire.");
+                giocatoriProntiPerFase.Clear();
+                return;
+            }
+
+            // Se le puntate sono tutte uguali, segna il giocatore come pronto
+            giocatoriProntiPerFase.Add(g.Nome);
+            g.HaAgitoQuestoTurno = true;
+
+            // Verifica se tutti i giocatori attivi hanno cliccato
+            int attivi = giocatori.Count(x => !x.Foldato && x.Soldi > 0);
+            int pronti = giocatoriProntiPerFase.Count;
+
+            if (pronti == attivi)
+            {
+                giocatoriProntiPerFase.Clear();
+                PassaFaseSuccessiva();
+                giocatoreCorrente = 0;
+                foreach (var gioc in giocatori)
+                {
+                    gioc.HaAgitoQuestoTurno = false;
+                    gioc.PuntataAttuale = 0;
+                }
+
+                //AvanzaTurno(); // riparte il ciclo dei turni
+            }
+            else
+            {
+                AvanzaTurno(); // passa al prossimo giocatore
+            }
+
+            AggiornaStatoBottoniTurno();
+        }
+
         private void MostraCarteComuni()
         {
             int daPescare = fase == 0 ? 3 : 1;
@@ -295,10 +355,26 @@ namespace WindowsFormsApp1
                     GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
                 }
                 MessageBox.Show($"Vince {vincitore.Nome} con punteggio {punteggioMax}! Ha vinto ${piatto}.", "Risultato");
+                giocatoreCorrente = 0;
+                puntataMassima = 0;
+                giocatori[0].PuntataAttuale = 0;
+                giocatori[1].PuntataAttuale = 0;
+                giocatori[2].PuntataAttuale = 0;
+                giocatori[0].HaAgitoQuestoTurno = false;
+                giocatori[1].HaAgitoQuestoTurno = false;
+                giocatori[2].HaAgitoQuestoTurno = false;
             }
             else
             {
                 MessageBox.Show("Tutti hanno foldato! Nessun vincitore.");
+                giocatoreCorrente = 0;
+                puntataMassima = 0;
+                giocatori[0].PuntataAttuale = 0;
+                giocatori[1].PuntataAttuale = 0;
+                giocatori[2].PuntataAttuale = 0;
+                giocatori[0].HaAgitoQuestoTurno = false;
+                giocatori[1].HaAgitoQuestoTurno = false;
+                giocatori[2].HaAgitoQuestoTurno = false;
             }
         }
 
@@ -379,7 +455,7 @@ namespace WindowsFormsApp1
                 lblPiatto.Text = $"Piatto: ${piatto}";
         }
 
-        private void AvanzaTurno(object sender, EventArgs e)
+        private void AvanzaTurno()
         {
             int tentativi = 0;
 
@@ -387,18 +463,30 @@ namespace WindowsFormsApp1
             {
                 giocatoreCorrente = (giocatoreCorrente + 1) % 3;
                 tentativi++;
+                if (tentativi > 3)
+                {
+                    break;
+                }
             }
-            while ((giocatori[giocatoreCorrente].Foldato || giocatori[giocatoreCorrente].Soldi <= 0 || giocatori[giocatoreCorrente].HaAgitoQuestoTurno) && tentativi < 3);
-            bool tuttiHannoAgito = giocatori.Where(g => !g.Foldato).All(g => g.HaAgitoQuestoTurno);
+            while ((giocatori[giocatoreCorrente].Foldato || giocatori[giocatoreCorrente].Soldi <= 0 || giocatori[giocatoreCorrente].HaAgitoQuestoTurno));
+            bool tuttiHannoAgito = giocatori.Where(g => !g.Foldato && g.Soldi > 0).All(g => g.HaAgitoQuestoTurno);
 
             if (tuttiHannoAgito)
             {
-                btnFaseSuccessiva_Click(sender, e);
+                if (fase != 3)
+                {
+                    PassaFaseSuccessiva();
+                    giocatoreCorrente = 0;
+                    puntataMassima = 0;
+                    giocatori[0].PuntataAttuale = 0;
+                    giocatori[1].PuntataAttuale = 0;
+                    giocatori[2].PuntataAttuale = 0;
+                    giocatori[0].HaAgitoQuestoTurno = false;
+                    giocatori[1].HaAgitoQuestoTurno = false;
+                    giocatori[2].HaAgitoQuestoTurno = false;
+                }
             }
-            else
-            {
-                AggiornaStatoBottoniTurno(); 
-            }
+            AggiornaStatoBottoniTurno();
         }
 
         private void AggiornaStatoBottoniTurno()
@@ -417,12 +505,6 @@ namespace WindowsFormsApp1
                 if (btnFold != null)
                     btnFold.Enabled = turnoAttivo && !g.Foldato;
             }
-        }
-
-        private void ResetAzioniTurno()
-        {
-            foreach (var g in giocatori)
-                g.HaAgitoQuestoTurno = false;
         }
 
         private void PokerTexas_FormClosing(object sender, FormClosingEventArgs e)
@@ -451,28 +533,6 @@ namespace WindowsFormsApp1
             new Classifica("Texas Holdem").Show();
         }
 
-        void SalvaPunteggio(string gioco, string utente, int punti)
-        {
-            string path = "Punteggi.json";
-            var dict = new Dictionary<string, Dictionary<string, int>>();
-
-            if (File.Exists(path))
-            {
-                var json = File.ReadAllText(path);
-                dict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, int>>>(json)
-                       ?? new Dictionary<string, Dictionary<string, int>>();
-            }
-
-            if (!dict.ContainsKey(gioco))
-                dict[gioco] = new Dictionary<string, int>();
-
-            if (dict[gioco].ContainsKey(utente))
-                dict[gioco][utente] += punti;
-            else
-                dict[gioco][utente] = punti;
-
-            File.WriteAllText(path, JsonConvert.SerializeObject(dict, Formatting.Indented));
-        }
     }
 
     public class carta

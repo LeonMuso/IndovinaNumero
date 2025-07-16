@@ -52,6 +52,7 @@
             this.BtnClassifica = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblUtente = new System.Windows.Forms.Label();
+            this.lblBanco = new System.Windows.Forms.Label();
             this.pnlGiocatore1.SuspendLayout();
             this.pnlGiocatore2.SuspendLayout();
             this.pnlGiocatore3.SuspendLayout();
@@ -288,11 +289,22 @@
             this.LblUtente.TabIndex = 18;
             this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // lblBanco
+            // 
+            this.lblBanco.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBanco.Location = new System.Drawing.Point(417, 37);
+            this.lblBanco.Name = "lblBanco";
+            this.lblBanco.Size = new System.Drawing.Size(97, 42);
+            this.lblBanco.TabIndex = 19;
+            this.lblBanco.Text = "Banco";
+            this.lblBanco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PokerTexas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 519);
+            this.Controls.Add(this.lblBanco);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.BtnClassifica);
@@ -345,5 +357,6 @@
         private System.Windows.Forms.Button BtnClassifica;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblUtente;
+        private System.Windows.Forms.Label lblBanco;
     }
 }
