@@ -62,6 +62,8 @@ namespace WindowsFormsApp1
             mazzo = new Mazzo();
             mazzo.Mescola();
             BtnVincitore.Enabled = true;
+            BtnCambioP1.Enabled = true;
+            BtnCambioP2.Enabled = true;
             manoGiocatore1 = mazzo.Pesca(5);
             manoGiocatore2 = mazzo.Pesca(5);
 
@@ -134,16 +136,13 @@ namespace WindowsFormsApp1
             int p1 = ValutatorePoker.ValutaMano(manoGiocatore1);
             int p2 = ValutatorePoker.ValutaMano(manoGiocatore2);
 
-            string tipo1 = ValutatorePoker.NomePunteggio(p1);
-            string tipo2 = ValutatorePoker.NomePunteggio(p2);
-
             string vincitore = "";
             int puntiVittoria = 150;
 
             string risultato;
             if (p1 > p2)
             {
-                risultato = $"Giocatore 1 vince con {tipo1}";
+                risultato = $"{UtenteC.NomeU} vince con {p1}";
                 vP1++;
                 LblPP1.Text = $"{vP1}";
                 BtnCambioP1.Enabled = true;
@@ -151,7 +150,7 @@ namespace WindowsFormsApp1
             }
             else if (p2 > p1)
             {
-                risultato = $"Giocatore 2 vince con {tipo2}";
+                risultato = $"{UtenteC.NomeU2} vince con {p2}";
                 vP2++;
                 LblPP2.Text = $"{vP2}";
                 BtnCambioP1.Enabled = true;
@@ -159,7 +158,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                risultato = $"Pareggio con {tipo1}";
+                risultato = $"Pareggio con {p1}";
                 BtnCambioP1.Enabled = true;
                 BtnCambioP2.Enabled = true;
             }
@@ -295,50 +294,84 @@ namespace WindowsFormsApp1
     }
     public static class ValutatorePoker
     {
-        public static int ValutaMano(List<Carta> mano)
+        public static int ValutaMano(List<Carta> carte)
         {
-            var valori = mano.GroupBy(c => c.Valori).ToDictionary(g => g.Key, g => g.Count());
-            var semi = mano.Select(c => c.Seme).Distinct().ToList();
-            var pesi = mano.Select(c => c.Peso).OrderBy(p => p).ToList();
-
-            bool isScala = pesi.Zip(pesi.Skip(1), (a, b) => b - a).All(diff => diff == 1);
-            bool isColore = semi.Count == 1;
-
-            if (isScala && isColore) return 8; // Scala colore
-            if (valori.ContainsValue(4)) return 7; // Poker
-            if (valori.ContainsValue(3) && valori.ContainsValue(2)) return 6; // Full
-            if (isColore) return 5; // Colore
-            if (isScala) return 4; // Scala
-            if (valori.ContainsValue(3)) return 3; // Tris
-            if (valori.Values.Count(v => v == 2) == 2) return 2; // Doppia coppia
-            if (valori.ContainsValue(2)) return 1; // Coppia
-
-            return 0; // Carta alta
-        }
-
-        public static string NomePunteggio(int valore)
+            // Mappa dei valori per ordinare
+            Dictionary<string, int> valori = new Dictionary<string, int>
         {
-            switch (valore)
+            { "2", 2 }, { "3", 3 }, { "4", 4 }, { "5", 5 }, { "6", 6 },
+            { "7", 7 }, { "8", 8 }, { "9", 9 }, { "10", 10 },
+            { "J", 11 }, { "Q", 12 }, { "K", 13 }, { "A", 14 }
+        };
+
+            // Ordina le carte per valore numerico decrescente
+            var ordinate = carte.OrderByDescending(c => valori[c.Valori]).ToList();
+
+            // Conta frequenze di valore e seme
+            var gruppiValori = ordinate.GroupBy(c => c.Valori).OrderByDescending(g => g.Count()).ThenByDescending(g => valori[g.Key]);
+            var gruppiSemi = ordinate.GroupBy(c => c.Seme);
+
+            bool isFlush = gruppiSemi.Any(g => g.Count() >= 5);
+            List<int> valoriUnici = ordinate.Select(c => valori[c.Valori]).Distinct().OrderByDescending(v => v).ToList();
+
+            // Controllo scala
+            bool isStraight = false;
+            for (int i = 0; i < valoriUnici.Count - 4; i++)
             {
-                case 8:
-                    return "Scala colore";
-                case 7:
-                    return "Poker";
-                case 6:
-                    return "Full";
-                case 5:
-                    return "Colore";
-                case 4:
-                    return "Scala";
-                case 3:
-                    return "Tris";
-                case 2:
-                    return "Doppia coppia";
-                case 1:
-                    return "Coppia";
-                default:
-                    return "Carta alta";
-            };
+                if (valoriUnici[i] - 1 == valoriUnici[i + 1] &&
+                    valoriUnici[i + 1] - 1 == valoriUnici[i + 2] &&
+                    valoriUnici[i + 2] - 1 == valoriUnici[i + 3] &&
+                    valoriUnici[i + 3] - 1 == valoriUnici[i + 4])
+                {
+                    isStraight = true;
+                    break;
+                }
+            }
+
+            // Scala bassa (A-2-3-4-5)
+            if (!isStraight && valoriUnici.Contains(14) && valoriUnici.Contains(2) && valoriUnici.Contains(3) && valoriUnici.Contains(4) && valoriUnici.Contains(5))
+            {
+                isStraight = true;
+            }
+
+            // Scala colore (straight flush)
+            if (isFlush && isStraight)
+                return 9000;
+
+            // Poker
+            if (gruppiValori.First().Count() == 4)
+                return 8000 + valori[gruppiValori.First().Key];
+
+            // Full
+            if (gruppiValori.First().Count() == 3 && gruppiValori.Skip(1).Any(g => g.Count() >= 2))
+                return 7000 + valori[gruppiValori.First().Key];
+
+            // Colore
+            if (isFlush)
+                return 6000 + valoriUnici.Max();
+
+            // Scala
+            if (isStraight)
+                return 5000 + valoriUnici.Max();
+
+            // Tris
+            if (gruppiValori.First().Count() == 3)
+                return 4000 + valori[gruppiValori.First().Key];
+
+            // Doppia coppia
+            if (gruppiValori.First().Count() == 2 && gruppiValori.Skip(1).Any(g => g.Count() == 2))
+            {
+                int val1 = valori[gruppiValori.First().Key];
+                int val2 = valori[gruppiValori.Skip(1).First(g => g.Count() == 2).Key];
+                return 3000 + val1 * 14 + val2;
+            }
+
+            // Coppia
+            if (gruppiValori.First().Count() == 2)
+                return 2000 + valori[gruppiValori.First().Key];
+
+            // Carta alta
+            return 1000 + valoriUnici.Max();
         }
     }
     public class Mazzo

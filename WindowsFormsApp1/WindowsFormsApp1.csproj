@@ -124,6 +124,12 @@
     </Compile>
     <Compile Include="GestionePunteggi.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Snake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Snake.Designer.cs">
+      <DependentUpon>Snake.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sudoku.cs">
       <SubType>Form</SubType>
     </Compile>

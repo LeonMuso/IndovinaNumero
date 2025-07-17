@@ -26,8 +26,8 @@ namespace WindowsFormsApp1
         const int puntiVittoria = 150;
         int giocatoreCorrente = 0;
         int puntataMassima = 0;
-        int clickFase = 0;
-        public PokerTexas(string p1, string p2, string p3)
+        private bool mostraCarteBot = false;
+        public PokerTexas()
         {
             InitializeComponent();
             LblUtente.Text = UtenteC.NomeU;
@@ -35,9 +35,9 @@ namespace WindowsFormsApp1
         }
         private void PokerTexas_Load(object sender, EventArgs e)
         {
-            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU, Soldi = 1000 });
-            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU2, Soldi = 1000 });
-            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU3, Soldi = 1000 });
+            giocatori.Add(new Giocatore { Nome = UtenteC.NomeU, Soldi = 1000, IsBot = false });
+            giocatori.Add(new Giocatore { Nome = "Bot 1", Soldi = 1000, IsBot = true });
+            giocatori.Add(new Giocatore { Nome = "Bot 2", Soldi = 1000, IsBot = true });
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -116,117 +116,15 @@ namespace WindowsFormsApp1
             AggiornaStatoBottoniTurno();
         }
 
-        private void btnPunta2_Click(object sender, EventArgs e)
-        {
-            Giocatore g = giocatori[giocatoreCorrente];
-
-            if (g.Foldato || g.Soldi <= 0) return;
-
-            Puntata fp = new Puntata(g.Soldi);
-            if (fp.ShowDialog() == DialogResult.OK)
-            {
-                int puntata = fp.ImportoPuntata;
-                int differenza = puntata - g.PuntataAttuale;
-
-                // ❗ Non può puntare meno della puntataMassima (tranne all-in)
-                if (puntata < puntataMassima && puntata != g.Soldi)
-                {
-                    MessageBox.Show($"Devi puntare almeno {puntataMassima} oppure fare all-in.");
-                    return;
-                }
-
-                // Aggiorna la puntata
-                g.Soldi -= differenza;
-                g.PuntataAttuale = puntata;
-                g.HaAgitoQuestoTurno = true;
-                piatto += differenza;
-
-                // Se questa è la nuova puntata massima, aggiorna e resetta gli altri
-                if (puntata > puntataMassima)
-                {
-                    puntataMassima = puntata;
-                    foreach (var gioc in giocatori)
-                        if (!gioc.Foldato)
-                            gioc.HaAgitoQuestoTurno = false;
-
-                    g.HaAgitoQuestoTurno = true;
-                }
-
-                AvanzaTurno();
-                AggiornaGiocatori();
-                AggiornaStatoBottoniTurno();
-            }
-        }
-
-        private void btnFold2_Click(object sender, EventArgs e)
-        {
-            Giocatore g = giocatori[giocatoreCorrente];
-            g.Foldato = true;
-            g.HaAgitoQuestoTurno = true;
-
-            AvanzaTurno();
-            AggiornaGiocatori();
-            AggiornaStatoBottoniTurno();
-        }
-
-        private void btnPunta3_Click(object sender, EventArgs e)
-        {
-            Giocatore g = giocatori[giocatoreCorrente];
-
-            if (g.Foldato || g.Soldi <= 0) return;
-
-            Puntata fp = new Puntata(g.Soldi);
-            if (fp.ShowDialog() == DialogResult.OK)
-            {
-                int puntata = fp.ImportoPuntata;
-                int differenza = puntata - g.PuntataAttuale;
-
-                // ❗ Non può puntare meno della puntataMassima (tranne all-in)
-                if (puntata < puntataMassima && puntata != g.Soldi)
-                {
-                    MessageBox.Show($"Devi puntare almeno {puntataMassima} oppure fare all-in.");
-                    return;
-                }
-
-                // Aggiorna la puntata
-                g.Soldi -= differenza;
-                g.PuntataAttuale = puntata;
-                g.HaAgitoQuestoTurno = true;
-                piatto += differenza;
-
-                // Se questa è la nuova puntata massima, aggiorna e resetta gli altri
-                if (puntata > puntataMassima)
-                {
-                    puntataMassima = puntata;
-                    foreach (var gioc in giocatori)
-                        if (!gioc.Foldato)
-                            gioc.HaAgitoQuestoTurno = false;
-
-                    g.HaAgitoQuestoTurno = true;
-                }
-
-                AvanzaTurno();
-                AggiornaGiocatori();
-                AggiornaStatoBottoniTurno();
-            }
-        }
-
-        private void btnFold3_Click(object sender, EventArgs e)
-        {
-            Giocatore g = giocatori[giocatoreCorrente];
-            g.Foldato = true;
-            g.HaAgitoQuestoTurno = true;
-
-            AvanzaTurno();
-            AggiornaGiocatori();
-            AggiornaStatoBottoniTurno();
-        }
-
         private void btnMostraVincitore_Click(object sender, EventArgs e)
         {
+            mostraCarteBot = true;
+            AggiornaGiocatori();
             MostraVincitore();
+            mostraCarteBot = false;
             btnStart_Click(sender, e);
             btnMostraVincitore.Visible = false;
+            giocatoriProntiPerFase.Clear();
         }
 
         private void PassaFaseSuccessiva()
@@ -383,39 +281,24 @@ namespace WindowsFormsApp1
             for (int i = 0; i < giocatori.Count; i++)
             {
                 Giocatore g = giocatori[i];
-
                 Panel pannello = Controls.Find("pnlGiocatore" + (i + 1), true).FirstOrDefault() as Panel;
                 if (pannello == null) continue;
 
-                // Label con nome e soldi
                 Label lblNomiSoldi = pannello.Controls.Find("lblNomiSoldi" + (i + 1), true).FirstOrDefault() as Label;
                 if (lblNomiSoldi != null)
                 {
-                    if (g.Foldato)
-                        lblNomiSoldi.Text = $"{g.Nome} - Foldato";
-                    else
-                        lblNomiSoldi.Text = $"{g.Nome} - ${g.Soldi}";
+                    lblNomiSoldi.Text = g.Foldato ? $"{g.Nome} - Foldato" : $"{g.Nome} - ${g.Soldi}";
                 }
 
-                if (g.Foldato)
-                {
-                    Label lblFold = new Label
-                    {
-                        Text = "Foldato",
-                        AutoSize = true,
-                        Top = 30,
-                        Left = 0,
-                        ForeColor = Color.Gray,
-                        Font = new Font("Segoe UI", 9, FontStyle.Italic)
-                    };
-                    pannello.Controls.Add(lblFold);
-                    continue;
-                }
+                pannello.Controls.OfType<Label>().Where(lbl => lbl.Top == 30).ToList().ForEach(lbl => pannello.Controls.Remove(lbl));
 
-                // Mostra le carte
                 int x = 0;
                 foreach (var carta in g.Mano)
                 {
+
+                    string testoCarta = g.IsBot && g != giocatori[0] && !mostraCarteBot ? "??" : $"{carta.Valore}\n{carta.Simbolo}";
+                    Color coloreCarta = g.IsBot && g != giocatori[0] && !mostraCarteBot ? Color.Gray : carta.Colore;
+
                     Label lblCarta = new Label
                     {
                         Width = 50,
@@ -423,54 +306,39 @@ namespace WindowsFormsApp1
                         Left = x,
                         Top = 30,
                         BorderStyle = BorderStyle.FixedSingle,
-                        Text = $"{carta.Valore}\n{carta.Simbolo}",
+                        Text = testoCarta,
                         TextAlign = ContentAlignment.MiddleCenter,
                         Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                        ForeColor = carta.Colore,
+                        ForeColor = coloreCarta,
                         BackColor = Color.White
                     };
                     pannello.Controls.Add(lblCarta);
                     x += 60;
                 }
-                // Bottone "Punta"
-                Button btnPunta = pannello.Controls.Find("btnPunta" + (i + 1), true).FirstOrDefault() as Button;
-                if (btnPunta != null)
-                {
-                    btnPunta.Enabled = !g.Foldato && g.Soldi > 0;
-                    btnPunta.Tag = i;
-                }
 
-                // Bottone "Fold"
+                Button btnPunta = pannello.Controls.Find("btnPunta" + (i + 1), true).FirstOrDefault() as Button;
                 Button btnFold = pannello.Controls.Find("btnFold" + (i + 1), true).FirstOrDefault() as Button;
-                if (btnFold != null)
-                {
-                    btnFold.Enabled = !g.Foldato;
-                    btnFold.Tag = i;
-                }
+                if (btnPunta != null) btnPunta.Enabled = !g.IsBot && !g.Foldato && g.Soldi > 0 && i == giocatoreCorrente;
+                if (btnFold != null) btnFold.Enabled = !g.IsBot && !g.Foldato && i == giocatoreCorrente;
             }
 
-            // Label del piatto (fuori dai pannelli)
             Label lblPiatto = Controls.Find("lblPiatto", true).FirstOrDefault() as Label;
             if (lblPiatto != null)
                 lblPiatto.Text = $"Piatto: ${piatto}";
         }
 
+
         private void AvanzaTurno()
         {
             int tentativi = 0;
-
             do
             {
                 giocatoreCorrente = (giocatoreCorrente + 1) % 3;
                 tentativi++;
-                if (tentativi > 3)
-                {
-                    break;
-                }
+                if (tentativi > 3) break;
             }
             while ((giocatori[giocatoreCorrente].Foldato || giocatori[giocatoreCorrente].Soldi <= 0 || giocatori[giocatoreCorrente].HaAgitoQuestoTurno));
             bool tuttiHannoAgito = giocatori.Where(g => !g.Foldato && g.Soldi > 0).All(g => g.HaAgitoQuestoTurno);
-
             if (tuttiHannoAgito)
             {
                 if (fase != 3)
@@ -478,14 +346,76 @@ namespace WindowsFormsApp1
                     PassaFaseSuccessiva();
                     giocatoreCorrente = 0;
                     puntataMassima = 0;
-                    giocatori[0].PuntataAttuale = 0;
-                    giocatori[1].PuntataAttuale = 0;
-                    giocatori[2].PuntataAttuale = 0;
-                    giocatori[0].HaAgitoQuestoTurno = false;
-                    giocatori[1].HaAgitoQuestoTurno = false;
-                    giocatori[2].HaAgitoQuestoTurno = false;
+                    foreach (var g in giocatori)
+                    {
+                        g.PuntataAttuale = 0;
+                        g.HaAgitoQuestoTurno = false;
+                    }
                 }
             }
+
+            AggiornaStatoBottoniTurno();
+            if (giocatoreCorrente == 1 || giocatoreCorrente == 2)
+            {
+                Giocatore bot = giocatori[giocatoreCorrente];
+                if (!bot.Foldato && bot.Soldi > 0 && !bot.HaAgitoQuestoTurno)
+                {
+                    EseguiTurnoBot(bot);
+                    AvanzaTurno();
+                }
+
+            }
+        }
+
+        private void EseguiTurnoBot(Giocatore g)
+        {
+            // Strategia base: folda se ha meno di 5 soldi e la mano è bassa, altrimenti chiama o rilancia leggermente
+            var forzaMano = ValutatoreMano.ValutaMano(g.Mano.Concat(carteComuni).ToList());
+            Random rnd = new Random();
+            int differenza = puntataMassima - g.PuntataAttuale;
+            if (forzaMano < 1050 && differenza > 0)
+            {
+                g.Foldato = true;
+                g.HaAgitoQuestoTurno = true;
+            }
+            else
+            {
+                int decisione = rnd.Next(100);
+                int puntata;
+                if (decisione < 20 && g.Soldi > puntataMassima + 50)
+                {
+                    puntata = puntataMassima + 50;
+                }
+                else
+                {
+                    puntata = puntataMassima;
+                }
+                if (puntata >= g.Soldi)
+                {
+                    puntata = g.Soldi;
+                }
+                int importo = puntata - g.PuntataAttuale;
+                g.Soldi -= importo;
+                g.PuntataAttuale = puntata;
+                g.HaAgitoQuestoTurno = true;
+                piatto += importo;
+
+                if(puntata > puntataMassima)
+                {
+                    puntataMassima = puntata;
+                    foreach(var gioc in giocatori)
+                    {
+                        if (!gioc.Foldato)
+                        {
+                            gioc.HaAgitoQuestoTurno = false;
+                        }
+                    }
+                    g.HaAgitoQuestoTurno = true;
+                }
+            }
+
+            AvanzaTurno();
+            AggiornaGiocatori();
             AggiornaStatoBottoniTurno();
         }
 
@@ -520,7 +450,7 @@ namespace WindowsFormsApp1
             else
             {
                 var posizione = this.Location;
-                var nuovoForm = new PokerTexas(UtenteC.NomeU, UtenteC.NomeU2, UtenteC.NomeU3);
+                var nuovoForm = new PokerTexas();
                 nuovoForm.StartPosition = FormStartPosition.Manual;
                 nuovoForm.Location = posizione;
                 nuovoForm.Show();
@@ -604,7 +534,7 @@ namespace WindowsFormsApp1
         public bool Foldato { get; set; } = false;
         public int PuntataAttuale { get; set; } = 0;
         public bool HaAgitoQuestoTurno { get; set; } = false;
-        public bool AllIn => Soldi == 0;
+        public bool IsBot { get; set; } = false;
     }
 
     public static class ValutatoreMano
@@ -690,5 +620,3 @@ namespace WindowsFormsApp1
         }
     }
 }
-
-

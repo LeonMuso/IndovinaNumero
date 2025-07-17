@@ -91,7 +91,7 @@
             // LblBOMB
             // 
             this.LblBOMB.AutoSize = true;
-            this.LblBOMB.Location = new System.Drawing.Point(576, 423);
+            this.LblBOMB.Location = new System.Drawing.Point(586, 423);
             this.LblBOMB.Name = "LblBOMB";
             this.LblBOMB.Size = new System.Drawing.Size(50, 13);
             this.LblBOMB.TabIndex = 3;
@@ -164,7 +164,7 @@
             // 
             this.PcBBOMB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBBOMB.BackgroundImage")));
             this.PcBBOMB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBBOMB.Location = new System.Drawing.Point(510, 250);
+            this.PcBBOMB.Location = new System.Drawing.Point(520, 250);
             this.PcBBOMB.Name = "PcBBOMB";
             this.PcBBOMB.Size = new System.Drawing.Size(182, 170);
             this.PcBBOMB.TabIndex = 10;
@@ -224,7 +224,7 @@
             // 
             // LblCaso
             // 
-            this.LblCaso.Location = new System.Drawing.Point(562, 325);
+            this.LblCaso.Location = new System.Drawing.Point(572, 325);
             this.LblCaso.Name = "LblCaso";
             this.LblCaso.Size = new System.Drawing.Size(73, 35);
             this.LblCaso.TabIndex = 16;
@@ -265,7 +265,7 @@
             // 
             this.PcBTexasHoldem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBTexasHoldem.BackgroundImage")));
             this.PcBTexasHoldem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBTexasHoldem.Location = new System.Drawing.Point(132, 225);
+            this.PcBTexasHoldem.Location = new System.Drawing.Point(516, 59);
             this.PcBTexasHoldem.Name = "PcBTexasHoldem";
             this.PcBTexasHoldem.Size = new System.Drawing.Size(100, 97);
             this.PcBTexasHoldem.TabIndex = 20;
@@ -275,7 +275,7 @@
             // LblTexasHoldem
             // 
             this.LblTexasHoldem.AutoSize = true;
-            this.LblTexasHoldem.Location = new System.Drawing.Point(145, 325);
+            this.LblTexasHoldem.Location = new System.Drawing.Point(529, 159);
             this.LblTexasHoldem.Name = "LblTexasHoldem";
             this.LblTexasHoldem.Size = new System.Drawing.Size(75, 13);
             this.LblTexasHoldem.TabIndex = 21;

@@ -30,17 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PokerTexas));
             this.lblNomiSoldi2 = new System.Windows.Forms.Label();
-            this.btnFold3 = new System.Windows.Forms.Button();
             this.btnFold1 = new System.Windows.Forms.Button();
-            this.btnFold2 = new System.Windows.Forms.Button();
             this.pnlGiocatore1 = new System.Windows.Forms.Panel();
             this.lblCarte1 = new System.Windows.Forms.Label();
             this.lblNomiSoldi1 = new System.Windows.Forms.Label();
             this.btnPunta1 = new System.Windows.Forms.Button();
-            this.btnPunta2 = new System.Windows.Forms.Button();
             this.pnlCarteComuni = new System.Windows.Forms.Panel();
             this.lblNomiSoldi3 = new System.Windows.Forms.Label();
-            this.btnPunta3 = new System.Windows.Forms.Button();
             this.pnlGiocatore2 = new System.Windows.Forms.Panel();
             this.lblCarte2 = new System.Windows.Forms.Label();
             this.pnlGiocatore3 = new System.Windows.Forms.Panel();
@@ -67,18 +63,6 @@
             this.lblNomiSoldi2.Size = new System.Drawing.Size(0, 13);
             this.lblNomiSoldi2.TabIndex = 0;
             // 
-            // btnFold3
-            // 
-            this.btnFold3.Enabled = false;
-            this.btnFold3.Location = new System.Drawing.Point(210, 103);
-            this.btnFold3.Name = "btnFold3";
-            this.btnFold3.Size = new System.Drawing.Size(75, 23);
-            this.btnFold3.TabIndex = 1;
-            this.btnFold3.Tag = "2";
-            this.btnFold3.Text = "Fold";
-            this.btnFold3.UseVisualStyleBackColor = true;
-            this.btnFold3.Click += new System.EventHandler(this.btnFold3_Click);
-            // 
             // btnFold1
             // 
             this.btnFold1.Enabled = false;
@@ -90,18 +74,6 @@
             this.btnFold1.Text = "Fold";
             this.btnFold1.UseVisualStyleBackColor = true;
             this.btnFold1.Click += new System.EventHandler(this.btnFold1_Click);
-            // 
-            // btnFold2
-            // 
-            this.btnFold2.Enabled = false;
-            this.btnFold2.Location = new System.Drawing.Point(210, 103);
-            this.btnFold2.Name = "btnFold2";
-            this.btnFold2.Size = new System.Drawing.Size(75, 23);
-            this.btnFold2.TabIndex = 3;
-            this.btnFold2.Tag = "1";
-            this.btnFold2.Text = "Fold";
-            this.btnFold2.UseVisualStyleBackColor = true;
-            this.btnFold2.Click += new System.EventHandler(this.btnFold2_Click);
             // 
             // pnlGiocatore1
             // 
@@ -142,18 +114,6 @@
             this.btnPunta1.UseVisualStyleBackColor = true;
             this.btnPunta1.Click += new System.EventHandler(this.btnPunta1_Click);
             // 
-            // btnPunta2
-            // 
-            this.btnPunta2.Enabled = false;
-            this.btnPunta2.Location = new System.Drawing.Point(129, 103);
-            this.btnPunta2.Name = "btnPunta2";
-            this.btnPunta2.Size = new System.Drawing.Size(75, 23);
-            this.btnPunta2.TabIndex = 6;
-            this.btnPunta2.Tag = "1";
-            this.btnPunta2.Text = "Punta";
-            this.btnPunta2.UseVisualStyleBackColor = true;
-            this.btnPunta2.Click += new System.EventHandler(this.btnPunta2_Click);
-            // 
             // pnlCarteComuni
             // 
             this.pnlCarteComuni.Location = new System.Drawing.Point(270, 84);
@@ -169,24 +129,10 @@
             this.lblNomiSoldi3.Size = new System.Drawing.Size(0, 13);
             this.lblNomiSoldi3.TabIndex = 8;
             // 
-            // btnPunta3
-            // 
-            this.btnPunta3.Enabled = false;
-            this.btnPunta3.Location = new System.Drawing.Point(129, 103);
-            this.btnPunta3.Name = "btnPunta3";
-            this.btnPunta3.Size = new System.Drawing.Size(75, 23);
-            this.btnPunta3.TabIndex = 9;
-            this.btnPunta3.Tag = "2";
-            this.btnPunta3.Text = "Punta";
-            this.btnPunta3.UseVisualStyleBackColor = true;
-            this.btnPunta3.Click += new System.EventHandler(this.btnPunta3_Click);
-            // 
             // pnlGiocatore2
             // 
             this.pnlGiocatore2.Controls.Add(this.lblCarte2);
             this.pnlGiocatore2.Controls.Add(this.lblNomiSoldi2);
-            this.pnlGiocatore2.Controls.Add(this.btnFold2);
-            this.pnlGiocatore2.Controls.Add(this.btnPunta2);
             this.pnlGiocatore2.Location = new System.Drawing.Point(299, 351);
             this.pnlGiocatore2.Name = "pnlGiocatore2";
             this.pnlGiocatore2.Size = new System.Drawing.Size(294, 139);
@@ -204,8 +150,6 @@
             // 
             this.pnlGiocatore3.Controls.Add(this.lblCarte3);
             this.pnlGiocatore3.Controls.Add(this.lblNomiSoldi3);
-            this.pnlGiocatore3.Controls.Add(this.btnPunta3);
-            this.pnlGiocatore3.Controls.Add(this.btnFold3);
             this.pnlGiocatore3.Location = new System.Drawing.Point(558, 206);
             this.pnlGiocatore3.Name = "pnlGiocatore3";
             this.pnlGiocatore3.Size = new System.Drawing.Size(294, 139);
@@ -335,14 +279,10 @@
         #endregion
 
         private System.Windows.Forms.Label lblNomiSoldi2;
-        private System.Windows.Forms.Button btnFold3;
         private System.Windows.Forms.Button btnFold1;
-        private System.Windows.Forms.Button btnFold2;
         private System.Windows.Forms.Panel pnlGiocatore1;
-        private System.Windows.Forms.Button btnPunta2;
         private System.Windows.Forms.Panel pnlCarteComuni;
         private System.Windows.Forms.Label lblNomiSoldi3;
-        private System.Windows.Forms.Button btnPunta3;
         private System.Windows.Forms.Button btnPunta1;
         private System.Windows.Forms.Label lblNomiSoldi1;
         private System.Windows.Forms.Panel pnlGiocatore2;

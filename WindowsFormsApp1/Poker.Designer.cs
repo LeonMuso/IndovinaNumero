@@ -84,6 +84,7 @@
             // 
             // BtnCambioP1
             // 
+            this.BtnCambioP1.Enabled = false;
             this.BtnCambioP1.Location = new System.Drawing.Point(403, 74);
             this.BtnCambioP1.Name = "BtnCambioP1";
             this.BtnCambioP1.Size = new System.Drawing.Size(75, 23);
@@ -94,6 +95,7 @@
             // 
             // BtnCambioP2
             // 
+            this.BtnCambioP2.Enabled = false;
             this.BtnCambioP2.Location = new System.Drawing.Point(403, 191);
             this.BtnCambioP2.Name = "BtnCambioP2";
             this.BtnCambioP2.Size = new System.Drawing.Size(75, 23);

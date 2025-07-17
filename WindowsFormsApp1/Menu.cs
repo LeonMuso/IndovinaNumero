@@ -151,21 +151,10 @@ namespace WindowsFormsApp1
         private void PcBTexasHoldem_Click(object sender, EventArgs e)
         {
             if (UtenteC.NomeU != null)
-            {
-                var login2 = new LogIn2();
-                if (login2.ShowDialog() == DialogResult.OK)
-                {
-                    var login3 = new LogIn3();
-                    if (login3.ShowDialog() == DialogResult.OK)
-                    {
-                        string nome1 = UtenteC.NomeU;
-                        string nome2 = UtenteC.NomeU2;
-                        string nome3 = UtenteC.NomeU3;
-                        var pokerT = new PokerTexas(nome1, nome2, nome3);
+            {      
+                        var pokerT = new PokerTexas();
                         pokerT.Show();
                         this.Hide();
-                    }
-                }
             }
             else
             {
