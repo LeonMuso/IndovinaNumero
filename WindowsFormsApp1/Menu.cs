@@ -151,10 +151,22 @@ namespace WindowsFormsApp1
         private void PcBTexasHoldem_Click(object sender, EventArgs e)
         {
             if (UtenteC.NomeU != null)
-            {      
-                        var pokerT = new PokerTexas();
-                        pokerT.Show();
-                        this.Hide();
+            {
+                this.Hide();
+                new PokerTexas().Show();
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PcBSnake_Click(object sender, EventArgs e)
+        {
+            if (UtenteC.NomeU != null)
+            {
+                this.Hide();
+                new Snake().Show();
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using SudokuWinForms;
+﻿using Microsoft.Win32.SafeHandles;
+using SudokuWinForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,6 @@ namespace WindowsFormsApp1
     {
         public static string NomeU { get; set; }
         public static string NomeU2 { get; set; }
-        public static string NomeU3 { get; set; }
         public static string Password { get; set; }
     }
 }

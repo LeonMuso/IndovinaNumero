@@ -51,6 +51,8 @@
             this.LblSudoku = new System.Windows.Forms.Label();
             this.PcBTexasHoldem = new System.Windows.Forms.PictureBox();
             this.LblTexasHoldem = new System.Windows.Forms.Label();
+            this.PcBSnake = new System.Windows.Forms.PictureBox();
+            this.LblSnake = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
@@ -59,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBSnake)).BeginInit();
             this.SuspendLayout();
             // 
             // LblSbloccaLucchetto
@@ -100,7 +103,7 @@
             // LblPoker
             // 
             this.LblPoker.AutoSize = true;
-            this.LblPoker.Location = new System.Drawing.Point(36, 325);
+            this.LblPoker.Location = new System.Drawing.Point(177, 435);
             this.LblPoker.Name = "LblPoker";
             this.LblPoker.Size = new System.Drawing.Size(35, 13);
             this.LblPoker.TabIndex = 4;
@@ -120,7 +123,7 @@
             // 
             this.PcBPoker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBPoker.BackgroundImage")));
             this.PcBPoker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBPoker.Location = new System.Drawing.Point(5, 225);
+            this.PcBPoker.Location = new System.Drawing.Point(146, 335);
             this.PcBPoker.Name = "PcBPoker";
             this.PcBPoker.Size = new System.Drawing.Size(100, 97);
             this.PcBPoker.TabIndex = 6;
@@ -184,7 +187,7 @@
             // LblMultiPlayer
             // 
             this.LblMultiPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblMultiPlayer.Location = new System.Drawing.Point(5, 181);
+            this.LblMultiPlayer.Location = new System.Drawing.Point(146, 291);
             this.LblMultiPlayer.Name = "LblMultiPlayer";
             this.LblMultiPlayer.Size = new System.Drawing.Size(368, 41);
             this.LblMultiPlayer.TabIndex = 12;
@@ -281,11 +284,33 @@
             this.LblTexasHoldem.TabIndex = 21;
             this.LblTexasHoldem.Text = "Texas Holdem";
             // 
+            // PcBSnake
+            // 
+            this.PcBSnake.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBSnake.BackgroundImage")));
+            this.PcBSnake.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBSnake.Location = new System.Drawing.Point(5, 186);
+            this.PcBSnake.Name = "PcBSnake";
+            this.PcBSnake.Size = new System.Drawing.Size(100, 97);
+            this.PcBSnake.TabIndex = 22;
+            this.PcBSnake.TabStop = false;
+            this.PcBSnake.Click += new System.EventHandler(this.PcBSnake_Click);
+            // 
+            // LblSnake
+            // 
+            this.LblSnake.AutoSize = true;
+            this.LblSnake.Location = new System.Drawing.Point(37, 286);
+            this.LblSnake.Name = "LblSnake";
+            this.LblSnake.Size = new System.Drawing.Size(38, 13);
+            this.LblSnake.TabIndex = 23;
+            this.LblSnake.Text = "Snake";
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblSnake);
+            this.Controls.Add(this.PcBSnake);
             this.Controls.Add(this.LblTexasHoldem);
             this.Controls.Add(this.PcBTexasHoldem);
             this.Controls.Add(this.LblSudoku);
@@ -319,6 +344,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBSnake)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,5 +374,7 @@
         private System.Windows.Forms.Label LblSudoku;
         private System.Windows.Forms.PictureBox PcBTexasHoldem;
         private System.Windows.Forms.Label LblTexasHoldem;
+        private System.Windows.Forms.PictureBox PcBSnake;
+        private System.Windows.Forms.Label LblSnake;
     }
 }

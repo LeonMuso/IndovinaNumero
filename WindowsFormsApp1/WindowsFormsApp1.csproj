@@ -63,12 +63,6 @@
     <Compile Include="IndovinaNumero.Designer.cs">
       <DependentUpon>IndovinaNumero.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogIn3.Designer.cs">
-      <DependentUpon>LogIn3.cs</DependentUpon>
-    </Compile>
     <Compile Include="PokerTexas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,9 +205,6 @@
     <EmbeddedResource Include="IndovinaNumero.resx">
       <DependentUpon>IndovinaNumero.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogIn3.resx">
-      <DependentUpon>LogIn3.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PokerTexas.resx">
       <DependentUpon>PokerTexas.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn2.resx">
       <DependentUpon>LogIn2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Snake.resx">
+      <DependentUpon>Snake.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sudoku.resx">
       <DependentUpon>Sudoku.cs</DependentUpon>
