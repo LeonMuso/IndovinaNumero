@@ -18,16 +18,19 @@ namespace WindowsFormsApp1
         private string direction = "right";
         private Random rnd = new Random();
         private int score = 0;
+        int meleMangiate = 0;
+        bool IsMelaOro = false;
         public Snake()
         {
             InitializeComponent();
-            StartGame();
         }
 
         private void StartGame()
         {
             snake.Clear();
             direction = "right";
+            meleMangiate = 0;
+            IsMelaOro = false;
             score = 0;
             snake.Add(new Point(5, 5));
             GenerateFood();
@@ -36,9 +39,17 @@ namespace WindowsFormsApp1
 
         private void GenerateFood()
         {
+            Random rnd = new Random();
+            Point newFood;
             int maxX = this.ClientSize.Width / gridSize;
             int maxY = this.ClientSize.Height / gridSize;
-            food = new Point(rnd.Next(maxX), rnd.Next(maxY));
+            do
+            {
+                newFood = new Point(rnd.Next(maxX), rnd.Next(maxY));
+            } while (snake.Contains(newFood));
+            food = newFood;
+            meleMangiate++;
+            IsMelaOro = meleMangiate % 5 == 0;
         }
 
         private bool Collision(Point head)
@@ -79,9 +90,9 @@ namespace WindowsFormsApp1
         private void Snake_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
+            Brush foodBrush = IsMelaOro ? Brushes.Gold : Brushes.Red;
             // Cibo
-            g.FillRectangle(Brushes.Red, food.X * gridSize, food.Y * gridSize, gridSize, gridSize);
+            g.FillRectangle(foodBrush, food.X * gridSize, food.Y * gridSize, gridSize, gridSize);
 
             // Serpente
             for (int i = 0; i < snake.Count; i++)
@@ -110,21 +121,50 @@ namespace WindowsFormsApp1
             if (Collision(newHead))
             {
                 timer1.Stop();
-                MessageBox.Show($"Game Over! Punteggio: {score}");
-                StartGame();
-                return;
+                string gioco = "Snake";
+                string utente = UtenteC.NomeU;
+                int punteggioAttuale = GestionePunteggi.OttieniPunteggio(gioco, utente);
+                if (!(punteggioAttuale > score))
+                {
+                    int nuovoPunteggio = score;
+                    GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
+                }
+
+                DialogResult risultato = MessageBox.Show($"Game Over! Punteggio: {score}" +
+                                                          "\n" + "Vuoi rigiocare?", "Game over", MessageBoxButtons.YesNo);
+                if (risultato == DialogResult.Yes)
+                {
+                    StartGame();
+                    return;
+                }
+                else
+                {
+                    Close();
+                }
             }
 
             snake.Insert(0, newHead);
 
             if (newHead == food)
             {
-                score += 10;
+                if (!IsMelaOro)
+                {
+                    score += 10;
+                }
+                else
+                {
+                    score += 20;
+                    if (timer1.Interval > 10)
+                    {
+                        timer1.Interval -= 10;
+                    }
+
+                }
                 GenerateFood();
             }
             else
             {
-                snake.RemoveAt(snake.Count - 1); 
+                snake.RemoveAt(snake.Count - 1);
             }
 
             this.Invalidate();
@@ -132,7 +172,7 @@ namespace WindowsFormsApp1
 
         private void Snake_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult risultato = MessageBox.Show($"Vuoi uscire da indovina il numero?",
+            DialogResult risultato = MessageBox.Show($"Vuoi uscire da Snake?",
                                                       "Torna al menu",
                                                       MessageBoxButtons.YesNo,
                                                       MessageBoxIcon.Stop);
@@ -149,6 +189,19 @@ namespace WindowsFormsApp1
                 nuovoForm.Show();
                 this.Dispose();
             }
+        }
+
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            StartGame();
+            BtnStart.Visible = false;
+            LblTitolo.Visible = false;
+            BtnClassifica.Visible = false;
+        }
+
+        private void BtnClassifica_Click(object sender, EventArgs e)
+        {
+            new Classifica("Snake").Show();
         }
     }
 }

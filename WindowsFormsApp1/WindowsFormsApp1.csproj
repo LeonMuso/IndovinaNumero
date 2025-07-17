@@ -63,6 +63,12 @@
     <Compile Include="IndovinaNumero.Designer.cs">
       <DependentUpon>IndovinaNumero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nim.Designer.cs">
+      <DependentUpon>Nim.cs</DependentUpon>
+    </Compile>
     <Compile Include="PokerTexas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IndovinaNumero.resx">
       <DependentUpon>IndovinaNumero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nim.resx">
+      <DependentUpon>Nim.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PokerTexas.resx">
       <DependentUpon>PokerTexas.cs</DependentUpon>
