@@ -43,7 +43,7 @@
             this.LblSingle = new System.Windows.Forms.Label();
             this.LblMultiPlayer = new System.Windows.Forms.Label();
             this.LblUtente = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PcBUtente = new System.Windows.Forms.PictureBox();
             this.BtnClassifica = new System.Windows.Forms.Button();
             this.LblCaso = new System.Windows.Forms.Label();
             this.BtnLogIn = new System.Windows.Forms.Button();
@@ -53,15 +53,18 @@
             this.LblTexasHoldem = new System.Windows.Forms.Label();
             this.PcBSnake = new System.Windows.Forms.PictureBox();
             this.LblSnake = new System.Windows.Forms.Label();
+            this.PcBNim = new System.Windows.Forms.PictureBox();
+            this.LblNim = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBUtente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSnake)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBNim)).BeginInit();
             this.SuspendLayout();
             // 
             // LblSbloccaLucchetto
@@ -204,15 +207,15 @@
             this.LblUtente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.LblUtente.Visible = false;
             // 
-            // pictureBox1
+            // PcBUtente
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(757, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 44);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.PcBUtente.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBUtente.BackgroundImage")));
+            this.PcBUtente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PcBUtente.Location = new System.Drawing.Point(757, 12);
+            this.PcBUtente.Name = "PcBUtente";
+            this.PcBUtente.Size = new System.Drawing.Size(41, 44);
+            this.PcBUtente.TabIndex = 14;
+            this.PcBUtente.TabStop = false;
             // 
             // BtnClassifica
             // 
@@ -304,11 +307,33 @@
             this.LblSnake.TabIndex = 23;
             this.LblSnake.Text = "Snake";
             // 
+            // PcBNim
+            // 
+            this.PcBNim.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBNim.BackgroundImage")));
+            this.PcBNim.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PcBNim.Location = new System.Drawing.Point(269, 335);
+            this.PcBNim.Name = "PcBNim";
+            this.PcBNim.Size = new System.Drawing.Size(100, 97);
+            this.PcBNim.TabIndex = 24;
+            this.PcBNim.TabStop = false;
+            this.PcBNim.Click += new System.EventHandler(this.PcBNim_Click);
+            // 
+            // LblNim
+            // 
+            this.LblNim.AutoSize = true;
+            this.LblNim.Location = new System.Drawing.Point(302, 435);
+            this.LblNim.Name = "LblNim";
+            this.LblNim.Size = new System.Drawing.Size(25, 13);
+            this.LblNim.TabIndex = 25;
+            this.LblNim.Text = "Nim";
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblNim);
+            this.Controls.Add(this.PcBNim);
             this.Controls.Add(this.LblSnake);
             this.Controls.Add(this.PcBSnake);
             this.Controls.Add(this.LblTexasHoldem);
@@ -318,7 +343,7 @@
             this.Controls.Add(this.BtnLogIn);
             this.Controls.Add(this.LblCaso);
             this.Controls.Add(this.BtnClassifica);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PcBUtente);
             this.Controls.Add(this.LblUtente);
             this.Controls.Add(this.LblMultiPlayer);
             this.Controls.Add(this.LblSingle);
@@ -341,10 +366,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBCampoMinato)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBBOMB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBUtente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSudoku)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBTexasHoldem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBSnake)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcBNim)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,7 +392,7 @@
         private System.Windows.Forms.Label LblSingle;
         private System.Windows.Forms.Label LblMultiPlayer;
         private System.Windows.Forms.Label LblUtente;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PcBUtente;
         private System.Windows.Forms.Button BtnClassifica;
         private System.Windows.Forms.Label LblCaso;
         private System.Windows.Forms.Button BtnLogIn;
@@ -376,5 +402,7 @@
         private System.Windows.Forms.Label LblTexasHoldem;
         private System.Windows.Forms.PictureBox PcBSnake;
         private System.Windows.Forms.Label LblSnake;
+        private System.Windows.Forms.PictureBox PcBNim;
+        private System.Windows.Forms.Label LblNim;
     }
 }

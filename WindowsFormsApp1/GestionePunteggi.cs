@@ -43,6 +43,7 @@ namespace WindowsFormsApp1
                 dati["Sudoku"] = new Dictionary<string, int>();
                 dati["Texas Holdem"] = new Dictionary<string, int>();
                 dati["Snake"] = new Dictionary<string, int>();
+                dati["Nim"] = new Dictionary<string, int>();
                 Salva();
             }
         }

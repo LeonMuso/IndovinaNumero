@@ -135,6 +135,7 @@ namespace WindowsFormsApp1
                 if (risultato == DialogResult.Yes)
                 {
                     StartGame();
+                    timer1.Interval = 100;
                     return;
                 }
                 else

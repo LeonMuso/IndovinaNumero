@@ -173,5 +173,25 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void PcBNim_Click(object sender, EventArgs e)
+        {
+            if (UtenteC.NomeU != null)
+            {
+                var login2 = new LogIn2();
+                if (login2.ShowDialog() == DialogResult.OK)
+                {
+                    string nome1 = UtenteC.NomeU;
+                    string nome2 = UtenteC.NomeU2;
+                    var poker = new Nim(nome1, nome2);
+                    poker.Show();
+                    this.Hide();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
