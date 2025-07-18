@@ -193,5 +193,10 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Fai prima il login", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnComeGiochi_Click(object sender, EventArgs e)
+        {
+            new Regole().Show();
+        }
     }
 }

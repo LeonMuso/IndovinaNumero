@@ -86,6 +86,12 @@
     <Compile Include="Puntata.Designer.cs">
       <DependentUpon>Puntata.cs</DependentUpon>
     </Compile>
+    <Compile Include="Regole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Regole.Designer.cs">
+      <DependentUpon>Regole.cs</DependentUpon>
+    </Compile>
     <Compile Include="SbloccaIlLucchetto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Regole.resx">
+      <DependentUpon>Regole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SbloccaIlLucchetto.resx">
       <DependentUpon>SbloccaIlLucchetto.cs</DependentUpon>

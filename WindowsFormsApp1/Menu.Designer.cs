@@ -55,6 +55,7 @@
             this.LblSnake = new System.Windows.Forms.Label();
             this.PcBNim = new System.Windows.Forms.PictureBox();
             this.LblNim = new System.Windows.Forms.Label();
+            this.btnComeGiochi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PcBPoker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBNumero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcBLucchetto)).BeginInit();
@@ -97,7 +98,7 @@
             // LblBOMB
             // 
             this.LblBOMB.AutoSize = true;
-            this.LblBOMB.Location = new System.Drawing.Point(586, 423);
+            this.LblBOMB.Location = new System.Drawing.Point(670, 354);
             this.LblBOMB.Name = "LblBOMB";
             this.LblBOMB.Size = new System.Drawing.Size(50, 13);
             this.LblBOMB.TabIndex = 3;
@@ -170,7 +171,7 @@
             // 
             this.PcBBOMB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PcBBOMB.BackgroundImage")));
             this.PcBBOMB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PcBBOMB.Location = new System.Drawing.Point(520, 250);
+            this.PcBBOMB.Location = new System.Drawing.Point(604, 181);
             this.PcBBOMB.Name = "PcBBOMB";
             this.PcBBOMB.Size = new System.Drawing.Size(182, 170);
             this.PcBBOMB.TabIndex = 10;
@@ -230,7 +231,7 @@
             // 
             // LblCaso
             // 
-            this.LblCaso.Location = new System.Drawing.Point(572, 325);
+            this.LblCaso.Location = new System.Drawing.Point(656, 256);
             this.LblCaso.Name = "LblCaso";
             this.LblCaso.Size = new System.Drawing.Size(73, 35);
             this.LblCaso.TabIndex = 16;
@@ -327,11 +328,23 @@
             this.LblNim.TabIndex = 25;
             this.LblNim.Text = "Nim";
             // 
+            // btnComeGiochi
+            // 
+            this.btnComeGiochi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComeGiochi.Location = new System.Drawing.Point(659, 396);
+            this.btnComeGiochi.Name = "btnComeGiochi";
+            this.btnComeGiochi.Size = new System.Drawing.Size(42, 42);
+            this.btnComeGiochi.TabIndex = 26;
+            this.btnComeGiochi.Text = "?";
+            this.btnComeGiochi.UseVisualStyleBackColor = true;
+            this.btnComeGiochi.Click += new System.EventHandler(this.btnComeGiochi_Click);
+            // 
             // MenuLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnComeGiochi);
             this.Controls.Add(this.LblNim);
             this.Controls.Add(this.PcBNim);
             this.Controls.Add(this.LblSnake);
@@ -404,5 +417,6 @@
         private System.Windows.Forms.Label LblSnake;
         private System.Windows.Forms.PictureBox PcBNim;
         private System.Windows.Forms.Label LblNim;
+        private System.Windows.Forms.Button btnComeGiochi;
     }
 }
