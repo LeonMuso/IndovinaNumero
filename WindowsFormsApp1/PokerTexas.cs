@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
             fase = 0;
             piatto = 0;
 
+
             foreach (var g in giocatori)
             {
                 g.Mano = mazzo.Pesca(2);
@@ -253,6 +254,7 @@ namespace WindowsFormsApp1
                     GestionePunteggi.AggiornaPunteggio(gioco, utente, nuovoPunteggio);
                 }
                 MessageBox.Show($"Vince {vincitore.Nome} con punteggio {punteggioMax}! Ha vinto ${piatto}.", "Risultato");
+
                 giocatoreCorrente = 0;
                 puntataMassima = 0;
                 giocatori[0].PuntataAttuale = 0;
@@ -273,6 +275,33 @@ namespace WindowsFormsApp1
                 giocatori[0].HaAgitoQuestoTurno = false;
                 giocatori[1].HaAgitoQuestoTurno = false;
                 giocatori[2].HaAgitoQuestoTurno = false;
+            }
+            if ((giocatori[0].Soldi == 0 && giocatori[1].Soldi == 0))
+            {
+                giocatori[0].Soldi = 1000;
+                giocatori[1].Soldi = 1000;
+            }
+            else if ((giocatori[1].Soldi == 0 && giocatori[2].Soldi == 0))
+            {
+                giocatori[1].Soldi = 1000;
+                giocatori[2].Soldi = 1000;
+            }
+            else if ((giocatori[2].Soldi == 0 && giocatori[0].Soldi == 0))
+            {
+                giocatori[2].Soldi = 1000;
+                giocatori[0].Soldi = 1000;
+            }
+            else if (giocatori[0].Soldi == 0)
+            {
+                giocatori[0].Soldi = 1000;
+            }
+            else if (giocatori[1].Soldi == 0)
+            {
+                giocatori[1].Soldi = 1000;
+            }
+            else if (giocatori[2].Soldi == 0)
+            {
+                giocatori[2].Soldi = 1000;
             }
         }
 
@@ -400,10 +429,10 @@ namespace WindowsFormsApp1
                 g.HaAgitoQuestoTurno = true;
                 piatto += importo;
 
-                if(puntata > puntataMassima)
+                if (puntata > puntataMassima)
                 {
                     puntataMassima = puntata;
-                    foreach(var gioc in giocatori)
+                    foreach (var gioc in giocatori)
                     {
                         if (!gioc.Foldato)
                         {

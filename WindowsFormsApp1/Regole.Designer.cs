@@ -36,7 +36,7 @@
             this.rtbRegole.Location = new System.Drawing.Point(1, -1);
             this.rtbRegole.Name = "rtbRegole";
             this.rtbRegole.ReadOnly = true;
-            this.rtbRegole.Size = new System.Drawing.Size(389, 523);
+            this.rtbRegole.Size = new System.Drawing.Size(771, 523);
             this.rtbRegole.TabIndex = 0;
             this.rtbRegole.Text = "";
             // 
@@ -44,7 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 521);
+            this.ClientSize = new System.Drawing.Size(771, 521);
             this.Controls.Add(this.rtbRegole);
             this.Name = "Regole";
             this.Text = "Regole";
