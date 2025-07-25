@@ -64,12 +64,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void PcBBOMB_Click(object sender, EventArgs e)
-        {
-            //this.Hide();
-            //new Form1().Show();
-        }
-
         private void PcBPoker_Click(object sender, EventArgs e)
         {
             if (UtenteC.NomeU != null)
